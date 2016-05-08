@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="antlib:org.apache.tools.ant" default="obfuscateAll">
+  <property file="build.properties"/>
+  <target name="obfuscateAll">
+    <ant dir="${oracle.jdeveloper.workspace.dir}${global.project}" antfile="obfuscate.xml"/>
+  </target>
+</project>

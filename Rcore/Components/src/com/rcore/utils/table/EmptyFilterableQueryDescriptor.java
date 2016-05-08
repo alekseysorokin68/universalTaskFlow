@@ -17,14 +17,12 @@ public class EmptyFilterableQueryDescriptor extends FilterableQueryDescriptor
     super();
   }
 
-  @Override 
-  public Map<String, Object> getFilterCriteria()
+  @Override public Map<String, Object> getFilterCriteria()
   {
     return filterCriteria;
   }
 
-  @Override 
-  public void setFilterCriteria(Map<String, Object> map)
+  @Override public void setFilterCriteria(Map<String, Object> map)
   {
     filterCriteria = map;
   }
@@ -34,44 +32,37 @@ public class EmptyFilterableQueryDescriptor extends FilterableQueryDescriptor
     ;
   }
 
-  @Override 
-  public void changeMode(QueryDescriptor.QueryMode queryMode)
+  @Override public void changeMode(QueryDescriptor.QueryMode queryMode)
   {
     ;
   }
 
-  @Override 
-  public ConjunctionCriterion getConjunctionCriterion()
+  @Override public ConjunctionCriterion getConjunctionCriterion()
   {
     return null;
   }
 
-  @Override 
-  public String getName()
+  @Override public String getName()
   {
     return null;
   }
 
-  @Override 
-  public Map<String, Object> getUIHints()
+  @Override public Map<String, Object> getUIHints()
   {
     return Collections.emptyMap();
   }
 
-  @Override 
-  public void removeCriterion(oracle.adf.view.rich.model.Criterion criterion)
+  @Override public void removeCriterion(oracle.adf.view.rich.model.Criterion criterion)
   {
     ;
   }
 
-  @Override 
-  public AttributeCriterion getCurrentCriterion()
+  @Override public AttributeCriterion getCurrentCriterion()
   {
     return null;
   }
 
-  @Override 
-  public void setCurrentCriterion(AttributeCriterion attributeCriterion)
+  @Override public void setCurrentCriterion(AttributeCriterion attributeCriterion)
   {
     ;
   }

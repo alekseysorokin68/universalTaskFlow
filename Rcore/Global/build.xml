@@ -80,6 +80,7 @@
   </target>
   
   <target name="exclude_build" description="Exclude build.*">
+    <!--echo message="${out_temp_file} ${outputfile}" /-->
     <jar destfile="${out_temp_file}">
        <zipfileset src="${outputfile}">
                  <exclude name="build.xml"/> 

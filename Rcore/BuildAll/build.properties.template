@@ -1,5 +1,5 @@
-install.dir=c:/Oracle/Middleware11119/
-oracle.jdeveloper.workspace.dir=C:/JDeveloper/mywork/11119/Rcore/RcoreImpl/
+install.dir=c:/Oracle/Middleware11117/
+oracle.jdeveloper.workspace.dir=C:/JDeveloper/mywork/11117/Rcore/RcoreImpl/
 oracle.commons=${install.dir}oracle_common/
 oracle.jdeveloper.ant.library=${install.dir}jdeveloper/jdev/lib/ant-jdeveloper.jar
 oracle.home=${install.dir}jdeveloper/
