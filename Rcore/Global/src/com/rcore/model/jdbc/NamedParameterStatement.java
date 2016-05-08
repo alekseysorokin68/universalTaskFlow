@@ -1004,5 +1004,17 @@ public class NamedParameterStatement implements Statement
       statement.setSQLXML(indexes[i], value);
     }
   }
+
+  @Override
+  public void closeOnCompletion() throws SQLException
+  {
+    if (isCloseOnCompletion()) close();
+  }
+
+  @Override
+  public boolean isCloseOnCompletion() throws SQLException
+  {
+    return true;
+  }
 }
 

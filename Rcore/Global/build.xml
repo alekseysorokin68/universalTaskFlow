@@ -45,8 +45,8 @@
             nowarn="${javac.nowarn}"
             deprecation="${javac.deprecation}" 
             encoding="UTF-8" 
-            source="1.6"
-            target="1.6">
+            source="1.8"
+            target="1.8">
       <src path="src"/>
     </javac>
   </target>

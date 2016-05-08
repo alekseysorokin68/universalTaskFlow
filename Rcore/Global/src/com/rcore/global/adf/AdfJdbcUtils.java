@@ -68,10 +68,10 @@ public class AdfJdbcUtils extends AdfJdbcUtilsInt
           sql, ex);
       throw ex;
     }
-    if (rc instanceof OracleResultSet)
-    {
-      ((OracleResultSet) rc).closeStatementOnClose();
-    }
+//    if (rc instanceof OracleResultSet)
+//    {
+//      ((OracleResultSet) rc).closeStatementOnClose();
+//    }
     if (IS_TRACE_SQL)
     {
       traceTime = System.currentTimeMillis() - traceTime;
@@ -103,10 +103,10 @@ public class AdfJdbcUtils extends AdfJdbcUtilsInt
           sql, ex);
       throw ex;
     }
-    if (rc instanceof OracleResultSet)
-    {
-      ((OracleResultSet) rc).closeStatementOnClose();
-    }
+//    if (rc instanceof OracleResultSet)
+//    {
+//      ((OracleResultSet) rc).closeStatementOnClose();
+//    }
     if (IS_TRACE_SQL)
     {
       traceTime = System.currentTimeMillis() - traceTime;
@@ -180,10 +180,10 @@ public class AdfJdbcUtils extends AdfJdbcUtilsInt
           sql + "\n params = " + Arrays.toString(params), ex);
       throw ex;
     }
-    if (rc instanceof OracleResultSet)
-    {
-      ((OracleResultSet) rc).closeStatementOnClose();
-    }
+//    if (rc instanceof OracleResultSet)
+//    {
+//      ((OracleResultSet) rc).closeStatementOnClose();
+//    }
     if (IS_TRACE_SQL)
     {
       traceTime = System.currentTimeMillis() - traceTime;
@@ -219,10 +219,10 @@ public class AdfJdbcUtils extends AdfJdbcUtilsInt
           sql + "\n params = " + Arrays.toString(params), ex);
       throw ex;
     }
-    if (rc instanceof OracleResultSet)
-    {
-      ((OracleResultSet) rc).closeStatementOnClose();
-    }
+//    if (rc instanceof OracleResultSet)
+//    {
+//      ((OracleResultSet) rc).closeStatementOnClose();
+//    }
     /*
     if (IS_TRACE_SQL)
     {

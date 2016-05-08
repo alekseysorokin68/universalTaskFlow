@@ -428,7 +428,6 @@ public class UnitTestJasperReport
   {
     String rc = null;
     rc = System.getProperty("user.dir");
-    // C:\JDeveloper\mywork\11117\Rcore\RcoreImpl\Test
     rc += ("/public_html/jasperReports");
     return rc;
   }

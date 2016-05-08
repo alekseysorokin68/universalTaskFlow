@@ -28,11 +28,6 @@
 </project>
 
 
-<!-- Specify the input jars, output jars, and library jars. 
-    -injars 'C:\JDeveloper\mywork\11117\Rcore\RcoreImpl\Global\classes'(com/rcore/global/Abundance.class)
-    -outjars 'obfuscation/classes'
-    -->
-
 <!--outjar file="library_out.jar" />
     <libraryjar file="${java.home}/lib/rt.jar" />
     

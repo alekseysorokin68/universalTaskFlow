@@ -84,6 +84,7 @@ public class ResultSetStatementClose implements ResultSet
   }
 
   @Override
+  @SuppressWarnings("oracle.jdeveloper.java.semantic-warning")
   public BigDecimal getBigDecimal(String columnName, int scale)
     throws SQLException
   {
@@ -399,6 +400,7 @@ public class ResultSetStatementClose implements ResultSet
   }
 
   @Override
+  @SuppressWarnings("oracle.jdeveloper.java.semantic-warning")
   public InputStream getUnicodeStream(String columnName)
     throws SQLException
   {
@@ -793,6 +795,7 @@ public class ResultSetStatementClose implements ResultSet
   }
 
   @Override
+  @SuppressWarnings("oracle.jdeveloper.java.semantic-warning")
   public InputStream getUnicodeStream(int columnIndex)
     throws SQLException
   {
@@ -884,6 +887,7 @@ public class ResultSetStatementClose implements ResultSet
   }
 
   @Override
+  @SuppressWarnings("oracle.jdeveloper.java.semantic-warning")
   public BigDecimal getBigDecimal(int columnIndex, int scale)
     throws SQLException
   {
@@ -1416,6 +1420,18 @@ public class ResultSetStatementClose implements ResultSet
     throws SQLException
   {
     return rs.isWrapperFor(iface);
+  }
+
+  @Override
+  public <T> T getObject(int columnIndex, Class<T> type) throws SQLException
+  {
+    return rs.getObject(columnIndex,type);
+  }
+
+  @Override
+  public <T> T getObject(String columnLabel, Class<T> type)  throws SQLException
+  {
+    return rs.getObject(columnLabel,type);
   }
 }
 

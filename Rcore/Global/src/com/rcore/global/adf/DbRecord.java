@@ -52,13 +52,13 @@ public final class DbRecord extends HashMap<String, String>
     return rc;
    }
    
-   public void put(Object key,Object value) 
+   public String put(String key,String value) 
    {
      if (key != null) 
      {
        key = ((String)key).toUpperCase();
      }
-     super.put((String) key, (String) value);
+     return super.put((String) key, (String) value);
    } // public void put(Object key,Object value)
 
    public String get(Object key) {
