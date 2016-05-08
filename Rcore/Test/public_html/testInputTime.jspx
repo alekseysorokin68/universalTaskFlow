@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dc="/rcoreComponentLib"
+>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document title="testInputTime3" id="d1">
+      <af:form id="f2">
+        <dc:inputTime label="Тестируем компонент: "
+                      simple="false"
+                      id="it1"
+                      initCurrentTime="true"
+                      autoRefresh="true"
+                      space="4"
+                      valueChangeListener="#{viewScope.testInputTime.valueChangeListener}"
+        />
+        <br/>
+        <!-- Тестируем inputDateTime -->
+        <dc:inputDateTime id="idt1" label="label" layout="horizontal">
+          <f:facet name="inputTimeFacet">
+            <dc:inputTime simple="true" initCurrentTime="true" id="it2" inlineStyle="border:none"/>
+          </f:facet>
+        </dc:inputDateTime>
+        
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

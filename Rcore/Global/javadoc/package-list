@@ -1,0 +1,12 @@
+com.rcore.global
+com.rcore.global.adf
+com.rcore.global.bcomponent.base
+com.rcore.global.bcomponent.connection
+com.rcore.global.bcomponent.transaction
+com.rcore.global.config
+com.rcore.global.jsf
+com.rcore.global.log
+com.rcore.global.utils
+com.rcore.global.xml
+com.rcore.model.dynamic_list
+com.rcore.model.tree

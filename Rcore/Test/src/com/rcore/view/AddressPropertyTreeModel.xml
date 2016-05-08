@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE items [
+  <!ELEMENT item (item*)>
+  <!ELEMENT items (definutions?,item*)>
+  <!ELEMENT definutions (def_item*)>
+  <!ELEMENT def_item (def_item*)>
+  
+  <!ATTLIST items dsname CDATA #REQUIRED
+                  header CDATA #REQUIRED
+  >
+  <!ATTLIST item 
+          id ID #REQUIRED
+          defaultId CDATA #IMPLIED
+          requared (true | false) "true"
+          tableOrView CDATA #IMPLIED
+          idAttribute CDATA #IMPLIED
+          idParentAttribute CDATA #IMPLIED
+          captionAttribute CDATA #IMPLIED
+          header CDATA #IMPLIED
+          id_ref_def_item IDREF #IMPLIED
+          extendedAttributes CDATA #IMPLIED
+  >
+  <!ATTLIST def_item 
+	  id ID #REQUIRED
+          defaultId CDATA #IMPLIED
+          requared (true | false) "true"
+          tableOrView CDATA #IMPLIED
+          idAttribute CDATA #IMPLIED
+          idParentAttribute CDATA #IMPLIED
+          captionAttribute CDATA #IMPLIED
+          header CDATA #IMPLIED
+          extendedAttributes CDATA #IMPLIED
+  >
+]>
+
+<items header="Адресный навигатор" dsname="java:comp/env/jdbc/AddressDbDS">
+  <definutions>
+    <def_item id="def_country"
+              defaultId="1" 
+              requared="true"
+              idAttribute="COUNTRY_ID"
+              captionAttribute="SNAME"
+              tableOrView="SELECT * FROM T_COUNTRY"
+              header="Страна"  
+    />
+    <def_item id="def_region"
+          defaultId="77" 
+          requared="true"
+          tableOrView="T_REGION"
+          idAttribute="REGION_ID"
+          idParentAttribute="COUNTRY_ID"
+          captionAttribute="SNAME"
+          header="Регион"
+    />
+    <def_item id="def_city"
+          defaultId="1" 
+          requared="true"
+          tableOrView="T_CITY"
+          idAttribute="CITY_ID"
+          idParentAttribute="REGION_ID"
+          captionAttribute="SNAME"
+          header="Город"
+    />
+    <def_item id="def_street"
+                  requared="false"
+                  tableOrView="T_STREET"
+                  idAttribute="STREET_ID"
+                  idParentAttribute="CITY_ID"
+                  captionAttribute="SNAME"
+                  header="Улица"
+    />
+    <def_item id="def_house"
+                  requared="false"
+                  tableOrView="T_HOUSE"
+                  idAttribute="HOUSE_ID"
+                  idParentAttribute="STREET_ID"
+                  captionAttribute="SNAME"
+                  header="Дом"
+    />
+  </definutions>
+  
+  <item id="country" id_ref_def_item="def_country">
+      <item id="region" id_ref_def_item="def_region">
+        <item id="city" id_ref_def_item="def_city" >     
+            <item id="street" id_ref_def_item="def_street">
+                <item id="house" id_ref_def_item="def_house" />
+            </item>
+        </item>
+      </item>
+  </item>
+  
+  
+</items>

@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:panelGroupLayout id="dc_pgl1" layout="horizontal"
+          partialTriggers="dc_cb2">
+      <f:facet name="separator">
+        <af:spacer width="2px" id="dc_s1"/>
+      </f:facet>
+      <af:panelGroupLayout id="dc_pgl2"
+          rendered="#{!(backingBeanScope.editDefaultsBean.mapIsContains[attrs])}"
+      >
+        <af:facetRef facetName="content" />
+      </af:panelGroupLayout>
+
+      <af:inputText
+        label="#{null}"
+        simple="true"
+        value="#{backingBeanScope.editDefaultsBean.mapElHtmlValuesByString[attrs]}"
+        rendered="#{backingBeanScope.editDefaultsBean.mapIsContains[attrs]}"
+        readOnly="true"
+        inlineStyle="padding-right:4px;padding-left:4px"
+        contentStyle="width:256px"
+        id="dc_ot1"/>
+
+      <af:commandButton id="dc_cb1"
+          shortDesc="Редактирование с использованием EL и HTML"
+          rendered="#{!(attrs.elDisabled and attrs.htmlDisabled)}"
+          inlineStyle="padding-top:2px;width:6px;height:6px;background:white;cursor:pointer;border-bottom:none"
+          icon="/universal_taskflow/images/small-strelka_down.png"
+          actionListener="#{backingBeanScope.editDefaultsBean.elHtmlActionListener}"
+          partialSubmit="true"
+      >
+        <f:attribute name="propertyClassName" value="#{attrs.propertyClassName}" />
+        <f:attribute name="propertyName" value="#{attrs.propertyName}" />
+        <f:attribute name="objectId" value="#{attrs.objectId}" />
+      </af:commandButton>
+
+      <af:popup id="dc_p1" 
+                contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.editDefaultsBean.elHtmlPopup}"
+      >
+        <af:dialog id="dc_pw1"
+            title="Редактирование с использованием EL и HTML"
+            stretchChildren="first"
+            contentWidth="600"
+            contentHeight="300"
+            resize="off"
+            type="none"
+        >
+        <!--
+        Тип выражения
+        EL *       HTML *     Сброс - возврат к обычному редактированию  *
+
+        panelTabbed c одной видимой закладкой
+        -->
+        <af:panelStretchLayout id="dc_psl12"
+              topHeight="#{'auto'}"
+              >
+          <f:facet name="top">
+            <af:panelBox id="dc_pb1" text="Выберите тип выражения" showDisclosure="false">
+              <af:panelGroupLayout layout="horizontal" id="dc_pgl3">
+                <af:selectBooleanRadio
+                    text="EL"
+                    group="expressionType"
+                    value="#{backingBeanScope.editDefaultsBean.selectInputTypeEL}"
+                    autoSubmit="true"
+                    immediate="true"
+                    disabled="#{attrs.elDisabled}"
+                    id="dc_EL"/>
+                 <af:selectBooleanRadio
+                    text="HTML"
+                    group="expressionType"
+                    value="#{backingBeanScope.editDefaultsBean.selectInputTypeHTML}"
+                    autoSubmit="true"
+                    disabled="#{attrs.htmlDisabled}"
+                    immediate="true"
+                    id="dc_HTML"/>
+                 <af:selectBooleanRadio
+                    text="Литерал - возврат к обычному редактированию"
+                    group="expressionType"
+                    value="#{backingBeanScope.editDefaultsBean.selectInputTypeLiteral}"
+                    autoSubmit="true"
+                    immediate="true"
+                    id="dc_LITERAL"/>
+              </af:panelGroupLayout>
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelTabbed
+              partialTriggers="dc_EL dc_HTML dc_LITERAL"
+              styleClass="AFStrechWidth"
+              inlineStyle="background-color:white"
+              id="dc_pt1">
+               <af:showDetailItem text="EL"
+                  id="sdi1"
+                  rendered="#{backingBeanScope.editDefaultsBean.expressionTypeInput.name == 'EL'}"
+                  stretchChildren="first">
+                <af:panelStretchLayout id="dc_psl2" bottomHeight="#{'auto'}">
+                  <f:facet name="center">
+                    <af:panelGroupLayout id="dc_pgl8">
+                      <af:inputText
+                        label="#{null}"
+                        simple="true"
+                        value="#{backingBeanScope.editDefaultsBean.expressionTypeInput.elInputText}"
+                        shortDesc="EL"
+                        rows="11"
+                        styleClass="AFStrechWidth"
+                        contentStyle="width:590px"
+                        autoSubmit="true"
+                        partialTriggers="dc_cb4"
+                        id="dc_it1"/>
+                      </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="bottom">
+                    <af:panelGroupLayout id="dc_pgl4" layout="vertical"
+                            styleClass="AFStrechWidth"
+                            halign="right"
+                    >
+                      <af:panelGroupLayout id="dc_pgl7" layout="horizontal"
+                          inlineStyle="padding-right:14px;padding-top:4px;">
+                        <f:facet name="separator">
+                          <af:spacer width="4px" id="dc_s3"/>
+                        </f:facet>
+                        <af:commandButton text="Проверить"
+                                          partialSubmit="true"
+                                          actionListener="#{backingBeanScope.editDefaultsBean.checkElActionListener}"
+                                          id="dc_ctb1">
+                            <f:attribute name="value" value="#{backingBeanScope.editDefaultsBean.expressionTypeInput.elInputText}" />
+                        </af:commandButton>
+                        <af:panelBox text="Выбор и вставка" id="dc_pb2" showDisclosure="false">
+                          <af:panelGroupLayout id="dc_pgl9" layout="horizontal">
+                            <f:facet name="separator">
+                              <af:spacer width="4px" id="dc_s4"/>
+                            </f:facet>
+                            <af:selectOneChoice id="dc_soc1" label="Выбор"
+                                  value="#{backingBeanScope.editDefaultsBean.selectedELValue}">
+                                <f:selectItems value="#{elBean.elSelectItems}" id="dc_si1"/>
+                            </af:selectOneChoice>
+                            <af:commandButton text="Вставка"
+                                              partialSubmit="true"
+                                              action="#{backingBeanScope.editDefaultsBean.selectELAction}"
+                                              id="dc_cb4"/>
+                          </af:panelGroupLayout>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </f:facet>
+
+                </af:panelStretchLayout>
+               </af:showDetailItem>
+
+               <af:showDetailItem text="HTML"
+                      id="sdi2"
+                      rendered="#{backingBeanScope.editDefaultsBean.expressionTypeInput.name == 'HTML'}"
+                      stretchChildren="first">
+                <af:panelStretchLayout id="dc_psl3">
+                  <f:facet name="center">
+                      <af:richTextEditor id="dc_rte1"
+                          label="#{null}"
+                          simple="true"
+                          value="#{backingBeanScope.editDefaultsBean.expressionTypeInput.htmlInputText}"
+                          rows="11"
+                          contentStyle="width:590px"
+                      >
+                      </af:richTextEditor>
+                  </f:facet>
+                </af:panelStretchLayout>
+               </af:showDetailItem>
+
+               <af:showDetailItem text="Сброс"
+                      id="sdi3"
+                      rendered="#{backingBeanScope.editDefaultsBean.expressionTypeInput.name == 'LITERAL'}"
+                      stretchChildren="first">
+                <af:panelStretchLayout id="dc_psl4">
+                  <f:facet name="center">
+                    <af:inputText
+                      label="#{null}"
+                      simple="false"
+                      value="Для возврата к обычному редактированию - нажмите 'OK'"
+                      styleClass="AFStrechWidth"
+                      readOnly="true"
+                      contentStyle="font-weight:bold"
+                      id="dc_it3"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+               </af:showDetailItem>
+
+            </af:panelTabbed>
+
+          </f:facet>
+        </af:panelStretchLayout>
+
+        <f:facet name="buttonBar">
+          <af:panelGroupLayout layout="vertical"
+                               styleClass="AFStrechWidth"
+                               halign="right"
+                               id="dc_pgl5">
+             <af:panelGroupLayout layout="horizontal"
+                    id="dc_pgl6"
+                    inlineStyle="padding-right:4px"
+                    >
+              <f:facet name="separator">
+                <af:spacer width="4px" id="dc_s2"/>
+              </f:facet>
+              <af:commandButton text="OK"
+                                partialSubmit="#{!attrs.clearTargetProperty}"
+                                actionListener="#{backingBeanScope.editDefaultsBean.okActionListenerInPopupEL}"
+                                id="dc_cb2">
+                  <f:attribute name="propertyClassName" value="#{attrs.propertyClassName}" />
+                  <f:attribute name="propertyName" value="#{attrs.propertyName}" />
+                  <f:attribute name="objectId" value="#{attrs.objectId}" />
+                  <f:attribute name="clearTargetProperty" value="#{attrs.clearTargetProperty}" />
+                  <f:attribute name="object" value="#{attrs.object}" />
+              </af:commandButton>
+              <af:commandButton text="Отмена" id="dc_cb3">
+              </af:commandButton>
+             </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        </af:dialog>
+      </af:popup>
+    </af:panelGroupLayout>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>valueEditorWithElHtmlCompDef</display-name>
+        <facet>
+          <description>Основной вариант редактирования</description>
+          <facet-name>content</facet-name>
+        </facet>
+        <attribute>
+          <attribute-name>propertyClassName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <required>true</required>
+        </attribute>
+        <attribute>
+          <attribute-name>propertyName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <required>true</required>
+        </attribute>
+        <attribute>
+          <attribute-name>objectId</attribute-name>
+          <attribute-class>java.io.Serializable</attribute-class>
+          <default-value>#{null}</default-value>
+          <required>false</required>
+        </attribute>
+
+        <attribute>
+          <attribute-name>elDisabled</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>htmlDisabled</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>clearTargetProperty</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>object</attribute-name>
+          <attribute-class>java.lang.Object</attribute-class>
+          <default-value>#{null}</default-value>
+        </attribute>
+        
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

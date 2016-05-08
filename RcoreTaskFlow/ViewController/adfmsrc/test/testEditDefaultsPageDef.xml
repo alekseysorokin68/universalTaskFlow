@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="testEditDefaultsPageDef"
+                Package="test">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="edit_defaultstaskflowdefinition1"
+              taskFlowId="/WEB-INF/universal_taskflow/view_types/administration/content/edit_defaults-task-flow-definition.xml#edit_defaults-task-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="id" value="portlet1"/>
+        <parameter id="ver" value="1"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="antlib:org.apache.tools.ant" default="buildAll">
+  <property file="build.properties"/>
+  <target name="buildAll">
+    <ant dir="${oracle.jdeveloper.workspace.dir}${global.project}" antfile="build.xml"  />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${model.project}"  antfile="build.xml"  />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${page.templates.project}" antfile="build.xml" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${components.project}"  antfile="build.xml" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${test_utils.project}"  antfile="build.xml" />
+    
+    <ant dir="${oracle.jdeveloper.workspace.dir}${global.project}" antfile="build.xml" target="exclude_build" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${model.project}"  antfile="build.xml" target="exclude_build" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${page.templates.project}" 
+                                                                        antfile="build.xml" target="exclude_build" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${components.project}"  antfile="build.xml" target="exclude_build" />
+    <ant dir="${oracle.jdeveloper.workspace.dir}${test_utils.project}"  antfile="build.xml" target="exclude_build" />
+  </target>
+  
+  
+  
+</project>

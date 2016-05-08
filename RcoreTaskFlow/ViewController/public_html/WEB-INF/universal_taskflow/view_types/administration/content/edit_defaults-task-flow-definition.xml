@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="edit_defaults-task-flow-definition">
+    <template-reference>
+      <document id="__1">/WEB-INF/universal_taskflow/universal_task-flow-template.xml</document>
+      <id id="__2">universal_task-flow-template</id>
+    </template-reference>
+    <default-activity id="__8">step1</default-activity>
+    <data-control-scope id="__3">
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__7">
+      <name id="__6">id</name>
+      <value>#{pageFlowScope.id}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name id="__4">ver</name>
+      <value>#{pageFlowScope.ver}</value>
+      <class>java.lang.Double</class>
+    </input-parameter-definition>
+    <managed-bean id="__17">
+      <managed-bean-name id="__19">adminPageFlowBean</managed-bean-name>
+      <managed-bean-class id="__18">universal_taskflow.edit_defaults.beans.AdminPageFlowBean</managed-bean-class>
+      <managed-bean-scope id="__16">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name id="__14">adminApplicationBean</managed-bean-name>
+      <managed-bean-class id="__12">universal_taskflow.edit_defaults.beans.AdminApplicationBean</managed-bean-class>
+      <managed-bean-scope id="__13">application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__23">
+      <managed-bean-name id="__22">adminSessionBean</managed-bean-name>
+      <managed-bean-class id="__21">universal_taskflow.edit_defaults.beans.AdminSessionBean</managed-bean-class>
+      <managed-bean-scope id="__20">session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__27">
+      <managed-bean-name id="__25">editDefaultsBean</managed-bean-name>
+      <managed-bean-class id="__24">universal_taskflow.edit_defaults.beans.EditDefaultsBean</managed-bean-class>
+      <managed-bean-scope id="__26">backingBean</managed-bean-scope>
+    </managed-bean>
+    <initializer id="__1a">#{pageFlowScope.adminPageFlowBean.initTaskFlow}</initializer>
+    <view id="trainPageTemplate">
+      <page>/universal_taskflow/pages/edit_defaults/trainPageTemplate.jsff</page>
+    </view>
+    <view id="selectOrderShuttleFieldsDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/selectOrderShuttleFieldsDC.jsff</page>
+    </view>
+    <view id="valueEditorWithElHtmlCompDef">
+      <page>/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff</page>
+    </view>
+    <view id="step1">
+      <page>/universal_taskflow/pages/edit_defaults/step1.jsff</page>
+      <train-stop id="__11">
+        <display-name id="__1aa">#{backingBeanScope.editDefaultsBean.trainText['step1']}</display-name>
+      </train-stop>
+    </view>
+    <view id="step2">
+      <page>/universal_taskflow/pages/edit_defaults/step2.jsff</page>
+      <train-stop id="__1c">
+        <display-name id="__1d">#{backingBeanScope.editDefaultsBean.trainText['step2']}</display-name>
+      </train-stop>
+    </view>
+    <view id="step3">
+      <page>/universal_taskflow/pages/edit_defaults/step3.jsff</page>
+      <train-stop id="__13c">
+        <display-name id="__13d">#{backingBeanScope.editDefaultsBean.trainText['step3']}</display-name>
+      </train-stop>
+    </view>
+    <view id="step4">
+      <page>/universal_taskflow/pages/edit_defaults/step4.jsff</page>
+      <train-stop id="__14c">
+        <display-name id="__14d">#{backingBeanScope.editDefaultsBean.trainText['step4']}</display-name>
+      </train-stop>
+    </view>
+    <view id="param_table_adf_def">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/param_table_adf_def.jsff</page>
+    </view>
+    <view id="param_table_html_def">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/param_table_html_def.jsff</page>
+    </view>
+    <view id="param_form_def">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/param_form_def.jsff</page>
+    </view>
+    <view id="param_tree_def">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/param_tree_def.jsff</page>
+    </view>
+    <view id="param_diagram_def">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/param_diagram_def.jsff</page>
+    </view>
+    <view id="onSqlTemplateParametersAsDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/onSqlTemplateParametersAsDC.jsff</page>
+    </view>
+    <view id="formFieldsOnSqlDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/formFieldsOnSqlDC.jsff</page>
+    </view>
+    <view id="dropDownListParametersDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/dropDownListParametersDC.jsff</page>
+    </view>
+    <view id="giperLinkInfoDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/giperLinkInfoDC.jsff</page>
+    </view>
+    <view id="linkByChangeCurrentRowInfoDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/linkByChangeCurrentRowInfoDC.jsff</page>
+    </view>
+    <view id="emptyDC">
+      <page>/universal_taskflow/pages/emptyDC.jsff</page>
+    </view>
+    <view id="convertorBuilderDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/convertorBuilderDC.jsff</page>
+    </view>
+    <view id="validatorBuilderDC">
+      <page>/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/validatorBuilderDC.jsff</page>
+    </view>
+    
+    <train/>
+    <control-flow-rule id="__10">
+      <from-activity-id id="__9">*</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome id="__29">step1</from-outcome>
+        <to-activity-id id="__1b">step1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__31">
+        <from-outcome id="__32">step2</from-outcome>
+        <to-activity-id id="__30">step2</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__41">
+        <from-outcome id="__42">step3</from-outcome>
+        <to-activity-id id="__40">step3</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__51">
+        <from-outcome id="__52">step4</from-outcome>
+        <to-activity-id id="__50">step4</to-activity-id>
+      </control-flow-case>
+      
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

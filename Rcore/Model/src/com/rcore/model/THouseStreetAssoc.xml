@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="THouseStreetAssoc"
+  Version="11.1.1.60.13">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="TStreet"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rcore.model.TStreet">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="TStreet"/>
+      <Attr Name="_foreignKey" Value="com.rcore.model.TStreet.TSteetPr1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.TStreet.StreetId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="THouse"
+    Cardinality="-1"
+    Owner="com.rcore.model.THouse">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="THouse"/>
+      <Attr Name="_foreignKey" Value="com.rcore.model.THouse.THouseStreet"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.THouse.StreetId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

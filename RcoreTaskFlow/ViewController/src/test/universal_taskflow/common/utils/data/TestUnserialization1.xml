@@ -1,0 +1,27 @@
+<ClassForSerialization serialVersionUID="2" attr="attr">
+  <simple>1</simple>
+  <rus>Цапля</rus>
+  <testEnum>TWO</testEnum>
+  <list>
+    <int>1</int>
+    <int>2</int>
+    <ClassForSerialization serialVersionUID="2" attr="attr">
+      <simple>1</simple>
+      <rus>Цапля</rus>
+      <testEnum>TWO</testEnum>
+      <list>
+        <int>1</int>
+        <int>2</int>
+      </list>
+    </ClassForSerialization>
+  </list>
+  <ts serialVersionUID="2" attr="attr">
+    <simple>1</simple>
+    <rus>Цапля</rus>
+    <testEnum>TWO</testEnum>
+    <list>
+      <int>1</int>
+      <int>2</int>
+    </list>
+  </ts>
+</ClassForSerialization>

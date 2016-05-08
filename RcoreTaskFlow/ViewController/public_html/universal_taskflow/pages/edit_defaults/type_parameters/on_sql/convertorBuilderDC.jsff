@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>convertorBuilderDC</display-name>
+        <attribute>
+          <attribute-name>сonvertorInfo</attribute-name>
+          <attribute-class>universal_taskflow.common.data.ConvertorInfo</attribute-class>
+          <required>true</required>
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+    
+    <af:popup id="popup_root" 
+              contentDelivery="lazyUncached"
+    >
+      <af:dialog id="dc_d1" 
+          title="Редактирование конвертора" 
+          type="okCancel"
+          modal="true"
+          resize="off"
+          stretchChildren="first"
+          closeIconVisible="false"
+          contentWidth="350"
+      >
+          <af:switcher id="dc_s1" facetName="#{attrs.сonvertorInfo['type']['name']}">
+            <f:facet name="convertNumber">
+              <af:panelFormLayout id="dc_pfl1">
+                <af:panelLabelAndMessage id="dc_plam1" label="Тип поля ввода (type)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:selectOneChoice id="dc_soc1"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.сonvertorInfo['mapAttributeValues']['type']}"
+                  >
+                    <af:selectItem label="числа"    value="number"   id="dc_si1" />
+                    <af:selectItem label="деньги"   value="currency" id="dc_si2" />
+                    <af:selectItem label="проценты" value="percent"  id="dc_si3" />
+                  </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="dc_plam2" 
+                                         label="Группировка символов (groupingUsed)"
+                                         labelStyle="white-space:nowrap;text-align:start"
+                                         >
+                  <af:selectBooleanCheckbox
+                    id="dc_sbc1"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.сonvertorInfo['mapAttributeValues']['groupingUsed']}"
+                  />
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage  id="dc_plam3" 
+                                          label="Шаблон (pattern)"
+                                          labelStyle="white-space:nowrap;text-align:start"
+                                          >
+                  <af:inputText
+                    id="dc_sbc2"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.сonvertorInfo['mapAttributeValues']['pattern']}"
+                  />
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </f:facet>
+            <f:facet name="convertDateTime">
+              <af:panelFormLayout id="dc_pfl2">
+                <af:panelLabelAndMessage  id="dc_plam5" 
+                                          label="Тип представления даты (type)"
+                                          labelStyle="white-space:nowrap;text-align:start"
+                                          >
+                  <af:selectOneChoice id="dc_soc2"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.сonvertorInfo['mapAttributeValues']['type']}"
+                  >
+                    <af:selectItem label="дата"    value="date"   id="dc_si4" />
+                    <af:selectItem label="время"   value="time"   id="dc_si5" />
+                    <af:selectItem label="дата и время" value="both"  id="dc_si6" />
+                  </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage  id="dc_plam4" 
+                                          label="Шаблон (pattern)"
+                                          labelStyle="white-space:nowrap;text-align:start"
+                                          >
+                  <af:inputText
+                    id="dc_sbc3"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.сonvertorInfo['mapAttributeValues']['pattern']}"
+                  />
+                </af:panelLabelAndMessage>
+                
+              </af:panelFormLayout>  
+            </f:facet>
+          </af:switcher>
+      </af:dialog>
+    </af:popup>
+  </af:componentDef>
+</jsp:root>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TCity"
+  Version="11.1.1.60.13"
+  DBObjectType="table"
+  DBObjectName="T_CITY"
+  AliasName="TCity"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.rcore.global.bcomponent.base.EntityImplRcore"
+  DefClass="com.rcore.global.bcomponent.base.EntityDefImplRcore"
+  CollClass="com.rcore.global.bcomponent.base.EntityCacheRcore">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="CityId"
+    IsNotNull="true"
+    ColumnName="CITY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="T_CITY"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RegionId"
+    ColumnName="REGION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="T_CITY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Sname"
+    Precision="64"
+    ColumnName="SNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="T_CITY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TRegion"
+    Association="com.rcore.model.TCityRegionAssoc"
+    AssociationEnd="com.rcore.model.TCityRegionAssoc.TRegion"
+    AssociationOtherEnd="com.rcore.model.TCityRegionAssoc.TCity"
+    Type="com.rcore.global.bcomponent.base.EntityImplRcore"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TStreet"
+    Association="com.rcore.model.TStreetCityAssoc"
+    AssociationEnd="com.rcore.model.TStreetCityAssoc.TStreet"
+    AssociationOtherEnd="com.rcore.model.TStreetCityAssoc.TCity"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="TCityPr1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="T_CITY_PR1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.TCity.CityId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TCityRegion">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="T_REGION_PR1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="T_CITY_REGION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.TCity.RegionId"/>
+    </AttrArray>
+  </Key>
+</Entity>

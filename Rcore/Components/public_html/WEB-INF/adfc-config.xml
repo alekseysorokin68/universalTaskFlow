@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <managed-bean id="__2">
+    <managed-bean-name>inputTimeBean</managed-bean-name>
+    <managed-bean-class>com.rcore.component.InputTimeBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__3">
+    <managed-bean-name>inputDateTimeBean</managed-bean-name>
+    <managed-bean-class>com.rcore.component.InputDateTimeBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__4">
+    <managed-bean-name>treeNavigatorBean</managed-bean-name>
+    <managed-bean-class>com.rcore.component.treenavigator.TreeNavigatorBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+ 
+</adfc-config>

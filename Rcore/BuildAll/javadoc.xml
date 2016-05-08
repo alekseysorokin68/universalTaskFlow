@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="antlib:org.apache.tools.ant" default="buildAll">
+  <property file="build.properties"/>
+  <target name="javadoc_allProjects">
+    <mkdir dir="${javadoc.dir}"/>
+    <ant dir="${oracle.jdeveloper.workspace.dir}${global.project}"
+         antfile="build.xml" target="javadoc"/>
+    <zip destfile="${javadoc.dir}/global.zip"
+         basedir="${oracle.jdeveloper.workspace.dir}${global.project}/javadoc"/>
+    <ant dir="${oracle.jdeveloper.workspace.dir}${model.project}"
+         antfile="build.xml" target="javadoc"/>
+    <zip destfile="${javadoc.dir}/model.zip"
+         basedir="${oracle.jdeveloper.workspace.dir}${model.project}/javadoc"/>
+    <ant dir="${oracle.jdeveloper.workspace.dir}${components.project}"
+         antfile="build.xml" target="javadoc"/>
+    <zip destfile="${javadoc.dir}/components.zip"
+         basedir="${oracle.jdeveloper.workspace.dir}${components.project}/javadoc"/>
+    <ant dir="${oracle.jdeveloper.workspace.dir}${test_utils.project}"
+         antfile="build.xml" target="javadoc"/>
+    <zip destfile="${javadoc.dir}/test_utils.zip"
+         basedir="${oracle.jdeveloper.workspace.dir}${test_utils.project}/javadoc"/>
+  </target>
+  <path id="javadoc_integrated_source_paths">
+    <pathelement location="${oracle.jdeveloper.workspace.dir}${global.project}/src"/>
+    <pathelement location="${oracle.jdeveloper.workspace.dir}${model.project}/src"/>
+    <pathelement location="${oracle.jdeveloper.workspace.dir}${components.project}/src"/>
+    <pathelement location="${oracle.jdeveloper.workspace.dir}${page.templates.project}/src"/>
+    <pathelement location="${oracle.jdeveloper.workspace.dir}${test_utils.project}/src"/>
+  </path>
+  <import file="${oracle.jdeveloper.workspace.dir}${global.project}/paths.xml"/>
+  <import file="${oracle.jdeveloper.workspace.dir}${model.project}/paths.xml"/>
+  <import file="${oracle.jdeveloper.workspace.dir}${components.project}/paths.xml"/>
+  <import file="${oracle.jdeveloper.workspace.dir}${page.templates.project}/paths.xml"/>
+  <import file="${oracle.jdeveloper.workspace.dir}${test_utils.project}/paths.xml"/>
+  <path id="javadoc_integrated_classpath_paths">
+    <path refid="classpath_Global"/>
+    <path refid="classpath_Model"/>
+    <path refid="classpath_Components"/>
+    <path refid="classpath_PageTemplates"/>
+    <path refid="classpath_TestUtils"/>
+  </path>
+  <target name="javadoc_integrated"
+          description="Generate Integrated JavaDoc For Application">
+    <javadoc destdir="${javadoc.dir}/rcore"
+             sourcepathref="javadoc_integrated_source_paths" charset="UTF-8"
+             encoding="UTF-8"
+             classpathref="javadoc_integrated_classpath_paths"/>
+  </target>
+</project>  

@@ -1,0 +1,82 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="AddressDb" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="AddressDb" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>orcl</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>b2b-sibur-sso.vm-p.rdtex.ru</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>SCOTT</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="ConnectionCB_TEST" className="oracle.jdeveloper.db.adapter.DatabaseProvider" partial="true" manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>sppr</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>172.28.36.8</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>cb_test</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="ConnectionCB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" partial="true" manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>sppr</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>172.28.36.8</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>cb</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

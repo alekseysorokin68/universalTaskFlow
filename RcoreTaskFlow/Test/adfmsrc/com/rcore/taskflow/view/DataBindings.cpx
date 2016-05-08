@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.rcore.taskflow.view" ClientType="Generic">
+  <pageMap>
+    <page path="/test1.jspx" usageId="com_rcore_taskflow_view_test1PageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_rcore_taskflow_view_test1PageDef"
+          path="com.rcore.taskflow.view.pageDefs.test1PageDef"/>
+  </pageDefinitionUsages>
+</Application>

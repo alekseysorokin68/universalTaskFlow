@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ViewObjTest"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  FetchMode="FETCH_AS_NEEDED"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rcore.model.view.ViewObjTest_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[select * from TEST]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Value"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="32"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VALUE"
+    Expression="VALUE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="32"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Img"
+    IsUpdateable="false"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.BlobDomain"
+    ColumnType="BLOB"
+    AliasName="IMG"
+    Expression="IMG"
+    SQLType="BLOB"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rcore.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

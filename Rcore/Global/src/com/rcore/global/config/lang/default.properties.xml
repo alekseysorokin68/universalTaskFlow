@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment><![CDATA[
+  ]]></comment>
+  <entry key="ui_first"  >Первая</entry>
+  <entry key="ui_next"   >Следующая</entry>
+  <entry key="ui_prev"   >Предыдущая</entry>
+  <entry key="ui_last"   >Последняя</entry>
+  <entry key="ui_ok"     >ОК</entry>
+  <entry key="ui_cancel" >Отмена</entry>
+  <entry key="ui_save"   >Сохранить</entry>
+  <entry key="ui_wait"   >Пожалуйста подождите ...</entry>
+</properties>
+

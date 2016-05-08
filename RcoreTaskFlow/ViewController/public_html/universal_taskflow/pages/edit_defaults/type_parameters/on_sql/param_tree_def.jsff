@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:declarativeComponent
+      viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/onSqlTemplateParametersAsDC.jsff"
+      id="dc_dc1">
+      <f:facet name="parametersTab">
+        <af:panelStretchLayout id="dc_psl18" endWidth="#{'auto'}">
+
+          <f:facet name="center">
+            <af:panelBox text="#{null}" showHeader="never" showDisclosure="false" id="pb2a" >
+
+            <af:panelFormLayout id="pfl13">
+              
+              <af:panelLabelAndMessage  id="plam00" 
+                                        label="Поле - ссылка на родительскую запись"
+                                        for="dc_soc5a"
+                                        >
+                <af:selectOneChoice
+                    label="#{null}"
+                    simple="true"
+                    id="dc_soc5a"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.parentField}"
+                >
+                  <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForTree.selectItemsSqlAttributesWithNull}"
+                                 id="si8a"/>
+                </af:selectOneChoice>
+              </af:panelLabelAndMessage>
+              
+              <af:panelLabelAndMessage  id="dc_plam1b" 
+                                        label="В начале корневые узлы раскрыты"
+                                        for="dc_soc1b"
+                                        >
+                <af:selectBooleanCheckbox
+                    label="#{null}"
+                    simple="true"
+                    id="dc_soc1b"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.initiallyExpanded}"
+                >
+                  
+                </af:selectBooleanCheckbox>
+              </af:panelLabelAndMessage>
+              
+              <af:panelLabelAndMessage id="plam0" label="Отображать заголовки колонок">
+                <af:selectBooleanCheckbox
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.displayHeadersOfColumns}"
+                  simple="true"
+                  id="sbDH_Columns"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage
+                  id="plam9a"
+                  label="Интервал для перемены цвета строк (указывается в количестве строк)"
+              >
+                <af:inputNumberSpinbox
+                    label="#{null}"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.intervalForChangeColourOfLines}"
+                    simple="true"
+                    id="ins1"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage  id="plam8a"
+                                        label="Возможность менять ширину колонок"
+ shortDesc="Для 'Многоколончатости' не рекомендуется устанавливать этот режим, поскольку изменение ширин колонок с процентами контролируется системой, могут быть коллизии."
+                                        >
+                <af:selectBooleanCheckbox
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.possibilityChangeWidthColumns}"
+                  simple="true"
+                  id="sbc0"/>
+              </af:panelLabelAndMessage>
+
+
+
+              <af:panelLabelAndMessage id="plam7a" label="Стиль таблицы (CSS)">
+                <af:inputText
+                  label="#{null}"
+                  shortDesc="Здесь можно настроить высоту таблицы: например height:96px"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.inlineStyle}"
+                  simple="true"
+                  id="sbc2"/>
+               </af:panelLabelAndMessage>
+
+               <af:panelLabelAndMessage id="plam7b"
+                                        label="Стиль контейнера таблицы (CSS)"
+                                        shortDesc="Если не задан - наследуется от стиля таблицы"
+               >
+                <af:inputText
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.containerInlineStyle}"
+                  simple="true"
+                  id="sbc2a"/>
+               </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage id="plam6a" label="Всплывающее описание">
+                <af:inputText
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.shortDesc}"
+                  simple="true"
+                  id="it14"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage id="plam5b" label="Наличие тулбара">
+                <af:selectBooleanCheckbox
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.toolBarExists}"
+                  simple="true"
+                  id="sbc3"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage id="plam3a" label="Выделение текущей строки">
+                <af:selectBooleanCheckbox
+                  label="#{null}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.rowSelectAble}"
+                  simple="true"
+                  id="sbc6"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage id="plam19a" label="Текст сообщения об отсутствии данных">
+                <af:inputText
+                    label="#{null}"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.emptyText}"
+                    simple="true"
+                    id="sbc1a"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage id="plam34a"
+                  label="Количество строк в буфере таблицы (порция для чтения из базы)">
+                <af:inputNumberSpinbox
+                    label="#{null}"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.fetchSize}"
+                    simple="true"
+                    id="it16"/>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage
+                id="pt_plam1a"
+                label="Способ заполнения содержимым"
+                shortDesc="Способ заполнения таблицы данными. См. вслывающие тексты к значениям в выпадающем списке"
+              >
+                <af:selectOneChoice id="pt_soc1a"
+                                    label="#{null}"
+                                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.contentDelivery}"
+                                    simple="true"
+                >
+                  <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForTree.contentDeliverySelectItems}" id="pt_si1"/>
+                </af:selectOneChoice>
+              </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage
+                id="pt_plam3a"
+                label="Отступ до кнопок редактирования в тулбар-е в пикселях"
+                shortDesc="Только для режима модификации данных"
+              >
+                <af:inputNumberSpinbox label="#{null}"
+                                       simple="true"
+                                       value="#{backingBeanScope.editDefaultsBean.paramsForTree.indexToButtonsEdit}"
+                                       id="pt_ins2a">
+                     <af:validateDoubleRange minimum="0" />
+                </af:inputNumberSpinbox>
+              </af:panelLabelAndMessage>
+
+
+            </af:panelFormLayout>
+
+
+
+          </af:panelBox>
+          </f:facet>
+
+          <f:facet name="end">
+
+            <af:panelBox text="Форма для редактирования"
+                 id="pb3a"
+                 rendered="#{backingBeanScope.editDefaultsBean.paramsForTree.modelReadWrite}"
+            >
+            <af:panelFormLayout id="pfl2a">
+              <af:inputText
+                    id="ins4a"
+                    label="Ширина заголовков (в процентах (%), или пикселях (px))"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.formTypeParameters.widthLabels}"
+                    shortDesc="Примеры 22%  47px"
+              />
+
+              <af:inputText
+                    id="ins3a"
+                    label="Ширина полей  (в процентах (%), или пикселях (px))"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.formTypeParameters.widthAttributes}"
+                    shortDesc="Примеры 22%  47px"
+              />
+
+              <af:inputNumberSpinbox
+                    id="ins5a"
+                    label="Количество строк в форме"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.formTypeParameters.rows}"
+              />
+
+              <af:inputNumberSpinbox
+                    id="ins6a"
+                    label="Максимальное количество колонок"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForTree.formTypeParameters.maxColumns}"
+              />
+
+              <af:selectOneChoice label="Расположение заголовков"
+                                  id="sbr1a"
+                                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.formTypeParameters.labelAlign}"
+              >
+                <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForTree.labelAlignSelectItems}" id="si1a"/>
+              </af:selectOneChoice>
+            </af:panelFormLayout>
+
+
+          </af:panelBox>
+          </f:facet>
+        </af:panelStretchLayout>
+
+      </f:facet>
+      <f:facet name="eventsTab">
+        <af:panelStretchLayout  id="dc_psl2t"
+                                topHeight="#{'auto'}"
+                                bottomHeight="#{'auto'}"
+        >
+          <f:facet name="top">
+            <af:panelBox text="События:" id="dc_pb1t" showDisclosure="false">
+              <af:selectBooleanCheckbox
+                  id="dc_sbc1t"
+                  label="#{backingBeanScope.editDefaultsBean.paramsForTree.eventChangeCurrentRowLabel}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForTree.eventChangeCurrentRowActive}"
+                  shortDesc="Активируйте (деактивируйте) событие"
+                  autoSubmit="true"
+                  immediate="true"
+              />
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelBox text="Связи с другими потоками задач:" id="dc_pb1t2"
+                         showDisclosure="false"
+                         partialTriggers="dc_sbc1t"
+                         visible="#{backingBeanScope.editDefaultsBean.paramsForTree.eventChangeCurrentRowActive}"
+            >
+              <af:declarativeComponent
+                    viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/linkByChangeCurrentRowInfoDC.jsff"
+                    id="dc_liat">
+                    <f:attribute name="linkInfo" value="#{backingBeanScope.editDefaultsBean.paramsForTree.linkByChangeCurrentRow}" />
+              </af:declarativeComponent>
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="bottom">
+            <af:panelBox text="Внешний слушатель:" id="dc_pb1t3"
+                         showDisclosure="false"
+                         partialTriggers="dc_sbc1t"
+                         visible="#{backingBeanScope.editDefaultsBean.paramsForTree.eventChangeCurrentRowActive}"
+            >
+              <c:set var="_txt2" scope="request">
+<![CDATA[<br/>
+  Вы можете зарегистрировать внешнего слушателя события добавив в параметры потока задач параметр <br/>
+  <b style='font-size:14px'>selectionListener</b> &nbsp;&nbsp;&nbsp; типа org.apache.myfaces.trinidad.event.SelectionListener: <br/>
+  <br/>
+  public interface SelectionListener extends javax.faces.event.FacesListener <br/>
+  {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void processSelection(org.apache.myfaces.trinidad.event.SelectionEvent p1) { } <br/>
+  }<br/>
+  <br/>
+]]>
+              </c:set>
+              <af:outputText  id="dc_ot2t" escape="false"
+                              value="#{_txt2}"/>
+            </af:panelBox>
+
+          </f:facet>
+        </af:panelStretchLayout>
+      </f:facet>
+    </af:declarativeComponent>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>param_tree_def</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

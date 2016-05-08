@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:declarativeComponent 
+      viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/onSqlTemplateParametersAsDC.jsff"
+      id="dc_dc1">
+      <f:facet name="parametersTab">
+        <af:panelStretchLayout  id="dc_psl16" 
+                                topHeight="#{'auto'}" 
+                                endWidth="#{'auto'}">
+          <f:facet name="top">
+            <af:panelBox  text="Блок параметров запроса" 
+                          id="pb13" 
+                          rendered="#{!(empty backingBeanScope.editDefaultsBean.paramsForForm.sqlParameters)}">
+              <af:panelFormLayout id="pfl6" rows="1">
+                <af:panelLabelAndMessage id="plam38" label="Блок параметров раскрыт">
+                  <af:selectBooleanCheckbox id="sbc13"
+                                            simple="true"
+                                            label="#{null}"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForForm.parametersDisclosed}"
+                  >
+                  </af:selectBooleanCheckbox>
+                </af:panelLabelAndMessage>
+
+                <af:panelLabelAndMessage id="plam39" label="Количество строк в форме">
+                  <af:inputNumberSpinbox id="sbc14"
+                                         simple="true"
+                                         label="#{null}"
+                                         value="#{backingBeanScope.editDefaultsBean.paramsForForm.rowInFilterForm}"
+                  >
+                  </af:inputNumberSpinbox>
+                </af:panelLabelAndMessage>
+
+                <af:panelLabelAndMessage id="pt_plam2" label="Отступ слева до кнопок (в px)">
+                  <af:inputNumberSpinbox id="pt_ins1"
+                                         simple="true"
+                                         label="#{null}"
+                                         value="#{backingBeanScope.editDefaultsBean.paramsForForm.buttonsIndent}"
+                  >
+                  </af:inputNumberSpinbox>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:panelBox>
+          </f:facet>
+          
+          <f:facet name="center">
+            <af:panelBox text="Основные данные"  id="pb2a" >
+              <af:panelFormLayout id="pfl2">
+                <af:inputText
+                      id="ins4"
+                      label="Ширина заголовков (в процентах (%), или пикселях (px))"
+                      value="#{backingBeanScope.editDefaultsBean.paramsForForm.widthLabels}"
+                      shortDesc="Примеры 22%  47px"
+                />
+  
+                <af:inputText
+                      id="ins3"
+                      label="Ширина полей  (в процентах (%), или пикселях (px))"
+                      value="#{backingBeanScope.editDefaultsBean.paramsForForm.widthAttributes}"
+                      shortDesc="Примеры 22%  47px"
+                />
+  
+                <af:inputNumberSpinbox
+                      id="ins5"
+                      label="Количество строк в форме"
+                      value="#{backingBeanScope.editDefaultsBean.paramsForForm.rows}"
+                />
+  
+                <af:inputNumberSpinbox
+                      id="ins6"
+                      label="Максимальное количество колонок"
+                      value="#{backingBeanScope.editDefaultsBean.paramsForForm.maxColumns}"
+                />
+  
+                <af:selectOneChoice label="Расположение заголовков"
+                                    id="sbr1tf"
+                                    value="#{backingBeanScope.editDefaultsBean.paramsForForm.labelAlign}"
+                >
+                  <f:selectItems  value="#{backingBeanScope.editDefaultsBean.labelAlignSelectItems}"
+                                  id="si1tf"
+                  />
+                </af:selectOneChoice>
+                
+                <af:selectBooleanCheckbox 
+                    label="Панель навигации"
+                    id="dc_soc1"
+                    value="#{backingBeanScope.editDefaultsBean.paramsForForm.isNavigationPanel}"
+                >
+                </af:selectBooleanCheckbox>
+
+            </af:panelFormLayout>
+            </af:panelBox>  
+          </f:facet>
+          
+          
+        </af:panelStretchLayout>
+        
+      </f:facet>
+      <f:facet name="eventsTab">
+        <af:panelStretchLayout  id="dc_psl2t" 
+                                topHeight="#{'auto'}"
+                                bottomHeight="#{'auto'}"
+        >
+          <f:facet name="top">
+            <af:panelBox text="События:" id="dc_pb1t" showDisclosure="false">
+              <af:selectBooleanCheckbox
+                  id="dc_sbc1t"
+                  label="#{backingBeanScope.editDefaultsBean.paramsForForm.eventChangeCurrentRowLabel}"
+                  value="#{backingBeanScope.editDefaultsBean.paramsForForm.eventChangeCurrentRowActive}"
+                  shortDesc="Активируйте (деактивируйте) событие"
+                  autoSubmit="true"
+                  immediate="true"
+              />
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelBox text="Связи с другими потоками задач:" id="dc_pb1t2" 
+                         showDisclosure="false"
+                         partialTriggers="dc_sbc1t"
+                         visible="#{backingBeanScope.editDefaultsBean.paramsForForm.eventChangeCurrentRowActive}"
+            >
+              <af:declarativeComponent
+                    viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/linkByChangeCurrentRowInfoDC.jsff"
+                    id="dc_liat">
+                    <f:attribute name="linkInfo" value="#{backingBeanScope.editDefaultsBean.paramsForForm.linkByChangeCurrentRow}" />
+              </af:declarativeComponent>
+            </af:panelBox>
+          </f:facet>
+          <f:facet name="bottom">
+            <af:panelBox text="Внешний слушатель:" id="dc_pb1t3" 
+                         showDisclosure="false"
+                         partialTriggers="dc_sbc1t"
+                         visible="#{backingBeanScope.editDefaultsBean.paramsForForm.eventChangeCurrentRowActive}"
+            >
+              <c:set var="_txt3" scope="request">
+<![CDATA[<br/>
+  Вы можете зарегистрировать внешнего слушателя события добавив в параметры потока задач параметр <br/>
+  <b style='font-size:14px'>selectionListener</b> &nbsp;&nbsp;&nbsp; типа org.apache.myfaces.trinidad.event.SelectionListener: <br/>
+  <br/>
+  public interface SelectionListener extends javax.faces.event.FacesListener <br/>
+  {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void processSelection(org.apache.myfaces.trinidad.event.SelectionEvent p1) { } <br/>
+  }<br/>
+  <br/>
+]]>
+              </c:set>
+              <af:outputText  id="dc_ot2t" escape="false" value="#{_txt3}"/>
+            </af:panelBox>
+            
+          </f:facet>
+        </af:panelStretchLayout>
+      </f:facet>
+    </af:declarativeComponent>
+    
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>param_form_def</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

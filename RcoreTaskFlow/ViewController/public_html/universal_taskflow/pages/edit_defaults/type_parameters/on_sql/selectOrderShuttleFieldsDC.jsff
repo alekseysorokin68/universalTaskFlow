@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:switcher facetName="#{attrs.parentComponent}" id="dc_s1">
+      <f:facet name="table">
+        <af:panelStretchLayout id="dc_psl1" bottomHeight="28px">
+          <f:facet name="center">
+            <af:selectOrderShuttle 
+              id="dc_sos1"
+              label="#{null}" 
+              simple="true"
+              leadingHeader="Все поля:"
+              trailingHeader="Выбранные поля:"
+              value="#{backingBeanScope.editDefaultsBean.selectedFieldsInTable}"
+              size="12"
+            >
+              <f:selectItems id="si8"
+                  value="#{backingBeanScope.editDefaultsBean.allFieldsSelectItems}"
+              />
+            </af:selectOrderShuttle>
+          </f:facet>
+          <f:facet name="bottom">
+            <af:panelGroupLayout  layout="vertical" 
+                                  styleClass="AFStrechWidth"
+                                  halign="right"
+                                  valign="middle"
+                                  inlineStyle="padding-right:4px"
+                                  id="dc_pgl2">
+              <af:panelGroupLayout layout="horizontal" id="dc_pgl1" 
+                                   valign="middle" 
+                                   halign="right">
+                <f:facet name="separator">
+                  <af:spacer width="4px" id="dc_s2"/>
+                </f:facet>
+                <af:commandButton text="OK" id="dc_cb1"
+                    actionListener="#{backingBeanScope.editDefaultsBean.selectFieldsActionListener}"
+                >
+                  <f:attribute name="parentComponent" value="#{attrs.parentComponent}" />
+                </af:commandButton>
+                <af:commandButton text="Отмена" id="dc_cb2" 
+                  actionListener="#{backingBeanScope.editDefaultsBean.cancelFieldsActionListener}">
+                  <!--af:resetActionListener /-->
+                  <f:attribute name="parentComponent" value="#{attrs.parentComponent}" />
+                </af:commandButton>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>  
+          </f:facet>
+        </af:panelStretchLayout>
+      </f:facet>
+      
+      <f:facet name="form">
+        <af:panelStretchLayout id="dc_psl2" bottomHeight="28px">
+          <f:facet name="center">
+            <af:selectOrderShuttle 
+              id="dc_sos2"
+              label="#{null}" 
+              simple="true"
+              leadingHeader="Все поля:"
+              trailingHeader="Выбранные поля:"
+              size="12"
+              value="#{backingBeanScope.editDefaultsBean.selectedFieldsInForm}"
+            >
+              <f:selectItems id="dc_si1"
+                  value="#{backingBeanScope.editDefaultsBean.allFieldsSelectItems}"
+              />
+            </af:selectOrderShuttle>
+          </f:facet> 
+          <f:facet name="bottom">
+            <af:panelGroupLayout  layout="vertical" 
+                                  styleClass="AFStrechWidth"
+                                  halign="right"
+                                  valign="middle"
+                                  inlineStyle="padding-right:4px"
+                                  id="dc_pgl3">
+              <af:panelGroupLayout layout="horizontal" id="dc_pgl4" 
+                                   valign="middle" 
+                                   halign="right">
+                <f:facet name="separator">
+                  <af:spacer width="4px" id="dc_s3"/>
+                </f:facet>
+                <af:commandButton text="OK" id="dc_cb3"
+                    actionListener="#{backingBeanScope.editDefaultsBean.selectFieldsActionListener}"
+                >
+                  <f:attribute name="parentComponent" value="#{attrs.parentComponent}" />
+                </af:commandButton>
+                <af:commandButton text="Отмена" id="dc_cb4" 
+                  actionListener="#{backingBeanScope.editDefaultsBean.cancelFieldsActionListener}">
+                  <!--af:resetActionListener /-->
+                  <f:attribute name="parentComponent" value="#{attrs.parentComponent}" />
+                </af:commandButton>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>  
+          </f:facet>
+        </af:panelStretchLayout>
+      </f:facet>  
+    </af:switcher>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>selectOrderShuttleFieldsDC</display-name>
+        <attribute>
+          <attribute-name>parentComponent</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>table</default-value>
+          <!-- table form -->
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

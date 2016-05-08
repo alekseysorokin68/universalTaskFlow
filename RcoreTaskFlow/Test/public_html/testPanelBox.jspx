@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Test panelBox">
+      <af:form id="f1">
+        <!--
+        inlineStyle="width:608px"
+        -->
+        <!--af:panelBox id="pb1"
+              text="panelBox"
+              type="default"
+              showHeader="never"
+              background="default"
+              ramp="highlight"
+        >
+          <af:commandButton text="Кнопка"
+              inlineStyle="height:200px;width:600px"
+              id="cb1"/>
+        </af:panelBox-->
+
+        <!--af:panelGridLayout id="pgl1">
+          <af:commandButton text="Кнопка"
+              inlineStyle="height:200px;width:600px"
+              id="cb2"/>
+        </af:panelGridLayout-->
+        <af:panelStretchLayout id="psl1"
+        >
+          <f:facet name="center">
+            <trh:tableLayout  id="tl1" borderWidth="8"
+                  inlineStyle="width:100%;height:100%"
+            >
+              <trh:rowLayout id="rl1">
+                <trh:cellFormat id="cf1" valign="top">
+                  <af:commandButton text="Кнопка"
+                      inlineStyle="height:500px;width:600px"
+                      id="cb2"/>
+                </trh:cellFormat>
+              </trh:rowLayout>
+            </trh:tableLayout>
+            <!--af:panelGridLayout id="grid"
+        inlineStyle="border:4px solid red"
+        dimensionsFrom="parent"
+        clientComponent="true"
+        
+                                >
+              <af:gridRow id="row"
+                                  marginTop="4px"
+                                  marginBottom="4px">
+                <af:gridCell id="logoCell" valign="middle"
+                             marginStart="4px">
+                  <af:commandButton text="Кнопка"
+                  inlineStyle="height:500px;width:600px"
+                  id="cb2"/>
+                </af:gridCell>
+              </af:gridRow>
+            </af:panelGridLayout-->
+            <!--af:panelBox id="pb1"
+              text="panelBox"
+              type="default"
+              showHeader="never"
+              background="default"
+              inlineStyle="border:2px solid black;"
+            >
+              <af:commandButton text="Кнопка"
+                  inlineStyle="height:200px;width:600px"
+                  id="cb1"/>
+            </af:panelBox-->
+          </f:facet>
+        </af:panelStretchLayout>
+
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

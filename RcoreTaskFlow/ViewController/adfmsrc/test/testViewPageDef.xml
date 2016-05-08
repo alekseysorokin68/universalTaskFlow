@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="testViewPageDef" Package="test">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="viewtaskflowdefinition1"
+              taskFlowId="/WEB-INF/universal_taskflow/view_types/run/view-task-flow-definition.xml#view-task-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="id" value="portlet1"/>
+        <parameter id="ver" value="1"/>
+      </parameters>
+    </taskFlow>
+    <taskFlow id="viewtaskflowdefinition2"
+              taskFlowId="/WEB-INF/universal_taskflow/view_types/run/view-task-flow-definition.xml#view-task-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="id" value="portlet1"/>
+        <parameter id="ver" value="1"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

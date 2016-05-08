@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+xmlns:trh="http://myfaces.apache.org/trinidad/html"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:f="http://java.sun.com/jsf/core">
+
+   <af:pageTemplate viewId="/universal_taskflow/pages/edit_defaults/trainPageTemplate.jsff"
+                    id="pt1"
+                    rendered="#{backingBeanScope.editDefaultsBean.accessibility}"
+                    >
+      <f:attribute name="activityId" value="step4" />
+    <f:facet name="content">
+      <af:panelFormLayout id="pfl2">
+            <af:panelLabelAndMessage label="Портлет активирован" id="plam2" for="sbc1">
+              <af:selectBooleanCheckbox id="sbc1"
+                    label="#{null}"
+                    simple="true"
+                    value="#{backingBeanScope.editDefaultsBean.mainRecord.activated}">
+              </af:selectBooleanCheckbox>
+            </af:panelLabelAndMessage>
+
+            <af:panelLabelAndMessage  label="Текст для не активированного портлета"
+                                      id="plam3"
+                                      for="it7"
+                                      >
+              <af:inputText id="it7"
+                    label="#{null}"
+                    simple="true"
+                    value="#{backingBeanScope.editDefaultsBean.mainRecord.textNotActivated}"
+                    contentStyle="width:512px"
+              >
+              </af:inputText>
+            </af:panelLabelAndMessage>
+
+            <af:panelLabelAndMessage label="Хранить все типы потока задач (или только последний)"
+                                     id="plam1"
+                                     for="it1"
+            >
+              <af:panelGroupLayout layout="horizontal" id="pgl2">
+                <af:selectBooleanCheckbox id="it1" label="#{null}" simple="true"
+                      value="#{backingBeanScope.editDefaultsBean.mainRecord.saveAllTaskFlowTypes}"
+                >
+                </af:selectBooleanCheckbox>
+                <af:spacer width="6px" id="s1"/>
+                <af:commandButton
+                  text="Очистить историю типов потока задач"
+                  action="#{backingBeanScope.editDefaultsBean.mainRecord.clearHistoryTypes}"
+                  id="cb1"/>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+
+              <af:panelLabelAndMessage label="Контейнер потока задач"
+                                       id="plam4"
+                                       for="soc1">
+                <af:panelBox showHeader="never" id="pb1" text="#{null}">
+                    <trh:tableLayout inlineStyle="width:100%" id="tl1">                    
+                      <trh:rowLayout id="rl1">
+                        <trh:cellFormat id="cf3">
+                          <af:outputLabel value="Тип" id="ol1" for="soc1"/>
+                        </trh:cellFormat>  
+                        
+                        <trh:cellFormat id="cf1">
+                          <af:selectOneChoice id="soc1" 
+                                label="#{null}"
+                                simple="true"
+                                value="#{backingBeanScope.editDefaultsBean.mainRecord.taskFlowParameters.containerType}"
+                                contentStyle="width:516px"
+                                >
+                              <f:selectItems value="#{backingBeanScope.editDefaultsBean.mainRecord.taskFlowParameters.containerTypeSelectItems}"
+                                             id="si1"/>
+                          </af:selectOneChoice>
+                        </trh:cellFormat>
+                      </trh:rowLayout>  
+                    <trh:rowLayout id="rl2">  
+                      <trh:cellFormat id="cf4">
+                          <af:outputLabel value="Стиль CSS" id="ol2" for="it2"/>
+                      </trh:cellFormat>  
+                    
+                      <trh:cellFormat id="cf2">
+                          <af:inputText
+                              id="it2"
+                              label="#{null}"
+                              simple="true"
+                              value="#{backingBeanScope.editDefaultsBean.mainRecord.taskFlowParameters.containerCSS}"
+                              contentStyle="width:510px"
+                          />
+                      </trh:cellFormat>
+                    </trh:rowLayout>    
+                  </trh:tableLayout>
+                </af:panelBox>
+            </af:panelLabelAndMessage>
+
+      </af:panelFormLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

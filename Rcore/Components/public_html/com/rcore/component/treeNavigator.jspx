@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Компонент для навигации по дереву, задаваемую моделью на основе Xml - документа с валидацией:
+<!DOCTYPE items [
+  <!ELEMENT item (item*)>
+  <!ELEMENT items (definutions?,item*)>
+  <!ELEMENT definutions (def_item*)>
+  <!ELEMENT def_item (def_item*)>
+  
+  <!ATTLIST items dsname CDATA #REQUIRED
+                  header CDATA #REQUIRED
+  >
+  <!ATTLIST item 
+          id ID #REQUIRED
+          defaultId CDATA #IMPLIED
+          requared (true | false) "true"
+          tableOrView CDATA #IMPLIED
+          idAttribute CDATA #IMPLIED
+          idParentAttribute CDATA #IMPLIED
+          captionAttribute CDATA #IMPLIED
+          header CDATA #IMPLIED
+          id_ref_def_item IDREF #IMPLIED
+          extendedAttributes CDATA #IMPLIED
+  >
+  <!ATTLIST def_item 
+	  id ID #REQUIRED
+          defaultId CDATA #IMPLIED
+          requared (true | false) "true"
+          tableOrView CDATA #IMPLIED
+          idAttribute CDATA #IMPLIED
+          idParentAttribute CDATA #IMPLIED
+          captionAttribute CDATA #IMPLIED
+          header CDATA #IMPLIED
+          extendedAttributes CDATA #IMPLIED
+  >
+]>
+
+Замечания:
+Узлы items - контент
+definutions - нужны исключительно для централизации описаний в items
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="comp" id="treeNavigator" definition="public">
+    <af:panelSplitter id="dc_ps1" 
+                      orientation="horizontal" 
+                      splitterPosition="#{attrs.splitPosition}"
+                      inlineStyle="#{attrs.inlineStyle}"
+                      partialTriggers="ctbChangeView ctbRefreshLevel ctbRefreshAll dc_cb1"
+    >
+       <f:facet name="first">
+          <af:panelStretchLayout  id="dc_psl3" 
+                                  topHeight="24" 
+                                  bottomHeight="#{viewScope.treeNavigatorBean.delegate.heightBtnSelectValues}">
+            <f:facet name="top">
+                <af:menuBar id="dc_mb1">
+                    <af:menu text="Управление" id="dc_m2">
+                       <af:commandMenuItem  text="Установить выбор" 
+                                            action="#{viewScope.treeNavigatorBean.delegate.setSelectForTable}"
+                                            immediate="false"
+                                            partialSubmit="true"
+                                            id="ctbSetSelect"
+                       /> 
+                       <af:commandMenuItem  text="Убрать выбор" 
+                                            action="#{viewScope.treeNavigatorBean.delegate.removeSelectForTable}"
+                                            immediate="false"
+                                            partialSubmit="true"
+                                            id="ctbDeselect"
+                       />
+                       <af:commandMenuItem  text="Описание"
+                                            immediate="false"
+                                            partialSubmit="true"
+                                            id="dc_ctb1">
+                         <af:showPopupBehavior  popupId="popupTreeMetaData" 
+                                                triggerType="action" />             
+                      </af:commandMenuItem>
+                      
+                      <af:commandMenuItem text="#{viewScope.treeNavigatorBean.delegate.changeViewText}"
+                                          action="#{viewScope.treeNavigatorBean.delegate.changeView}"
+                                          immediate="false"
+                                          partialSubmit="true"
+                                          id="ctbChangeView"
+                       />
+                       <af:commandMenuItem  text="Обновить данные текущего уровня" 
+                                            action="#{viewScope.treeNavigatorBean.delegate.refreshLevel}"
+                                            immediate="false"
+                                            partialSubmit="true"
+                                            id="ctbRefreshLevel"
+                       />
+                       <af:commandMenuItem  text="Обновить все данные" 
+                                            action="#{viewScope.treeNavigatorBean.delegate.refreshAllLevels}"
+                                            immediate="false"
+                                            partialSubmit="true"
+                                            id="ctbRefreshAll"
+                       />
+                    </af:menu>
+    
+                    <af:popup id="popupTreeMetaData">
+                      <af:dialog  id="dc_d1" 
+                                  title="Описание метаданных"
+                                  type="ok"
+                      >
+                        <af:panelStretchLayout id="dc_pgl1">
+                          <f:facet name="center">
+                              <af:inputText label="#{''}"
+                                            value="#{viewScope.treeNavigatorBean.delegate.strXmlDocument}"
+                                            simple="true"
+                                            rows="24"
+                                            id="dc_it1"
+                                            styleClass="AFStretchWidth"
+                                            contentStyle="border:1px solid blue"
+                              />
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </af:dialog>
+                    </af:popup>
+                 </af:menuBar>   
+            </f:facet>
+            <f:facet name="center">
+              <af:tree  value="#{viewScope.treeNavigatorBean.delegate.model}" 
+                        id="dc_t1"
+                        var="node"
+                        expandAllEnabled="true"
+                        rendered="#{attrs.type=='tree'}"
+                        displayRow="selected"
+                        initiallyExpanded="#{attrs.initiallyExpanded}"
+                        inlineStyle="#{attrs.inlineStyleTree}"
+                        summary="#{''}" 
+                        rowSelection="single"
+                        selectionListener="#{viewScope.treeNavigatorBean.delegate.treeSelectionListener}"
+                        clientComponent="true"
+                        binding="#{viewScope.treeNavigatorBean.delegate.tree}"
+                        selectedRowKeys="#{viewScope.treeNavigatorBean.delegate.treeSelectionRowKeySet}"
+              >
+                <f:facet name="nodeStamp">
+                    <af:outputLabel value="#{node.header}" 
+                                    shortDesc="#{node.header}" 
+                                    id="dc_ol1" />
+                </f:facet>
+              </af:tree>
+            </f:facet>
+            <f:facet name="bottom">
+              <af:panelGroupLayout id="dc_pgl2" 
+                  halign="center" 
+                  valign="middle" 
+                  styleClass="AFStretchWidth" 
+                  layout="vertical"
+                  rendered="#{viewScope.treeNavigatorBean.delegate.isRenderedBtnSelectValues}"
+                  >
+                <af:commandButton text="Выбрать" id="dc_cb1" action="#{viewScope.treeNavigatorBean.delegate.actOnSelectValues}" partialSubmit="true">
+                </af:commandButton>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelStretchLayout>
+       </f:facet>   
+       <f:facet name="second">
+          <!--
+          rendered="#{backingBeanScope.treeNavigatorBean.isLeftPanelRendered}"
+          -->
+        <af:panelStretchLayout id="dc_psl1" partialTriggers="dc_t1" styleClass="AFStretchWidth"
+          rendered="#{viewScope.treeNavigatorBean.delegate.isLeftPanelRendered}"
+        >  
+          <f:facet name="center">
+              <af:panelStretchLayout id="dc_psl2">
+                  <f:facet name="top">
+                      <af:message 
+                        rendered="#{viewScope.treeNavigatorBean.delegate.isRenderedMessage}"
+                        messageType="warning" 
+                        message="#{viewScope.treeNavigatorBean.delegate.messageByBagInAfTable}"
+                        id="dc_m1"/>
+                  </f:facet>
+                  <f:facet name="center">
+                <af:group id="dc_g1">
+                  <af:panelCollection id="pc1">
+                   <!--
+                      binding="#{backingBeanScope.treeNavigatorBean.tableData}"
+                   -->
+                    <af:table id="dc_t2"
+                              rendered="#{viewScope.treeNavigatorBean.delegate.isRenderedTable}"
+                              value="#{viewScope.treeNavigatorBean.delegate.tableModel}"
+                              var="row" 
+                              rowSelection="single"
+                              columnSelection="none"
+                              columnStretching="column:dc_text"
+                              rows="#{attrs.tableRows}"
+                              fetchSize="#{attrs.tableFetchSize}"
+                              immediate="true" 
+                              summary="#{''}"
+                              filterVisible="false"
+                              selectionListener="#{viewScope.treeNavigatorBean.delegate.tableSelectionListener}"
+                              binding="#{viewScope.treeNavigatorBean.delegate.tableData}"
+                              displayRow="selected" 
+                              partialTriggers="it1 it2"
+                              selectedRowKeys="#{viewScope.treeNavigatorBean.delegate.tableRowKeySet}"
+                      >
+                      <f:facet name="detailStamp">
+                          <af:facetRef facetName="detailStampTable"/>
+                      </f:facet>
+                      
+                      <af:column align="left" id="dc_text">
+                        <f:facet name="header">
+                          <af:panelGroupLayout  id="pgl1" 
+                                                layout="vertical"
+                                                halign="center">
+                            <af:outputLabel value="#{viewScope.treeNavigatorBean.delegate.simpleHeader}" id="ol1"/>
+                            <af:inputText simple="true"
+                                          value="#{viewScope.treeNavigatorBean.delegate.valueFilterSname}"
+                                          autoSubmit="true" 
+                                          label="#{''}"
+                                          id="it1"
+                                          valueChangeListener="#{viewScope.treeNavigatorBean.delegate.filterSnameValueChangeListener}">
+                              <af:clientListener method="onEnter" type="keyUp"/>
+                            </af:inputText>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <af:outputText value="#{row.SNAME}" id="dc_ot2"/>
+                      </af:column>
+                      <af:column id="dc_c1" align="right" rendered="#{attrs.isViewIdColumn}">
+                        <f:facet name="header">
+                          <af:panelGroupLayout layout="vertical" halign="center" id="pgl2">
+                            <af:outputLabel value="Идентификатор" id="ol2"/>
+                            <af:inputText simple="true"
+                                          label="#{''}"
+                                          value="#{viewScope.treeNavigatorBean.delegate.valueFilterId}"
+                                          autoSubmit="true" 
+                                          id="it2"
+                                          valueChangeListener="#{viewScope.treeNavigatorBean.delegate.filterIdValueChangeListener}">
+                                <af:clientListener method="onEnter" type="keyUp"/>
+                            </af:inputText>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <af:outputText value="#{row.ID}" id="dc_ot1"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                  <af:resource type="javascript">
+                    function onEnter(event) 
+                    { 
+                      var keyCode = event.getKeyCode();
+                      if (keyCode == 13) { 
+                        var src = event.getSource(); 
+                        var id = src.getClientId()+"::content"; 
+                        var html =  document.getElementById(id); 
+                        html.blur(); // Принудительная потеря фокуса! 
+                      }
+                    } 
+                  </af:resource>
+                </af:group>
+              </f:facet>
+              </af:panelStretchLayout>
+          </f:facet>
+         </af:panelStretchLayout> 
+       </f:facet>
+    </af:panelSplitter>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>treeNavigator</display-name>
+        <facet>
+          <description>Фасет для детализации строки таблицы</description>
+          <facet-name>detailStampTable</facet-name>
+        </facet>
+        <attribute>
+          <attribute-name>xmlResource</attribute-name>
+          <attribute-class>java.lang.Object</attribute-class>
+          <required>true</required>
+        </attribute>
+        <attribute>
+          <attribute-name>type</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>tree</default-value>  <!-- tree,according -->
+        </attribute>
+        <attribute>
+          <attribute-name>initiallyExpanded</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>  <!-- tree,according -->
+        </attribute>
+        <attribute>
+          <attribute-name>inlineStyleTree</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>inlineStyle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>visualNodesAsList</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>splitPosition</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>tableRows</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>25</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>tableFetchSize</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>25</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>initLevel</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>0,0</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>nodeStampInTableListId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>isViewIdColumn</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <component-extension>
+          <component-tag-namespace>com.rcore.component</component-tag-namespace>
+          <component-taglib-uri>/rcoreComponentLib</component-taglib-uri>
+          
+          <method-attribute>
+            <attribute-name>onInit</attribute-name>
+            <method-signature>void method(java.lang.Object)</method-signature>
+            <!--
+              void method(Element xmlRoot) // return - isRefreshCurrentRecord
+            -->
+            <required>false</required>
+          </method-attribute>
+          
+          <method-attribute>
+            <attribute-name>onSelectInTableListener</attribute-name>
+            <method-signature>java.lang.Boolean method(java.lang.Object, 
+                              java.lang.String, 
+                              java.lang.String)
+            </method-signature>
+                              <!--
+                                boolean method(Element xmlNode, 
+                                String dbId, 
+                                String caption) // return - isRefreshCurrentRecord
+                              -->
+                              
+            <required>false</required>
+          </method-attribute>
+          
+            <method-attribute>
+                <attribute-name>onSelectInTreeListener</attribute-name>
+                <method-signature>java.lang.Boolean method(java.lang.Object, 
+                                  java.lang.String, 
+                                  java.lang.String)</method-signature>
+                 <!--
+                  boolean method(Element xmlNode, 
+                                String dbId, 
+                                String caption) // return - isRefreshCurrentRecord
+                 -->
+                <required>false</required>                  
+            </method-attribute>
+            
+            <method-attribute>
+                <attribute-name>onSelectValues</attribute-name>
+                <method-signature>java.lang.String method(java.lang.Object, 
+                                  java.lang.String, 
+                                  java.lang.String)</method-signature>
+                    <!--
+                      String method(
+                        Element xmlNodeRoot,
+                        String attributeIdValue, 
+                        String attributeCaptionValue 
+                      ) // return message or null
+                    -->
+                <required>false</required>                  
+            </method-attribute>
+            
+            <method-attribute>
+                <attribute-name>onClearSelected</attribute-name>
+                <method-signature>void method(java.lang.Object)</method-signature>
+                    <!--
+                      void method(Element xmlNodeRoot)
+                    -->
+                <required>false</required>                  
+            </method-attribute>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

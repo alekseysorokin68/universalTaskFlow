@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:tr="http://myfaces.apache.org/trinidad/html"
+          >
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="comp" id="inputTime" definition="public">
+  
+    <af:panelGroupLayout id="inputTimeRoot" 
+                         halign="left" 
+                         valign="middle" 
+                         layout="horizontal" 
+                         inlineStyle="#{attrs.inlineStyle}"
+                         shortDesc="#{attrs.shortDesc}"
+    >
+      <f:facet name="separator">
+        <af:spacer width="#{attrs.space}" id="s1"/>
+      </f:facet>
+      <af:serverListener method="#{viewScope.inputTimeBean.delegate.autoRefresh}" type="itAutoRefresh" />
+      <tr:script id="dc_s4" rendered="#{attrs.autoRefresh}"
+                            text="#{viewScope.inputTimeBean.delegate.script}"
+      />
+      <tr:script id="dc_s5" rendered="#{attrs.autoRefresh}">
+          function itToServer() 
+          {
+             var inputComp = AdfPage.PAGE.findComponent("${attrs.id}:inputTimeRoot");
+             alert("@="+inputComp);
+             AdfCustomEvent.queue(inputComp,
+                       "itAutoRefresh",
+                       // Send one parameter
+                       {dcType:"inputTime"},
+                       // true - "immediate" on the server
+                       false); // false - для обновления контролей, если true - не обновляются
+          }
+      </tr:script>
+      
+      <af:outputLabel value="#{attrs.label}" id="dc_ol1" rendered="#{!attrs.simple}" />
+      
+      <af:inputNumberSpinbox label="#{attrs.labelHH}" 
+                             id="hh_inputNumber"
+                             value="#{attrs.hh}"
+                             autoSubmit="#{attrs.autoSubmit}"
+                             valueChangeListener="#{comp.handleValueChangeListener}"
+                             rendered="#{attrs.hhRendered}"
+                             visible="#{attrs.hhVisible}"
+                             readOnly="#{attrs.hhReadonly}"
+                             disabled="#{attrs.hhDisabled}"
+                             binding="#{viewScope.inputTimeBean.delegate.hhEditor}"
+                             contentStyle="width:#{attrs.elementWidth}"
+      >
+                             <!-- C valueChangeListener все правильно и работает. JD воспринимает как неккоректность  -->
+        <af:validateLongRange maximum="23" minimum="0" hintMaximum="Максимум - 23" hintMinimum="Минимум - 0"/>
+        <f:attribute name="timeType" value="hh" />
+      </af:inputNumberSpinbox>
+      
+      <af:inputNumberSpinbox label="#{attrs.labelMM}" 
+                             id="mm_inputNumber" 
+                             value="#{attrs.mm}"
+                             autoSubmit="#{attrs.autoSubmit}" 
+                             valueChangeListener="#{comp.handleValueChangeListener}"
+                             rendered="#{attrs.mmRendered}"
+                             visible="#{attrs.mmVisible}"
+                             readOnly="#{attrs.mmReadonly}"
+                             disabled="#{attrs.mmDisabled}"
+                             binding="#{viewScope.inputTimeBean.delegate.mmEditor}"
+                             contentStyle="width:#{attrs.elementWidth}"
+                             >
+        <af:validateLongRange maximum="59" minimum="0" hintMaximum="Максимум - 59" hintMinimum="Минимум - 0"/>
+        <f:attribute name="timeType" value="mm" />
+      </af:inputNumberSpinbox>
+      
+      <af:inputNumberSpinbox label="#{attrs.labelSS}" 
+                             id="ss_inputNumber" 
+                             value="#{attrs.ss}"
+                             autoSubmit="#{attrs.autoSubmit}" 
+                             valueChangeListener="#{comp.handleValueChangeListener}"
+                             rendered="#{attrs.ssRendered}"
+                             visible="#{attrs.ssVisible}"
+                             readOnly="#{attrs.ssReadonly}"
+                             disabled="#{attrs.ssDisabled}"
+                             binding="#{viewScope.inputTimeBean.delegate.ssEditor}"
+                             contentStyle="width:#{attrs.elementWidth}"
+      >
+        <af:validateLongRange maximum="59" minimum="0" hintMaximum="Максимум - 59" hintMinimum="Минимум - 0"/>
+        <f:attribute name="timeType" value="ss" />
+      </af:inputNumberSpinbox>
+    </af:panelGroupLayout>
+    
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>inputTime</display-name>
+        
+        <attribute>
+          <attribute-name>inlineStyle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>border:1px solid black</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>label</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <attribute-name>simple</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>hh</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <attribute-name>mm</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <attribute-name>ss</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>initCurrentTime</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>space</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>4</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>labelHH</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>Часы:</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>labelMM</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>Минуты:</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>labelSS</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>Секунды:</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>autoSubmit</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>shortDesc</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>hhRendered</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>mmRendered</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>ssRendered</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>hhVisible</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>mmVisible</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>ssVisible</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>hhReadonly</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>mmReadonly</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>ssReadonly</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>hhDisabled</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>mmDisabled</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>ssDisabled</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>autoRefresh</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>refreshInterval</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>1000</default-value>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>elementWidth</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>12px</default-value>
+        </attribute>
+        
+        <component-extension>
+          <component-tag-namespace>com.rcore.component</component-tag-namespace>
+          <component-taglib-uri>/rcoreComponentLib</component-taglib-uri>
+          
+          <method-attribute>
+            <attribute-name>valueChangeListener</attribute-name>
+            <method-signature>void method(javax.faces.event.ValueChangeEvent)</method-signature>
+          </method-attribute>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

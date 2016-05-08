@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="true" xmlns="http://xmlns.oracle.com/jdeveloper/110000jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../../Rcore/RcoreImpl/_lib/external/used/htmlparser.jar" jar-entry=""/>
+         <Item path="../../../Rcore/RcoreImpl/_lib/external/used/com_sun_xml.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath/>
+   <locked>true</locked>
+   <name>ADF Library Dependencies</name>
+   <sourcePath/>
+</JLibraryNode>

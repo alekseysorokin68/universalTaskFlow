@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component" id="exportTable"
+                   definition="public">
+    <af:toolbar id="dc_t1">
+      <af:commandButton text="#{attrs.text}" id="dc_cb1">
+        <af:exportCollectionActionListener type="excelHTML"
+                                           exportedId="#{attrs.exportId}"/>
+      </af:commandButton>
+    </af:toolbar>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>exportTable</display-name>
+        <attribute>
+          <attribute-name>text</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>Экспорт</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>exportId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <required>true</required>
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>com.rcore.component</component-tag-namespace>
+          <component-taglib-uri>/rcoreComponentLib</component-taglib-uri>
+          <method-attribute>
+            <attribute-name>valueChangeListener</attribute-name>
+            <method-signature>void method(javax.faces.event.ValueChangeEvent)</method-signature>
+          </method-attribute>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

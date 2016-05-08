@@ -1,0 +1,1 @@
+1) Selenium....jar мешает любой обычной аппликации (ViewController)

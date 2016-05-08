@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.rcore.taskflow.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/test/testEditDefaults.jspx"
+          usageId="com_rcore_taskflow_view_testEditDefaultsPageDef"/>
+    <page path="/universal_taskflow/pages/edit_defaults/step1.jsff"
+          usageId="com_rcore_taskflow_view_step1PageDef"/>
+    <page path="/test/testView.jspx"
+          usageId="com_rcore_taskflow_view_testViewPageDef"/>
+    <page path="/universal_taskflow/pages/edit_defaults/edit_defaults.jspx"
+          usageId="com_rcore_taskflow_view_edit_defaultsPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_rcore_taskflow_view_testEditDefaultsPageDef"
+          path="test.testEditDefaultsPageDef"/>
+    <page id="com_rcore_taskflow_view_step1PageDef"
+          path="universal_taskflow.pages.edit_defaults.step1PageDef"/>
+    <page id="com_rcore_taskflow_view_testViewPageDef"
+          path="test.testViewPageDef"/>
+    <page id="com_rcore_taskflow_view_edit_defaultsPageDef"
+          path="universal_taskflow.pages.edit_defaults.edit_defaultsPageDef"/>
+  </pageDefinitionUsages>
+</Application>

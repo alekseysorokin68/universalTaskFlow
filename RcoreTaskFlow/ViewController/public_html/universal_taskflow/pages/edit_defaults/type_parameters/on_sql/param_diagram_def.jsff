@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:declarativeComponent viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/onSqlTemplateParametersAsDC.jsff"
+                             id="dc_dc1">
+      <f:facet name="parametersTab">
+        <af:panelBox text="#{null}" id="pb5" showHeader="never" showDisclosure="false">
+          <af:panelFormLayout id="pt_pfl1">
+            <af:selectOneChoice label="Формат графика"
+                                value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.imageFormat}" 
+                                shortDesc="Определяет формат графика:
+  AUTO  - Формат выбирается системой
+  FLASH - График формата FLASH
+  HTML5 - График формата HTML5
+  PNG   - График формата PNG
+  PNG_STAMPED - График упрощенного формата PNG (PNG_STAMPED)
+" 
+                                id="pt_soc6">
+              <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.imageFormatSelectItems}"
+                             id="pt_si6"/>
+            </af:selectOneChoice>
+            <af:selectBooleanCheckbox id="pt_sbc6"
+                                      label="Открывать график в текущем окне"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.isOpenImageInCurrentWindow}"/>
+            <af:selectBooleanCheckbox id="pt_sbc1"
+                                      label="Наличие второй зеркальной шкалы"
+                                      shortDesc="Наличие оси Y не только слева у графика, но и справа"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.secondMirrorScale}"/>
+
+            <af:panelLabelAndMessage id="pt_plam2" label="Параметры оси Y">
+              <af:panelBox id="pt_pb1"
+                           text="Если заданы оба параметра - действует 'Размер интервала'">
+                <af:panelGroupLayout layout="horizontal" id="pt_pgl1">
+                  <f:facet name="separator">
+                    <af:spacer width="4px" id="pt_s4"/>
+                  </f:facet>
+                  <af:inputNumberSpinbox id="pt_ins1"
+                                         label="Количество диапазонов"
+                                         shortDesc="Количество диапазонов (значений) на оси Y"
+                                         simple="false"
+                                         value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.quantityRanges}"/>
+                  <af:outputText value="или" id="pt_ot2"/>
+                  <af:inputText label="Размер интервала"
+                                value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.majorIncrement}"
+                                shortDesc="Размер (величина) одного интервала по оси Y"
+                                id="pt_it5"/>
+                </af:panelGroupLayout>
+              </af:panelBox>
+            </af:panelLabelAndMessage>
+            <af:selectBooleanCheckbox id="pt_sbc3" label="3D Эффект"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.effect3d}"/>
+            <af:inputText id="pt_ins2" label="Ширина диаграммы (px,%)"
+                          value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.width}"
+                          shortDesc="Здесь допустимо EL-выражение"
+                          contentStyle="width:500px"/>
+            <af:inputText id="pt_ins3" label="Высота диаграммы (px,%)"
+                          value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.height}"
+                          shortDesc="Здесь допустимо EL-выражение"
+                          contentStyle="width:500px"/>
+            <af:inputText id="pt_it1" label="Всплывающее описание"
+                          value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.shortDesc}"/>
+            <af:inputColor id="pt_ic1" label="Цвет заполнитель"
+                           lastUsedVisible="false"
+                           defaultColor="#{backingBeanScope.editDefaultsBean.paramsForDiagram.defaultColorFiller}"
+                           value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.colorFiller}"/>
+            <af:inputText id="pt_it2" label="Заголовок по оси X"
+                          value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.titleX}"/>
+            <af:inputText id="pt_it3" label="Заголовок по оси Y"
+                          value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.titleY}"/>
+            <af:selectOneChoice id="pt_it4"
+                                label="Расположение заголовка по оси Х"
+                                value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.titleXAlign}">
+              <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.horizontalAlignSelectItems}"
+                             id="pt_si1"/>
+            </af:selectOneChoice>
+            <af:selectOneChoice id="pt_soc1"
+                                label="Расположение заголовка по оси Y"
+                                value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.titleYAlign}">
+              <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.verticalAlignSelectItems}"
+                             id="pt_si2"/>
+            </af:selectOneChoice>
+            <af:selectBooleanCheckbox id="pt_sbc4"
+                                      label="Наличие стандартной легенды"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.standartLegendExists}"
+                                      shortDesc="То есть наличие информации о цвете каждого поля"/>
+                                      
+            
+            <af:inputNumberSpinbox 
+                                   label="Толщина линии графика"
+                                   value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.lineWidth}"
+                                   id="pt_ins4"/>
+            <af:selectOneChoice 
+                                id="pt_soc5" 
+                                label="Стиль графика"
+                                value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.graphStyle}">
+              <f:selectItems id="pt_si5"
+                             value="#{backingBeanScope.editDefaultsBean.paramsForDiagram.graphStyleSelectItems}"/>
+            </af:selectOneChoice>
+          </af:panelFormLayout>
+        </af:panelBox>
+      </f:facet>
+      <f:attribute name="eventsTabExists" value="false"/>
+    </af:declarativeComponent>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>param_diagram_def</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

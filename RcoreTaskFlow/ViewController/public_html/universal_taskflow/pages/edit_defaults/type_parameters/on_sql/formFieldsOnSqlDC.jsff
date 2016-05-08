@@ -1,0 +1,1940 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>formFieldsOnSqlDC</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+
+    <af:panelSplitter orientation="vertical"
+                          styleClass="AFStretchWidth"
+                          splitterPosition="128"
+                          rendered="#{not empty backingBeanScope.editDefaultsBean.paramsForOnSql.sqlAttributes}"
+                          id="dc_ps1">
+              <c:set var="isAdfTable"  value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecord.taskFlowType.name == 'TABLE_ADF'}"  scope="page" />
+              <c:set var="isHtmlTable" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecord.taskFlowType.name == 'TABLE_HTML'}" scope="page" />
+              <c:set var="isForm"      value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecord.taskFlowType.name == 'FORM'}"       scope="page" />
+              <c:set var="isTree"      value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecord.taskFlowType.name == 'TREE'}"       scope="page" />
+              <c:set var="isDiagram"   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecord.taskFlowType.isDiagram}"            scope="page" />
+
+              <f:facet name="first">
+                <af:panelStretchLayout id="dc_psl2" topHeight="#{'auto'}">
+                  <f:facet name="top">
+                    <af:panelGroupLayout layout="vertical"
+                                         id="dc_pgl8"
+                                         styleClass="AFStrechLayout"
+                                         halign="right"
+
+                                         >
+                      <af:panelGroupLayout  id="dc_pgl9" layout="horizontal">
+                        <af:toolbar id="t6" >
+                          <af:menuBar id="mb1">
+                            <af:menu text="Ширины" id="m2">
+                              <af:commandMenuItem text="Равномерно разделить колонки по ширине"
+                                                  shortDesc="В %"
+                                                  partialSubmit="false"
+                                                  action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.setFieldsWidthEvenlyAction}"
+                                                  id="cl1"/>
+                              <af:commandMenuItem text="Почистить поле 'Ширина' у всех колонок"
+                                                  partialSubmit="false"
+                                                  action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.clearFieldsWidthInTable}"
+                                                  id="cl2"/>
+                            </af:menu>
+                            <af:menu text="Запросы" id="m3">
+                              <af:commandMenuItem text="Запрос на вставку"
+                                                  partialSubmit="false"
+                                                  action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.getSqlInsertAction}"
+                                                  id="cmi1"/>
+                              <af:commandMenuItem text="Запрос на корректировку"
+                                                  partialSubmit="false"
+                                                  action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.getSqlUpdateAction}"
+                                                  id="cmi2"/>
+                              <af:commandMenuItem text="Запрос на удаление"
+                                                  partialSubmit="false"
+                                                  action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.getSqlDeleteAction}"
+                                                  id="cmi3"/>
+                            </af:menu>
+
+                            <af:menu text="Выбор и порядок полей" id="dc_m1">
+                              <af:commandMenuItem text="В таблице"
+                                                  partialSubmit="false"
+                                                  id="dc_cmi1">
+                                  <af:showPopupBehavior
+                                              popupId="popup_order_table"
+                                              triggerType="action"
+                                  />
+                              </af:commandMenuItem>
+
+                              <af:commandMenuItem text="В форме"
+                                                  partialSubmit="false"
+                                                  id="dc_cmi2">
+                                  <af:showPopupBehavior
+                                              popupId="popup_order_form"
+                                              triggerType="action"
+                                  />
+                              </af:commandMenuItem>
+
+
+                            </af:menu>
+                          </af:menuBar>
+                        </af:toolbar>
+                        <af:popup id="popup_order_table" contentDelivery="lazyUncached">
+                          <af:dialog id="dc_d3" 
+                                     title="Выбор и порядок полей в таблице" 
+                                     stretchChildren="first"
+                                     type="none"
+                                     closeIconVisible="false"
+                                     resize="off"
+                                     contentWidth="600"
+                                     >
+                            <af:declarativeComponent viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/selectOrderShuttleFieldsDC.jsff"
+                                                     id="dc_dc6">
+                                 <f:attribute name="parentComponent" value="table" />                    
+                            </af:declarativeComponent>
+                          </af:dialog>
+                        </af:popup>
+
+                        <af:popup id="popup_order_form">
+                          <af:dialog id="dc_d4" 
+                                     title="Выбор и порядок полей в форме"
+                                     stretchChildren="first"
+                                     type="none"
+                                     closeIconVisible="false"
+                                     resize="off"
+                                     contentWidth="600"
+                          >
+                            <af:declarativeComponent viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/selectOrderShuttleFieldsDC.jsff"
+                                                     id="dc_dc7">
+                                 <f:attribute name="parentComponent" value="form" />                    
+                            </af:declarativeComponent>
+                          </af:dialog>
+                        </af:popup>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="center">
+                  <!--
+                  partialTriggers="::dc1:dc_it5 ::dc1"
+                  -->
+                    <af:table id="tFields"
+                              value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.sqlAttributesList}"
+                              rowSelection="single"
+                              var="row"
+                              varStatus="vs"
+                              summary="Таблица полей"
+                              styleClass="AFStretchWidth"
+                              selectionListener="#{backingBeanScope.editDefaultsBean.paramsForOnSql.sqlAttributeSelectionListener}"
+                              columnStretching="last"
+                              columnResizing="disabled"
+                              emptyText="Нет полей"
+                              disableColumnReordering="true"
+                              contentDelivery="whenAvailable"
+                              partialTriggers="::dc1:dc_it5"
+                              binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.tableSqlAttributes}">
+                      <af:column rowHeader="true" filterable="false"
+                                 sortable="false" headerNoWrap="true"
+                                 headerText="№" align="left" width="26px"
+                                 frozen="true" id="dc_c1">
+                        <af:outputText id="dc_ot1" value="#{vs.index + 1}"/>
+                      </af:column>
+                      <af:column rowHeader="#{false}" filterable="false"
+                                 sortable="false" headerNoWrap="false"
+                                 headerText="Имя" width="236px" align="left"
+                                 id="dc_c2">
+                        <af:outputText id="dc_ot3" value="#{row.name}"/>
+                      </af:column>
+                      <af:column rowHeader="#{false}" filterable="false"
+                                 sortable="false" headerNoWrap="false"
+                                 headerText="Тип" width="96px" align="left"
+                                 id="dc_c3">
+                        <af:outputText id="dc_ot4" value="#{row.sqlTypeName}"/>
+                      </af:column>
+
+                      <af:column filterable="false"
+                                 sortable="false"
+                                 headerText="Длина" width="40px" align="right"
+                                 id="dc_c5">
+                        <af:outputText id="dc_ot2" value="#{row.length}"/>
+                      </af:column>
+
+                      <af:column filterable="false"
+                                 sortable="false"
+                                 headerText="Обнуляемо"
+                                 width="64px"
+                                 align="center"
+                                 id="dc_c6">
+                        <af:switcher facetName="#{row.nullable ? 'SELECTED' : 'NO_SELECTED'}"
+                                     id="dc_s5">
+                          <f:facet name="SELECTED">
+                              <af:selectBooleanCheckbox
+                                label="#{null}"
+                                simple="false"
+                                readOnly="true"
+                                id="dc_ot5"
+                                value="true"
+                                />
+                          </f:facet>
+                          <f:facet name="NO_SELECTED">
+                            <af:outputText id="dc_ot6"/>
+                          </f:facet>
+                        </af:switcher>
+                      </af:column>
+
+                      <af:column filterable="false"
+                                 sortable="false"
+                                 headerNoWrap="false"
+                                 headerText="Заголовок поля"
+                                 align="left"
+                                 id="dc_c4">
+                              <af:inputText label="#{null}"
+                                            simple="true"
+                                            value="#{row.caption}"
+                                            id="dc_it4"
+                                            autoSubmit="true"
+                                            immediate="true"
+                                            shortDesc="Здесь можно вводить непосредственное значение поля. Если вы хотите задать EL или HTML выражение, то сделайте  это в разделе 'Основные данные'. В этом случае будет действовать, то что задано там, а не здесь."
+                                            styleClass="AFStretchWidth"/>
+                      </af:column>
+                    </af:table>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelStretchLayout id="dc_psl13"
+                                       styleClass="AFStretchWidth"
+                                       bottomHeight="0"
+                                       partialTriggers="tFields"
+                                       >
+                  <f:facet name="center">
+                    <af:panelGroupLayout id="pgl13"
+                                         styleClass="AFStretchWidth"
+                                         partialTriggers="tFields"
+                                         rendered="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute != null}"
+                                         layout="scroll">
+                      <af:panelBox text="Поле #{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}"
+                                   id="dc_pb6">
+                        <af:panelBox text="Основные данные" id="dc_pb2">
+                          <af:panelFormLayout id="dc_pfl2"
+                                              rows="#{isAdfTable ? 8 :
+                                                     (isHtmlTable ? 6 :
+                                                     (isForm ? 5 :
+                                                     (isTree ? 6 :
+                                                     (isDiagram ? 4 :
+                                                     6))))}"
+                          >
+                            <af:panelLabelAndMessage id="dc_plam1"
+                                                     label="Заголовок поля"
+                                                     labelStyle="text-align:start"
+                                                     for="dc1:dc_it5"
+                            >
+                            <!--
+                            partialTriggers="::tFields:dc1a:dc_it4 ::tFields:dc1a"
+                            -->
+                              <af:declarativeComponent
+                                  viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                  partialTriggers="::tFields:dc_it4"
+                                  id="dc1">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="caption" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{false}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:attribute name="clearTargetProperty" value="#{true}" />
+                                  <f:attribute name="object" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute}" />
+                                  <f:facet name="content">
+                                    <af:inputText id="dc_it5"
+                                                  label="#{null}"
+                                                  value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.caption}"
+                                                  autoSubmit="true"
+                                                  immediate="true"
+                                                  simple="true">
+                                    </af:inputText>
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage id="dc_plam2"
+                                                     label="Всплывающий текст"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc1:dc_it6"
+                            >
+                              <af:declarativeComponent
+                                viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                id="dc_dc1">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="schortDesc" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:inputText id="dc_it6"
+                                                    label="#{null}"
+                                                    value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.schortDesc}"
+                                                    simple="true"/>
+                                  </f:facet>
+                               </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+
+                            <af:panelLabelAndMessage id="dc_plam3"
+                                                     label="Видимость поля в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc2:dc_sbc4"
+                                                     rendered="#{isAdfTable || isHtmlTable || isTree}"
+                                                     >
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc2"
+                                    >
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="visibleInTable" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:selectBooleanCheckbox id="dc_sbc4"
+                                        label="#{null}"
+                                        simple="true"
+                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visibleInTable}"
+                                    />
+                                  </f:facet>
+                                </af:declarativeComponent>
+
+
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam23"
+                                                     label="Видимость поля в форме"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc3:dc_sbc5"
+                                                     rendered="#{isAdfTable || isHtmlTable || isForm || isTree}"
+                                                     >
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc3">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="visibleInForm" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:selectBooleanCheckbox id="dc_sbc5"
+                                          label="#{null}"
+                                          simple="true"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visibleInForm}"
+                                      />
+                                   </f:facet>
+                               </af:declarativeComponent>
+
+                            </af:panelLabelAndMessage>
+
+
+
+                            <af:panelLabelAndMessage id="dc_plam5"
+                                                     label="Ширина поля в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc4:dc_sbc6"
+                                                     rendered="#{isAdfTable || isHtmlTable || isTree}"
+
+                            >
+
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc4"
+                                    >
+                                      <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                      <f:attribute name="propertyName" value="widthInTable" />
+                                      <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                      <f:attribute name="htmlDisabled" value="#{true}" />
+                                      <f:attribute name="elDisabled" value="#{false}" />
+                                      <f:facet name="content">
+                                          <af:inputText id="dc_sbc6"
+                                                        label="#{null}"
+                                                        simple="true"
+                                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.widthInTable}"
+                                                        contentStyle="width:62px"
+                                                        />
+                                      </f:facet>
+                                </af:declarativeComponent>
+
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam5d"
+                                                     label="Ширина поля в форме"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc5:dc_sbc7"
+                                                     rendered="#{isAdfTable || isHtmlTable || isTree || isForm}"
+
+                            >
+
+
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc5">
+                                      <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                      <f:attribute name="propertyName" value="widthInForm" />
+                                      <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                      <f:attribute name="htmlDisabled" value="#{true}" />
+                                      <f:attribute name="elDisabled" value="#{false}" />
+                                      <f:facet name="content">
+                                          <af:inputText id="dc_sbc7"
+                                                        label="#{null}"
+                                                        simple="true"
+                                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.widthInForm}"
+                                                        contentStyle="width:62px"/>
+                                      </f:facet>
+                                </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+
+
+
+                            <af:panelLabelAndMessage id="dc_plam7"
+                                                     label="Выравнивание заголовка в таблице:"
+                                                     labelStyle="text-align:start;white-space: nowrap"
+                                                     for="dc_dc12:dc_soc1b"
+                                                     rendered="#{isAdfTable || isHtmlTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc12">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="headerAlign" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                        <af:selectOneChoice
+                                            id="dc_soc1b"
+                                            label="Заголовка"
+                                            simple="true"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.headerAlign}"
+                                        >
+                                          <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.horizontalAlignSelectItems}"
+                                                         id="dc_si2"/>
+                                        </af:selectOneChoice>
+                                   </f:facet>
+                                </af:declarativeComponent>
+
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam15"
+                                                     label="Выравнивание данных в таблице:"
+                                                     labelStyle="text-align:start;white-space: nowrap"
+                                                     for="dc_dc13:dc_soc6"
+                                                     rendered="#{isAdfTable || isHtmlTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc13">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="dataAlign" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:selectOneChoice
+                                        id="dc_soc6"
+                                        label="Данных"
+                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.dataAlign}"
+                                        simple="true"
+                                    >
+                                      <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.horizontalAlignSelectItems}"
+                                                     id="dc_si1b"/>
+                                    </af:selectOneChoice>
+                                  </f:facet>
+                                </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage  label="Первичный ключ"
+                                                      labelStyle="text-align:start;white-space: nowrap"
+                                                      for="sbc3"
+                                                      id="plam6">
+                                <af:selectBooleanCheckbox label="#{null}"
+                                                          id="sbc3"
+                                                          simple="true"
+                                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.primaryKey}">
+                                </af:selectBooleanCheckbox>
+                              </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam8"
+                                                     label="Перенос заголовка в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc14:dc_soc3"
+                                                     rendered="#{isAdfTable || isHtmlTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc14">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="wrapEnabled" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:selectBooleanCheckbox
+                                          id="dc_soc3"
+                                          label="Заголовка"
+                                          simple="true"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.wrapEnabled}"
+                                      />
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam16"
+                                                     label="Перенос данных в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc15:dc_soc4b"
+                                                     rendered="#{isAdfTable || isHtmlTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc15">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="wrapEnabledData" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:selectBooleanCheckbox id="dc_soc4b"
+                                          label="Данных"
+                                          inlineStyle="width:105px"
+                                          simple="true"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.wrapEnabledData}"
+                                      />
+                                  </f:facet>
+                                </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam9"
+                                                     label="Наличие фильтра в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc16:dc_sbc8"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc16">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="filterAble" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:selectBooleanCheckbox id="dc_sbc8"
+                                                              label="Фильтра"
+                                                              simple="true"
+                                                              value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.filterAble}"
+                                    />
+                                  </f:facet>
+                              </af:declarativeComponent>
+
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam17"
+                                                     label="Наличие cортировки в таблице"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc17:dc_sbc9"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc17">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="sortAble" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:selectBooleanCheckbox id="dc_sbc9"
+                                                              label="Сортировки"
+                                                              simple="true"
+                                                              value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.sortAble}"
+                                    />
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam4"
+                                                     label="'Замороженное' поле"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc18:dc_sbc10"
+                                                     shortDesc="Поле в таблице не будет подвержено горизонтальному скроллингу. Будет постоянно видимо"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc18">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="frozen" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:selectBooleanCheckbox
+                                      label="#{null}"
+                                      simple="true"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.frozen}"
+                                      id="dc_sbc10"/>
+                                   </f:facet>
+                               </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+
+
+                            <!--af:panelLabelAndMessage id="dc_plam6"
+                                                     labelStyle="text-align:start"
+                                                     label="Цвет шрифта"
+                                                     shortDesc="В таблице и форме"
+                                                     for="dc_dc6:dc_ic1"
+                            >
+                              <af:declarativeComponent
+                                viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                id="dc_dc6">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="color" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:inputColor
+                                        label="#{null}"
+                                        simple="true"
+                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.color}"
+                                        id="dc_ic1"/>
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam11"
+                                                     label="Цвет фона"
+                                                     labelStyle="text-align:start"
+                                                     shortDesc="В таблице и форме"
+                                                     for="dc_dc7:dc_ic2"
+                            >
+
+                              <af:declarativeComponent
+                                viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                id="dc_dc7">
+                                <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                <f:attribute name="propertyName" value="background" />
+                                <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                <f:attribute name="htmlDisabled" value="#{true}" />
+                                <f:attribute name="elDisabled" value="#{false}" />
+                                <f:facet name="content">
+                                  <af:inputColor  label="#{null}"
+                                                  simple="true"
+                                                  value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.background}"
+                                                  id="dc_ic2"/>
+                                </f:facet>
+                              </af:declarativeComponent>
+
+                            </af:panelLabelAndMessage-->
+
+                            <af:panelLabelAndMessage
+                              id="dc_plam12"
+                              labelStyle="text-align:start"
+                              label="Стиль (CSS) заголовка в #{isDiagram ? 'диаграмме' : 'таблице'}"
+                              for="dc_dc8:dc_ic3"
+                            >
+                              <af:declarativeComponent
+                                viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                id="dc_dc8">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="inlineStyleForHeaderInTable" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                      <af:inputText label="#{null}"
+                                                    simple="true"
+                                                    value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.inlineStyleForHeaderInTable}"
+                                                    id="dc_ic3"/>
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage
+                              id="dc_plam15a"
+                              labelStyle="text-align:start"
+                              label="Стиль (CSS) данных в #{isDiagram ? 'диаграмме' : 'таблице'}"
+                              for="dc_dc9:dc_ic3a"
+                            >
+
+                              <af:declarativeComponent
+                                viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                id="dc_dc9">
+                                <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                <f:attribute name="propertyName" value="inlineStyleForDataInTable" />
+                                <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                <f:attribute name="htmlDisabled" value="#{true}" />
+                                <f:attribute name="elDisabled" value="#{false}" />
+                                <f:facet name="content">
+                                  <af:inputText label="#{null}"
+                                                simple="true"
+                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.inlineStyleForDataInTable}"
+                                                id="dc_ic3a"/>
+                                </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+
+                            <af:panelLabelAndMessage id="dc_plam10"
+                                                     label="Поле для сортировки"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc19:dc_soc5"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:panelGroupLayout layout="horizontal"
+                                                   id="dc_pgl16">
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc19">
+                                    <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                    <f:attribute name="propertyName" value="sortProperty" />
+                                    <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                    <f:attribute name="htmlDisabled" value="#{true}" />
+                                    <f:attribute name="elDisabled" value="#{false}" />
+                                    <f:facet name="content">
+                                        <af:selectOneChoice
+                                          label="#{null}"
+                                          simple="true"
+                                          id="dc_soc5"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.sortProperty}"
+                                        >
+                                          <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.selectItemsSqlAttributesWithNull}"
+                                                         id="si8"/>
+                                        </af:selectOneChoice>
+                                     </f:facet>
+                                </af:declarativeComponent>
+                                <af:spacer width="4px" id="s7"/>
+                                <af:commandImageLink icon="/universal_taskflow/images/question.gif"
+                                                     shortDesc="Подробные разъяснения"
+                                                     id="cil2">
+                                  <af:showPopupBehavior popupId="pHelpFieldSort"
+                                                        alignId="cil2"
+                                                        align="afterStart"
+                                                        triggerType="action"/>
+                                </af:commandImageLink>
+                              </af:panelGroupLayout>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam20"
+                                                     label="Поле для фильтрации"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc30:dc_soc7"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:panelGroupLayout layout="horizontal" id="dc_pgl4">
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc30">
+                                    <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                    <f:attribute name="propertyName" value="filterProperty" />
+                                    <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                    <f:attribute name="htmlDisabled" value="#{true}" />
+                                    <f:attribute name="elDisabled" value="#{false}" />
+                                    <f:facet name="content">
+                                        <af:selectOneChoice
+                                          label="#{null}"
+                                          simple="true"
+                                          id="dc_soc7"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.filterProperty}"
+                                        >
+                                          <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.selectItemsSqlAttributesWithNull}"
+                                                         id="dc_si5"/>
+                                        </af:selectOneChoice>
+                                     </f:facet>
+                                </af:declarativeComponent>
+                                <af:spacer width="4px" id="dc_s7"/>
+                                <af:commandImageLink icon="/universal_taskflow/images/question.gif"
+                                                     shortDesc="Подробные разъяснения"
+                                                     id="dc_cil1">
+                                  <af:showPopupBehavior popupId="pHelpFieldFilter"
+                                                        alignId="dc_cil1"
+                                                        align="afterStart"
+                                                        triggerType="action"/>
+                                </af:commandImageLink>
+                              </af:panelGroupLayout>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam21"
+                                                     label="Тип фильтра"
+                                                     labelStyle="text-align:start"
+                                                     for="dc_dc31:dc_soc8"
+                                                     rendered="#{isAdfTable}"
+                            >
+                              <af:panelGroupLayout layout="horizontal" id="dc_pgl5">
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc31">
+                                    <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                    <f:attribute name="propertyName" value="filterType" />
+                                    <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                    <f:attribute name="htmlDisabled" value="#{true}" />
+                                    <f:attribute name="elDisabled" value="#{false}" />
+                                    <f:facet name="content">
+
+                                        <af:selectOneChoice
+                                          label="#{null}"
+                                          simple="true"
+                                          id="dc_soc8"
+                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.filterType}"
+                                        >
+                                          <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.selectItemsFilterType}"
+                                                         id="dc_si6"/>
+                                        </af:selectOneChoice>
+                                     </f:facet>
+                                  </af:declarativeComponent>
+                                  </af:panelGroupLayout>
+
+
+
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage
+                              id="dc_plam13"
+                              labelStyle="text-align:start"
+                              label="Расположение метки на форме"
+                              for="dc_dc10:dc_it7"
+                              rendered="#{isAdfTable || isHtmlTable || isForm || isTree}"
+                            >
+                            <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc10">
+                                <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                <f:attribute name="propertyName" value="labelAlign" />
+                                <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                <f:attribute name="htmlDisabled" value="#{true}" />
+                                <f:attribute name="elDisabled" value="#{false}" />
+                                <f:facet name="content">
+                                    <af:selectOneChoice
+                                      label="#{null}"
+                                      simple="true"
+                                      id="dc_it7"
+                                      value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.labelAlign}"
+                                    >
+                                      <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.labelAlignSelectItems}"  id="si3"/>
+                                    </af:selectOneChoice>
+                                </f:facet>
+                            </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam14"
+                                                     labelStyle="text-wrap:none;text-align:start"
+                                                     shortDesc="Это свойство нужно для группового заголовка (заголовка, объединяющего несколько полей)"
+                                                     label="Категория в таблице"
+                                                     rendered="#{isAdfTable || isHtmlTable}"
+                                                     >
+                              <af:declarativeComponent
+                                  viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                  id="dc_dc11">
+                                  <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                  <f:attribute name="propertyName" value="visualCategory" />
+                                  <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                  <f:attribute name="htmlDisabled" value="#{true}" />
+                                  <f:attribute name="elDisabled" value="#{false}" />
+                                  <f:facet name="content">
+                                    <af:panelGroupLayout id="pgl14"
+                                                         layout="horizontal"
+                                                         inlineStyle="padding:0;margin:0">
+                                      <f:facet name="separator">
+                                        <af:spacer width="6px" id="dc_s2b"/>
+                                      </f:facet>
+
+                                      <af:inputText simple="true"
+                                                    label="#{null}"
+                                                    value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualCategory}"
+                                                    readOnly="true"
+                                                    partialTriggers="::btnSelectCategory ::btnNewCategory"
+                                                    id="it9"/>
+                                      <af:commandButton text="#{null}"
+                                                        inlineStyle="width:6px;background:white;border:none"
+                                                        icon="/universal_taskflow/images/small-3-dots.png"
+                                                        disabled="false"
+                                                        id="dc_cb15">
+                                        <af:showPopupBehavior popupId="::p3"
+                                            alignId="dc_cb15"
+                                            align="afterEnd"
+                                            triggerType="action" />
+                                      </af:commandButton>
+                                      <af:spacer width="3px" id="dc_s1b"/>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                              </af:declarativeComponent>
+                            </af:panelLabelAndMessage>
+
+                            <!--af:panelLabelAndMessage id="dc_plam6"
+                                                     labelStyle="text-wrap:none;text-align:start"
+                                                     shortDesc="Это свойство определяет место в порядке следования полей в таблице)"
+                                                     label="Индекс в таблице"
+                            >
+                              <af:inputText simple="true"
+                                            label="#{null}"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.indexTable}"
+                                            readOnly="true"
+                                            id="dc_it3"/>
+                            </af:panelLabelAndMessage>
+
+                            <af:panelLabelAndMessage id="dc_plam11"
+                                                     labelStyle="text-wrap:none;text-align:start"
+                                                     shortDesc="Это свойство определяет место в порядке следования полей в форме)"
+                                                     label="Индекс в форме"
+                            >
+                              <af:inputText simple="true"
+                                            label="#{null}"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.indexForm}"
+                                            readOnly="true"
+                                            id="dc_it9"/>
+                            </af:panelLabelAndMessage-->
+
+                          </af:panelFormLayout>
+                        </af:panelBox>
+
+                        <af:panelBox text="Визуальное представление поля"
+                                     id="dc_pb3"
+                                     rendered="#{isAdfTable || isHtmlTable || isForm || isTree}"
+                                     >
+                          <af:panelGroupLayout id="dc_pgl10" layout="vertical"
+                                               styleClass="AFStrechWidth"
+                                               valign="top"
+                                               inlineStyle="padding-left:12px;padding-right:2px">
+                            <trh:tableLayout id="dc_tl3" width="100%">
+                              <trh:rowLayout id="dc_rl5">
+                                <trh:cellFormat id="dc_cf7"
+                                                width="50%"
+                                                valign="top">
+                                  <af:panelBox  text="В таблице"
+                                                id="dc_pb4"
+                                                styleClass="AFStrechWidth"
+                                                rendered="#{isAdfTable || isHtmlTable || isTree}"
+                                                >
+                                    <af:panelGroupLayout layout="horizontal"
+                                                         valign="top"
+                                                         id="dc_pgl17">
+                                      <f:facet name="separator">
+                                        <af:spacer width="22px" id="dc_s3"/>
+                                      </f:facet>
+                                      <trh:tableLayout id="dc_tl4">
+                                        <trh:rowLayout id="dc_rl4">
+                                          <trh:cellFormat id="dc_cf11">
+                                            <af:outputLabel value="Не редактируемый текст"
+                                                            shortDesc="outputText ... escape=true"
+                                                            for="table_radio1"
+                                                            id="dc_ol3"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf13">
+                                            <af:selectBooleanRadio
+                                               label="#{null}"
+                                               id="table_radio1"
+                                               simple="true"
+                                               autoSubmit="true"
+                                               immediate="true"
+                                               value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['OUTPUT_TEXT']}"
+                                               group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf14">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.name != 'OUTPUT_TEXT'}"
+                                                              partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                              id="dc_cb5"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl6">
+                                          <trh:cellFormat id="dc_cf15">
+                                            <af:outputLabel value="Не редактируемая метка"
+                                                            shortDesc="outputLabel"
+                                                            for="table_radio2"
+                                                            id="dc_ol4"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf16">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio2"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['OUTPUT_LABEL']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf17">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.name != 'OUTPUT_LABEL'}"
+                                                              partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                              id="dc_cb6"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl7">
+                                          <trh:cellFormat id="dc_cf18">
+                                            <af:outputLabel value="Не редактируемый HTML"
+                                                            shortDesc="outputText ... escape=false"
+                                                            for="table_radio3"
+                                                            id="dc_ol5"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf19">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio3"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['OUTPUT_FORMATTED']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf20">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="true"
+                                                              id="dc_cb7"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                      <trh:tableLayout id="dc_tl5">
+                                        <trh:rowLayout id="dc_rl8">
+                                          <trh:cellFormat id="dc_cf21">
+                                            <af:outputLabel value="Флажок"
+                                                            shortDesc="selectBooleanCheckBox"
+                                                            for="table_radio4"
+                                                            id="dc_ol6"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf22">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio4"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['CHECK_BOX']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf23">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.name != 'CHECK_BOX'}"
+                                                              partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                              id="dc_cb8">
+                                                  <af:showPopupBehavior
+                                                      popupId="p40"
+                                                      triggerType="action"
+                                                      align="afterStart"
+                                                      alignId="dc_cb8"
+                                                  />
+                                            </af:commandButton>
+                                            <af:popup id="p40"
+                                                partialTriggers="tFields"
+                                            >
+                                              <af:dialog id="d60"
+                                                         title="Значения чекбокса"
+                                                         type="okCancel"
+                                              >
+                                                <af:panelFormLayout id="pgl230" labelAlignment="top">
+                                                  <af:inputText label="Значение для установленного флага:"
+                                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.checkBoxTrueValue}"
+                                                                autoSubmit="true"
+                                                                immediate="true"
+                                                                id="it170"/>
+                                                  <af:inputText label="Значение для не установленного флага:"
+                                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.checkBoxFalseValue}"
+                                                                autoSubmit="true"
+                                                                immediate="true"
+                                                                id="it180"/>
+                                                </af:panelFormLayout>
+                                              </af:dialog>
+                                            </af:popup>
+
+                                          </trh:cellFormat>
+
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl9">
+                                          <trh:cellFormat id="dc_cf24">
+                                            <af:outputLabel value="Дата (время)"
+                                                            shortDesc="Элемент управления для отображения: даты, времени, даты и времени"
+                                                            for="table_radio5"
+                                                            id="dc_ol7"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf25">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio5"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['DATE']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf26">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.name != 'DATE'}"
+                                                              partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                              id="dc_cb9"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl10">
+                                          <trh:cellFormat id="dc_cf27">
+                                            <af:outputLabel value="Изображение"
+                                                            shortDesc="Рисунок"
+                                                            for="table_radio6"
+                                                            id="dc_ol8"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf28">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio6"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['IMAGE']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf29">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="true"
+                                                              id="dc_cb10"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                      <trh:tableLayout id="dc_tl6">
+                                        <trh:rowLayout id="dc_rl11">
+                                          <trh:cellFormat id="dc_cf30">
+                                            <af:outputLabel value="Гиперссылка"
+                                                            shortDesc="goLink"
+                                                            for="table_radio7"
+                                                            id="dc_ol9"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf31">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="table_radio7"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForTable['LINK']}"
+                                                                   group="table_radio"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf32">
+                                            <af:commandButton shortDesc="Параметры гиперссылки"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.name != 'LINK'}"
+                                                              partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                              id="dc_cb11">
+                                               <af:showPopupBehavior
+                                                    popupId="#{'dc_lia:popup_root'}"
+                                                    triggerType="action"
+                                                />
+                                            </af:commandButton>
+                                            <!--
+                                            viewId="#{(backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlParameter != null) ? '/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/giperLinkInfoDC.jsff' : '/universal_taskflow/pages/emptyDC.jsff'}"
+                                            -->
+                                            <af:declarativeComponent
+                                              viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/giperLinkInfoDC.jsff"
+                                              partialTriggers="::dc_cb11"
+                                              id="dc_lia">
+                                                <f:attribute name="linkInfo" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.linkInfo}" />
+                                            </af:declarativeComponent>
+                                          </trh:cellFormat>
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                    </af:panelGroupLayout>
+                                    <af:panelBox text="Конвертор поля в таблице"
+                                                 id="dc_pb8"
+                                                 inlineStyle="margin-top:2px"
+                                                 disclosed="false"
+                                                 partialTriggers="table_radio1 table_radio2 table_radio3 table_radio4 table_radio5 table_radio6 table_radio7"
+                                                 visible="#{not empty backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnTableInfo.type.convertors}"
+                                    >
+                                      <af:panelGroupLayout layout="horizontal"
+                                                           id="dc_pgl2">
+                                         <f:facet name="separator">
+                                          <af:spacer width="4px" id="dc_s2"/>
+                                         </f:facet>
+                                         <af:selectOneChoice
+                                            id="dc_soc2"
+                                            label="Тип конвертора"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForTable.type}"
+                                            autoSubmit="true"
+                                            immediate="true"
+                                         >
+                                          <f:selectItems
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorSelectItemsInTable}"
+                                            id="dc_si3"/>
+                                         </af:selectOneChoice>
+
+                                         <af:commandButton
+                                            text="Параметры конвертора"
+                                            disabled="#{
+                                                        (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForTable.type == null)
+                                                          ||
+                                                        (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForTable.type.name == 'convertEmpty')
+                                                      }"
+                                            partialTriggers="dc_soc2"
+                                            id="dc_cb2">
+                                            <af:showPopupBehavior popupId="#{'dc_dc21:popup_root'}"
+                                            />
+                                         </af:commandButton>
+
+                                         <af:declarativeComponent
+                                            viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/convertorBuilderDC.jsff"
+                                            id="dc_dc21">
+                                            <f:attribute name="сonvertorInfo" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForTable}" />
+                                         </af:declarativeComponent>
+                                      </af:panelGroupLayout>
+                                    </af:panelBox>
+                                  </af:panelBox>
+                                </trh:cellFormat>
+                                <trh:cellFormat id="dc_cf10" width="50%"
+                                                valign="top">
+                                  <af:panelBox text="В форме" id="dc_pb5"
+                                               styleClass="AFStrechWidth"
+                                               rendered="#{isAdfTable || isHtmlTable || isForm || isTree}"
+                                               >
+                                    <af:panelGroupLayout layout="horizontal"
+                                                         valign="top"
+                                                         id="dc_pgl18">
+                                      <f:facet name="separator">
+                                        <af:spacer width="22px" id="dc_s4"/>
+                                      </f:facet>
+                                      <trh:tableLayout id="dc_tl7">
+                                        <trh:rowLayout id="dc_rl12">
+                                          <trh:cellFormat id="dc_cf33">
+                                            <af:outputLabel value="Поле для ввода текста"
+                                                            shortDesc="inputText"
+                                                            for="form_radio1"
+                                                            id="dc_ol10"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf36">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio1"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['INPUT']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf37">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.name != 'INPUT'}"
+                                                              partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                              id="dc_cb12">
+                                                <af:showPopupBehavior
+                                                  popupId="popup_input_params"
+                                                  triggerType="action"
+                                                />
+                                            </af:commandButton>
+                                          </trh:cellFormat>
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl15">
+                                          <trh:cellFormat id="dc_cf38">
+                                            <af:outputLabel value="Не редактируемый текст"
+                                                            shortDesc="outputText"
+                                                            for="form_radio2"
+                                                            id="dc_ol11"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf39">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio2"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['OUTPUT_TEXT']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl16">
+                                          <trh:cellFormat id="dc_cf41">
+                                            <af:outputLabel value="Не редактируемая метка"
+                                                            shortDesc="outputLabel"
+                                                            for="form_radio3"
+                                                            id="dc_ol12"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf42">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio3"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['OUTPUT_LABEL']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                      <trh:tableLayout id="dc_tl8">
+                                        <trh:rowLayout id="dc_rl13">
+                                          <trh:cellFormat id="dc_cf34">
+                                            <af:outputLabel value="Не редактируемый HTML"
+                                                            shortDesc="outputText ... escape=false"
+                                                            for="form_radio4"
+                                                            id="dc_ol13"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf44">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio4"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['OUTPUT_FORMATTED']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf45">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="true"
+                                                              id="dc_cb21"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl17">
+                                          <trh:cellFormat id="dc_cf46">
+                                            <af:outputLabel value="Флажок"
+                                                            shortDesc="selectBooleanCheckBox"
+                                                            for="form_radio6"
+                                                            id="dc_ol14"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf47">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio6"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['CHECK_BOX']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+
+                                          <trh:cellFormat id="dc_cf1">
+
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.name != 'CHECK_BOX'}"
+                                                              partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                              id="dc_cb20a">
+                                               <af:showPopupBehavior
+                                                    popupId="p42"
+                                                    triggerType="action"
+                                                />
+                                            </af:commandButton>
+                                            <af:popup id="p42"
+                                                partialTriggers="tFields"
+                                            >
+                                              <af:dialog id="dc_d2"
+                                                         title="Значения чекбокса"
+                                                         type="okCancel"
+                                              >
+                                                <af:panelFormLayout id="dc_pfl1" labelAlignment="top">
+                                                  <af:inputText label="Значение для установленного флага:"
+                                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.checkBoxTrueValue}"
+                                                                autoSubmit="true"
+                                                                immediate="true"
+                                                                id="dc_it1"/>
+                                                  <af:inputText label="Значение для не установленного флага:"
+                                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.checkBoxFalseValue}"
+                                                                autoSubmit="true"
+                                                                immediate="true"
+                                                                id="dc_it2"/>
+                                                </af:panelFormLayout>
+                                              </af:dialog>
+                                            </af:popup>
+
+                                          </trh:cellFormat>
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl18">
+                                          <trh:cellFormat id="dc_cf49">
+                                            <af:outputLabel value="Дата (время)"
+                                                            shortDesc="inputData"
+                                                            for="form_radio7"
+                                                            id="dc_ol15"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf50">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio7"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['DATE']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf51">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.name != 'DATE'}"
+                                                              partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                              id="dc_cb17"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                      <trh:tableLayout id="dc_tl9">
+                                        <trh:rowLayout id="dc_rl14">
+                                          <trh:cellFormat id="dc_cf35">
+                                            <af:outputLabel value="Поле для ввода чисел"
+                                                            shortDesc="inputNumberSpinbox"
+                                                            for="form_radio8"
+                                                            id="dc_ol16"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf52">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio8"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['INPUT_NUMBER']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf53">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.name != 'INPUT_NUMBER'}"
+                                                              partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                              id="dc_cb18"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl19">
+                                          <trh:cellFormat id="dc_cf54">
+                                            <af:outputLabel value="Изображение"
+                                                            shortDesc="image"
+                                                            for="form_radio9"
+                                                            id="dc_ol17"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf55">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio9"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['IMAGE']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <!--trh:cellFormat id="dc_cf56">
+                                            <af:commandButton shortDesc="Дополнительные параметры элемента управления"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="true"
+                                                              id="dc_cb19"/>
+                                          </trh:cellFormat-->
+                                        </trh:rowLayout>
+                                        <trh:rowLayout id="dc_rl20">
+                                          <trh:cellFormat id="dc_cf57">
+                                            <af:outputLabel value="Выпадающий список"
+                                                            shortDesc="selectOneChoice"
+                                                            for="form_radio10"
+                                                            id="dc_ol18"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf58">
+                                            <af:selectBooleanRadio label="#{null}"
+                                                                   id="form_radio10"
+                                                                   simple="true"
+                                                                   autoSubmit="true"
+                                                                   immediate="true"
+                                                                   value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.mapTypesForForm['DROP_DOWN_LIST']}"
+                                                                   group="form_radio"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat id="dc_cf59">
+                                            <af:commandButton shortDesc="Параметры списка"
+                                                              inlineStyle="width:6px;background:white;border:none"
+                                                              icon="/universal_taskflow/images/small-3-dots.png"
+                                                              disabled="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.name != 'DROP_DOWN_LIST'}"
+                                                              partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                              id="dc_cb20">
+                                               <af:showPopupBehavior
+                                                    popupId="#{'dc_dc20:popup_root'}"
+                                                    triggerType="action"
+                                                />
+                                            </af:commandButton>
+
+                                            <af:declarativeComponent
+                                              viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/dropDownListParametersDC.jsff"
+                                              partialTriggers="::dc_cb20"
+                                              id="dc_dc20">
+                                                <f:attribute name="dropDownInfo" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.dropDownInfo}" />
+                                            </af:declarativeComponent>
+
+                                          </trh:cellFormat>
+                                        </trh:rowLayout>
+                                      </trh:tableLayout>
+                                    </af:panelGroupLayout>
+                                    <af:panelBox text="Конвертор поля в форме"
+                                                 id="dc_pb9"
+                                                 inlineStyle="margin-top:2px"
+                                                 disclosed="false"
+                                                 partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                                 visible="#{not empty backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.convertors}"
+                                    >
+                                      <af:panelGroupLayout layout="horizontal"
+                                                           id="dc_pgl3">
+                                         <f:facet name="separator">
+                                          <af:spacer width="4px" id="dc_s6"/>
+                                         </f:facet>
+                                         <af:selectOneChoice
+                                            id="dc_soc4"
+                                            label="Тип конвертора"
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForForm.type}"
+                                            autoSubmit="true"
+                                            immediate="true"
+                                         >
+                                          <f:selectItems
+                                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorSelectItemsInForm}"
+                                            id="dc_si4"/>
+                                         </af:selectOneChoice>
+
+                                         <af:commandButton
+                                            text="Параметры конвертора"
+                                            disabled="#{
+                                                        (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForForm.type == null)
+                                                          ||
+                                                        (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForForm.type.name == 'convertEmpty')
+                                                      }"
+                                            partialTriggers="dc_soc4"
+                                            id="dc_cb3">
+                                            <af:showPopupBehavior
+                                              popupId="#{'dc_dc22:popup_root'}"
+                                            />
+                                         </af:commandButton>
+
+                                         <af:declarativeComponent
+                                            viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/convertorBuilderDC.jsff"
+                                            id="dc_dc22">
+                                            <f:attribute name="сonvertorInfo" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.convertorInfoForForm}" />
+                                         </af:declarativeComponent>
+                                      </af:panelGroupLayout>
+                                    </af:panelBox>
+                                  </af:panelBox>
+                                </trh:cellFormat>
+                              </trh:rowLayout>
+                            </trh:tableLayout>
+                          </af:panelGroupLayout>
+                        </af:panelBox>
+
+                        <af:panelBox  text="Информация для корректировки поля"
+                                      rendered="#{backingBeanScope.editDefaultsBean.paramsForOnSql.modelType.name != 'READ_ONLY'}"
+                                      id="plam8">
+                           <af:panelGroupLayout layout="horizontal"
+                                                valign="top"
+                                                id="pgl20">
+
+                             <af:panelBox showDisclosure="false"
+                                          text="Возможность изменений для:"
+                                          type="default"
+                                          id="pb5">
+                                <af:panelFormLayout id="pfl31" rows="2">
+                                  <af:panelLabelAndMessage
+                                              label="Новой записи"
+                                              labelStyle="text-wrap:none"
+                                              for="dc_dc24:sbc4_ins"
+                                              id="plam91">
+
+                                  <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                    id="dc_dc24">
+                                      <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                      <f:attribute name="propertyName" value="editableInInsert" />
+                                      <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                      <f:attribute name="htmlDisabled" value="#{true}" />
+                                      <f:attribute name="elDisabled" value="#{false}" />
+                                      <f:facet name="content">
+
+                                        <af:selectBooleanCheckbox
+                                                      label="#{null}"
+                                                      id="sbc4_ins"
+                                                      autoSubmit="true"
+                                                      immediate="true"
+                                                      simple="true"
+                                                      contentStyle="height:12px"
+                                                      value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.editableInInsert}"
+                                         />
+                                      </f:facet>
+                                  </af:declarativeComponent>
+
+                                  </af:panelLabelAndMessage>
+
+                                  <af:panelLabelAndMessage
+                                              label="Корректировки"
+                                              labelStyle="text-wrap:none"
+                                              for="dc_dc25:sbc4_upd"
+                                              id="plam911">
+
+                                    <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc25">
+                                        <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                        <f:attribute name="propertyName" value="editableInUpdate" />
+                                        <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                        <f:attribute name="htmlDisabled" value="#{true}" />
+                                        <f:attribute name="elDisabled" value="#{false}" />
+                                        <f:facet name="content">
+                                           <af:selectBooleanCheckbox
+                                                          label="#{null}"
+                                                          id="sbc4_upd"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          immediate="true"
+                                                          contentStyle="height:12px"
+                                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.editableInUpdate}"
+                                           />
+                                        </f:facet>
+                                    </af:declarativeComponent>
+
+                                  </af:panelLabelAndMessage>
+
+                                </af:panelFormLayout>
+                             </af:panelBox>
+
+                             <af:panelBox showDisclosure="false"
+                                          text="Автоматическое значения для:"
+                                          id="dc_pb7">
+                              <af:panelFormLayout id="pfl2" rows="2">
+                                <af:panelLabelAndMessage label="Новой записи"
+                                                         id="dc_plam18"
+                                                         for="dc_dc26:dc_it8"
+                                                         >
+
+                                  <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc26">
+                                        <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                        <f:attribute name="propertyName" value="defaultValue" />
+                                        <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                        <f:attribute name="htmlDisabled" value="#{true}" />
+                                        <f:attribute name="elDisabled" value="#{false}" />
+                                        <f:facet name="content">
+
+                                          <af:inputText label="Новой записи"
+                                                        simple="true"
+                                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.defaultValue}"
+                                                        shortDesc="Автоматическое значение для новой записи (insert). Допустимы служебные слова: today,username. Также конструкции @{field_имя_поля}, @{param_имя_параметра}"
+                                                        disabled="#{!backingBeanScope.editDefaultsBean.paramsForOnSql.insertAble}"
+                                                        contentStyle="height:12px"
+                                                        id="dc_it8"/>
+                                        </f:facet>
+                                    </af:declarativeComponent>
+
+
+                                </af:panelLabelAndMessage>
+
+                                <af:panelLabelAndMessage label="Корректировки"
+                                                         id="dc_plam19"
+                                                         for="dc_dc27:it15"
+                                                         >
+
+                                  <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc27">
+                                        <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                        <f:attribute name="propertyName" value="updateValue" />
+                                        <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                        <f:attribute name="htmlDisabled" value="#{true}" />
+                                        <f:attribute name="elDisabled" value="#{false}" />
+                                        <f:facet name="content">
+                                            <af:inputText label="Корректировки"
+                                                          simple="true"
+                                                          value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.updateValue}"
+                                                          shortDesc="Автоматическое значение для корректируемой записи (update). Допустимы служебные слова: today,username.  Также конструкции @{field_имя_поля}, @{param_имя_параметра}"
+                                                          disabled="#{!backingBeanScope.editDefaultsBean.paramsForOnSql.updateAble}"
+                                                          contentStyle="height:12px"
+                                                          id="it15"/>
+                                        </f:facet>
+                                  </af:declarativeComponent>
+
+                                </af:panelLabelAndMessage>
+                               </af:panelFormLayout>
+                             </af:panelBox>
+
+                             <af:panelBox showDisclosure="false"
+                                          text="Участие в sql-запросе для:"
+                                          id="pb4">
+                              <af:panelFormLayout id="pfl3" rows="2">
+                                <af:panelLabelAndMessage
+                                              label="Новой записи"
+                                              labelStyle="text-wrap:none"
+                                              for="dc_dc28:it16"
+                                              id="plam9">
+
+                                  <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc28">
+                                        <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                        <f:attribute name="propertyName" value="inInsertSql" />
+                                        <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                        <f:attribute name="htmlDisabled" value="#{true}" />
+                                        <f:attribute name="elDisabled" value="#{false}" />
+                                        <f:facet name="content">
+                                            <af:selectBooleanCheckbox
+                                                label="#{null}"
+                                                shortDesc="Участие в sql-запросе для новой записи (insert)"
+                                                value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.inInsertSql}"
+                                                simple="true"
+                                                contentStyle="height:12px"
+                                                id="it16"/>
+                                        </f:facet>
+                                  </af:declarativeComponent>
+
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage
+                                              label="Корректировки"
+                                              labelStyle="text-wrap:none"
+                                              for="dc_dc29:sbc7"
+                                              id="plam24">
+
+                                  <af:declarativeComponent
+                                      viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                      id="dc_dc29">
+                                        <f:attribute name="propertyClassName" value="universal_taskflow.common.data.SqlAttribute" />
+                                        <f:attribute name="propertyName" value="inUpdateSql" />
+                                        <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}" />
+                                        <f:attribute name="htmlDisabled" value="#{true}" />
+                                        <f:attribute name="elDisabled" value="#{false}" />
+                                        <f:facet name="content">
+                                           <af:selectBooleanCheckbox
+                                                        label="#{null}"
+                                                        shortDesc="Участие в sql-запросе для корретируемой записи (update)"
+                                                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.inUpdateSql}"
+                                                        simple="true"
+                                                        contentStyle="height:12px"
+                                                        id="sbc7"/>
+                                        </f:facet>
+                                   </af:declarativeComponent>
+                                </af:panelLabelAndMessage>
+                               </af:panelFormLayout>
+                             </af:panelBox>
+
+                             <af:panelBox text="Валидатор поля в форме"
+                                          id="dc_pb1"
+                                          disclosed="true"
+                                          showDisclosure="false"
+
+                                          partialTriggers="form_radio1 form_radio2 form_radio3 form_radio4 form_radio6 form_radio7 form_radio8 form_radio9 form_radio10"
+                                          visible="#{
+                                                      (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.editableInInsert
+                                                        ||
+                                                      backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.editableInUpdate)
+                                                        and
+                                                      (not empty backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.visualControlTypeOnFormInfo.type.validators)
+                                                    }"
+                                          >
+                              <af:panelGroupLayout
+                                  layout="vertical"
+                                  halign="left"
+                                  valign="middle"
+                                  id="dc_pgl1">
+                                <f:facet name="separator">
+                                  <af:spacer height="1px" id="dc_s1"/>
+                                </f:facet>
+
+                                <af:selectOneChoice
+                                    label="Тип валидатора"
+                                    value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.validatorInfo.type}"
+                                    autoSubmit="true"
+                                    immediate="true"
+                                    id="dc_soc1"
+                                >
+                                  <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.validatorSelectItems}"
+                                                 id="dc_si1"/>
+                                </af:selectOneChoice>
+
+                                <af:commandButton
+                                    text="Параметры валидатора"
+                                    disabled="#{
+                                                (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.validatorInfo.type == null)
+                                                  ||
+                                                (backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.validatorInfo.type.name == 'validateEmpty')
+                                              }"
+                                    partialTriggers="dc_soc1"
+                                    id="dc_cb1">
+                                    <af:showPopupBehavior
+                                       popupId="#{'dc_dc23:popup_root'}"
+                                    />
+                                </af:commandButton>
+
+                                <af:declarativeComponent
+                                    viewId="/universal_taskflow/pages/edit_defaults/type_parameters/on_sql/validatorBuilderDC.jsff"
+                                    id="dc_dc23">
+                                    <f:attribute name="validatorInfo" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.validatorInfo}" />
+                                </af:declarativeComponent>
+
+                              </af:panelGroupLayout>
+                             </af:panelBox>
+                           </af:panelGroupLayout>
+                        </af:panelBox>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </f:facet>
+
+                  <f:facet name="bottom">
+                    <af:group id="dc_g1" rendered="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute != null}">
+                      <af:popup id="pHelpFieldSort" contentDelivery="lazy">
+                        <pre>
+  При нажатии на кнопку сортировки, запрос, как правило,
+  должен сортироваться по текущему полю.
+  Так и будет если здесь будет введена пустая строка, или текущее поле.
+  Но бывают случаи, когда сортировка поля должна происходить не по текущему полю, а по другому.
+  Например:
+     Нужно чтобы в таблице было поле date1 из table1.
+     Поле имеет тип Date.
+     При этом:
+      - date1 нужно печатать в виде dd-MM-yyyy
+      - сортровка по полю должна быть сортировкой по date1
+
+     Проблема:
+      Если сделать запрос
+        select to_char(date1,'dd-MM-yyyy') fDate from table1
+      То сортировка по полю fDate будет неверной.
+
+     Решение проблеммы:
+      Делаем запрос с двумя полями
+        select to_char(date1,'dd-MM-yyyy') fDate,
+               date1
+        from table1
+
+      При этом поле date1 делаем невидимым в таблице.
+      У поля fDate ставим 'Поле для сортировки и фильтра' - date1
+                                        </pre>
+                      </af:popup>
+
+                      <af:popup id="pHelpFieldFilter" contentDelivery="lazy">
+                                 <c:set var="_txt" scope="request"><![CDATA[
+                                      <pre>
+Здесь ситуация аналогична полю для сортировки.
+Фильтр, расположенный над заголовком поля, как правило, фильтрует таблицу по текущему полю.
+Так и будет если здесь будет введена пустая строка, или текущее поле.
+Но бывают случаи, когда фильтрация таблицы должна происходить не по текущему полю, а по другому.
+Например:
+   Текущее поле в запросе есть витруальная комбинация HTML - текста и другого поля:
+   &lt;a href=...&gt; || field_text || &lt;/a&gt;
+
+   В колонке пользователь видит текст, соответствующий полю field_text.
+   И набирает в фильтре текст из field_text.
+   Но (в этом случае) фильтр по текущему полю не будет работать правильно.
+   Решение проблемы - сделать в текущем поле полем для фильтрации - field_text</pre>]]>
+                                 </c:set>
+          <af:outputText value="#{_txt}" id="ot1" escape="false"/>
+
+                                  </af:popup>
+
+
+                      <af:popup  id="p3"
+                          contentDelivery="lazyUncached"
+                          binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.popupSelectCategory}">
+                        <af:dialog title="Выбор категория для поля #{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.name}"
+                                   type="none"
+                                   closeIconVisible="false"
+                                   stretchChildren="first"
+                                   contentWidth="300"
+                                   contentHeight="150"
+                                   id="d5">
+                             <af:panelStretchLayout id="psl2"
+                                                    styleClass="AFStretchWidth"
+                                                    topHeight="18px"
+                                                    bottomHeight="24px"
+                             >
+                                <f:facet name="top">
+                                  <af:panelGroupLayout  id="pgl15"
+                                                        layout="vertical"
+                                                        halign="center"
+                                                        valign="middle"
+                                                        styleClass="AFStretchWidth">
+                                    <af:outputText value="Выбирите категорию, или создайте новую:"
+                                                   id="ot16"
+                                                   inlineStyle="font-weight:bold"/>
+                                   </af:panelGroupLayout>
+                                </f:facet>
+                                <f:facet name="center">
+                                  <af:panelGroupLayout  layout="vertical"
+                                                        styleClass="AFStretchWidth"
+                                                        halign="center"
+                                                        id="pgl18">
+                                  <af:selectOneListbox
+                                      styleClass="AFStretchWidth"
+                                      contentStyle="width:250px;"
+                                      size="6"
+                                      label="#{null}"
+                                      simple="true"
+                                      id="dc_sol1"
+                                      binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.comboboxCategory}">
+                                    <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.categoryOfAttributes}"
+                                         id="si2"/>
+                                  </af:selectOneListbox>
+                                  </af:panelGroupLayout>
+                                </f:facet>
+                                <f:facet name="bottom">
+                                  <af:panelGroupLayout  id="pgl16"
+                                                        layout="horizontal"
+                                                        halign="left"
+                                                        valign="bottom"
+                                                        styleClass="AFStretchWidth">
+                                      <af:inputText label="Ввод новой категории"
+                                                    id="it13"
+                                                    binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.inputNewCategory}"/>
+                                   </af:panelGroupLayout>
+                                </f:facet>
+                             </af:panelStretchLayout>
+                             <f:facet name="buttonBar">
+                                <af:panelGroupLayout  id="pgl17"
+                                                      layout="horizontal"
+                                                      halign="right"
+                                                      styleClass="AFStretchWidth">
+                                      <af:commandButton text="Выбрать категорию"
+                                                        action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.selectCategoryAction}"
+                                                        partialSubmit="true"
+                                                        id="btnSelectCategory">
+                                      </af:commandButton>
+                                       <af:commandButton  text="Создать новую категорию"
+                                                          action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.newCategoryAction}"
+                                                          partialSubmit="true"
+                                                          id="btnNewCategory">
+                                      </af:commandButton>
+                                      <af:commandButton text="Отмена"
+                                                        action="#{backingBeanScope.editDefaultsBean.paramsForOnSql.cancelCategoryAction}"
+                                                        partialSubmit="true"
+                                                        id="cb11">
+                                      </af:commandButton>
+                                   </af:panelGroupLayout>
+                             </f:facet>
+                        </af:dialog>
+                      </af:popup>
+
+                      <af:popup id="popup_input_params"
+                                contentDelivery="lazyUncached"
+                                partialTriggers="dc_cb12"
+                      >
+                        <af:dialog  id="dc_d1"
+                                    title="Параметры для ввода текста"
+                                    modal="true"
+                                    type="okCancel"
+                                    >
+                          <af:inputNumberSpinbox id="dc_ins1"
+                            label="Количество строк"
+                            value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlAttribute.
+                                    visualControlTypeOnFormInfo.rowsInInput}"
+                          >
+                            <af:validateLongRange minimum="1" />
+                          </af:inputNumberSpinbox>
+                        </af:dialog>
+                      </af:popup>
+                    </af:group>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </f:facet>
+            </af:panelSplitter>
+
+  </af:componentDef>
+</jsp:root>

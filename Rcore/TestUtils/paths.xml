@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="TestUtils_paths" basedir=".">
+  <property file="../BuildAll/build.properties"/>
+  <property file="build.properties"/>
+<path id="library.RDTEX_EXTERNAL_LIB">
+    <pathelement location="${external.dir}/used/com_sun_xml.jar"/>
+    <pathelement location="${external.dir}/used/htmllexer.jar"/>
+    <pathelement location="${external.dir}/used/htmlparser.jar"/>
+    <pathelement location="${test.dir}/mockito-1.8.5.zip"/>
+    <pathelement location="${test.dir}/selenium-server-standalone-2.16.1.jar"/>
+  </path>
+  <path id="classpath_TestUtils">
+    <pathelement location="${external.dir}/used/rcore_global_adf_jar.jar"/>
+    <path refid="library.RDTEX_EXTERNAL_LIB"/>
+  </path>
+</project>  

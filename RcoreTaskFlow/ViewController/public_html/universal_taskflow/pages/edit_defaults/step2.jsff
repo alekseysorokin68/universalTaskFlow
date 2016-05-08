@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+xmlns:trh="http://myfaces.apache.org/trinidad/html"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+
+   <af:pageTemplate viewId="/universal_taskflow/pages/edit_defaults/trainPageTemplate.jsff"
+                    id="pt1"
+                    rendered="#{backingBeanScope.editDefaultsBean.accessibility}"
+                    >
+      <f:attribute name="activityId" value="step2" />
+    <f:facet name="content">
+      
+      <af:panelStretchLayout id="psl2s2">
+        <f:facet name="center">
+          <af:tree id="t2"
+              value="#{backingBeanScope.editDefaultsBean.taskFlowTypeTreeModel}"
+              var="node"
+              varStatus="vs"
+              emptyText="Данных нет"
+              displayRow="selected"
+              initiallyExpanded="true"
+              rowSelection="none"
+              summary="#{null}"
+          >
+            <f:attribute name="node" value="#{node}" />
+            <f:facet name="nodeStamp">
+              <af:panelGroupLayout id="pgl1${vs.index}"
+                inlineStyle="padding-top:6px;padding-left:6px;"
+              >
+                <af:switcher id="s1" facetName="#{node['leaf'] ? 'LEAF' : 'GROUP'}">
+                  <f:facet name="GROUP">
+                    <af:inputText
+                      value="#{node['caption']}"
+                      shortDesc="#{node['description']}"
+                      id="ot1${vs.index}"
+                      readOnly="true"
+                      disabled="true"
+                      contentStyle="font-weight:bold;font-size:13px"
+                    />
+                  </f:facet>
+                  <f:facet name="LEAF">
+                        <af:selectBooleanRadio
+                          label="#{null}"
+                          simple="false"
+                          group="step2"
+                          autoSubmit="true"
+                          immediate="true"
+                          text="#{node['caption']}"
+                          value="#{backingBeanScope.editDefaultsBean.typeNodeSelectedMap[node]}"
+                          id="sbr1${vs.index}"/>
+                  </f:facet>
+                </af:switcher>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:tree>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

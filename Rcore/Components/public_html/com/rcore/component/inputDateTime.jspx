@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="comp" id="inputDateTime" definition="public">
+    
+    <af:panelGroupLayout layout="#{attrs.layout}" 
+                           id="inputDateTimeRoot" 
+                           halign="center" 
+                           valign="middle"
+                           inlineStyle="#{attrs.inlineStyle}"
+      >
+         <f:facet name="separator">
+          <af:spacer width="#{viewScope.inputDateTimeBean.delegate.widthSeparator}" 
+                     height="#{viewScope.inputDateTimeBean.delegate.heightSeparator}" 
+                     id="s1" />
+        </f:facet>
+        <af:outputLabel value="#{attrs.label}" id="dc_ol1" rendered="#{!attrs.simple}" />
+        <af:inputDate id="dc_id1" label="#{''}" simple="true"/>
+        <af:facetRef facetName="inputTimeFacet"/>
+      </af:panelGroupLayout>  
+    
+  
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>inputDateTime</display-name>
+        <facet>
+          <description>Фасет для отображения и ввода времени</description>
+          <facet-name>inputTimeFacet</facet-name>
+        </facet>
+        
+        <attribute>
+          <attribute-name>layout</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>vertical</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>inlineStyle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>border:1px solid black</default-value>
+        </attribute>
+        <!--attribute>
+          <attribute-name>space</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>4</default-value>
+        </attribute-->
+        
+        <attribute>
+          <attribute-name>label</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>simple</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        
+        <component-extension>
+          <component-tag-namespace>com.rcore.component</component-tag-namespace>
+          <component-taglib-uri>/rcoreComponentLib</component-taglib-uri>
+          
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

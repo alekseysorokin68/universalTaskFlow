@@ -1,0 +1,325 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>validatorBuilderDC</display-name>
+        <attribute>
+          <attribute-name>validatorInfo</attribute-name>
+          <attribute-class>universal_taskflow.common.data.ValidatorInfo</attribute-class>
+          <required>true</required>
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+    
+    <af:popup id="popup_root" 
+              contentDelivery="lazyUncached"
+    >
+      <af:dialog id="dc_d1" 
+          title="Редактирование валидатора" 
+          type="okCancel"
+          modal="true"
+          resize="off"
+          stretchChildren="first"
+          closeIconVisible="false"
+          contentWidth="800"
+          contentHeight="550"
+      >
+          <af:switcher id="dc_s1" facetName="#{attrs.validatorInfo['type']['name']}">
+            <f:facet name="validateDoubleRange">
+              <af:panelFormLayout id="dc_pfl1">
+                <af:panelLabelAndMessage id="dc_plam1" label="Максимум (maximum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputText
+                    id="dc_sbc2"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['maximum']}"
+                  />
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="dc_plam2" label="Минимум (minimum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputText
+                    id="dc_it1"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['minimum']}"
+                  />
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>  
+            </f:facet>
+            <f:facet name="validateLength">
+              <af:panelFormLayout id="dc_pfl2">
+                <af:panelLabelAndMessage id="dc_plam3" 
+                    label="Максимум (maximum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputText
+                    id="dc_it2"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['maximum']}"
+                  />
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="dc_plam4" 
+                    label="Минимум (minimum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputText
+                    id="dc_it3"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['minimum']}"
+                  />
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>  
+            </f:facet>
+            
+            <f:facet name="validateDateTimeRange">
+              <af:panelFormLayout id="dc_pfl3">
+                <af:panelLabelAndMessage id="dc_plam5" 
+                    label="Максимум (maximum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputDate
+                    id="dc_it4"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['maximum']}"
+                  >
+                    <af:convertDateTime type="both" pattern="dd.MM.yyyy kk:mm:ss" />
+                  </af:inputDate>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="dc_plam6" 
+                    label="Минимум (minimum) (пустота - ограничения нет)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:inputDate
+                    id="dc_id1"
+                    label="#{null}"
+                    simple="true"
+                    value="#{attrs.validatorInfo['mapAttributeValues']['minimum']}"
+                  >
+                    <af:convertDateTime type="both" pattern="dd.MM.yyyy kk:mm:ss" />
+                  </af:inputDate>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>  
+            </f:facet>
+            
+            <f:facet name="validateDateRestriction">
+              <af:panelFormLayout id="dc_pfl4">
+                <af:panelLabelAndMessage 
+                    id="dc_plam7" 
+                    label="Недопустимые дни календаря (invalidDays)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:panelStretchLayout 
+                        id="dc_psl19" 
+                        topHeight="24px"
+                        inlineStyle="height:128px;width:392px;margin-right:6px"
+                  >
+                    <f:facet name="top">
+                      <af:panelGroupLayout 
+                          id="dc_pgl1" 
+                          layout="horizontal"
+                          styleClass="AFStrechWidth"
+                          halign="left"
+                      >
+                        <af:inputDate
+                          id="dc_id3"
+                          label="Выбор нового дня"
+                          value="#{attrs.validatorInfo['invalidDayToAdd']}"
+                          autoSubmit="true"
+                          immediate="true"
+                          autoComplete="off"
+                        >
+                          <af:validateDateRestriction 
+                            invalidDays="#{attrs.validatorInfo['invalidDaysDateListProvider']}" 
+                            messageDetailInvalidDays="Этот день уже в таблице. Выберите другой или очистите поле"
+                            />
+                        </af:inputDate>
+                        <af:spacer width="8px" id="dc_s2"/>
+                        <af:commandButton
+                            id="dc_cb1"
+                            text="Добавить"
+                            partialTriggers="dc_id3"
+                            disabled="#{empty attrs.validatorInfo['invalidDayToAdd']}"
+                            action="#{attrs.validatorInfo['addInvalidDayAction']}"
+                            partialSubmit="true"
+                        />
+                      </af:panelGroupLayout>
+                    </f:facet>
+                    
+                    <f:facet name="center">
+                      <af:table 
+                            id="dc_t1"
+                            value="#{attrs.validatorInfo['invalidDaysTableModel']}"
+                            var="row"
+                            partialTriggers="::dc_cb1 dc_cil1"
+                            varStatus="vs"
+                            columnResizing="disabled"
+                            disableColumnReordering="true"
+                            columnStretching="column:dc_c1"
+                            width="390px"
+                      >
+                        
+                        <af:column id="dc_c1" 
+                                  headerText="Недопустимый день календаря"
+                        >
+                          <af:inputDate
+                              id="dc_id2"
+                              value="#{row['date']}"
+                              label="#{null}"
+                              simple="true"
+                          />
+                        </af:column>
+                        
+                        <af:column id="dc_c2" 
+                          headerText=" " 
+                          width="32px"
+                          align="center">
+                            <af:commandImageLink
+                                shortDesc="Удалить"
+                                icon="/universal_taskflow/images/delete.jpg"
+                                actionListener="#{attrs.validatorInfo['invalidDayDelete']}"
+                                partialSubmit="true"
+                                id="dc_cil1">
+                               <f:attribute name="row" value="#{row}" /> 
+                            </af:commandImageLink>    
+                        </af:column>
+                        
+                        
+                      </af:table>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage 
+                    id="dc_plam8" 
+                    label="Недопустимые дни недели (invalidDaysOfWeek)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:panelStretchLayout 
+                        id="dc_psl2" 
+                        inlineStyle="height:150px;width:430px;margin-right:6px;margin-top:12px"
+                  >
+                  
+                    <f:facet name="center">
+                      <af:table 
+                            id="dc_t2"
+                            value="#{attrs.validatorInfo['invalidDaysOfWeekTableModel']}"
+                            var="row"
+                            varStatus="vs"
+                            columnResizing="disabled"
+                            disableColumnReordering="true"
+                            columnStretching="multiple"
+                            rows="7"
+                            fetchSize="7"
+                            autoHeightRows="7"
+                            
+                            width="390px"
+                      >
+                        
+                        <af:column id="dc_c3" 
+                                  headerText="Недопустимый день недели"
+                                  width="92%"
+                        >
+                          <af:outputText
+                              id="dc_id4"
+                              value="#{row['label']}"
+                          />
+                        </af:column>
+                        
+                        <af:column id="dc_c4" 
+                          headerText=" " 
+                          width="8%"
+                          align="center">
+                            <af:selectBooleanCheckbox id="dc_sbr1"
+                              label="#{null}"
+                              simple="true"
+                              value="#{row['selected']}"
+                            >
+                            </af:selectBooleanCheckbox>
+                        </af:column>
+                        
+                        
+                      </af:table>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:panelLabelAndMessage>
+              
+                <af:panelLabelAndMessage 
+                    id="dc_plam9" 
+                    label="Недопустимые месяца (invalidMonths)"
+                    labelStyle="white-space:nowrap;text-align:start"
+                >
+                  <af:panelStretchLayout 
+                        id="dc_psl3" 
+                        inlineStyle="height:250px;width:430px;margin-right:6px;margin-top:12px"
+                  >
+                  
+                    <f:facet name="center">
+                      <af:table 
+                            id="dc_t3"
+                            value="#{attrs.validatorInfo['invalidMonthsTableModel']}"
+                            var="row"
+                            varStatus="vs"
+                            columnResizing="disabled"
+                            disableColumnReordering="true"
+                            columnStretching="multiple"
+                            rows="12"
+                            fetchSize="12"
+                            autoHeightRows="12"
+                            
+                            width="390px"
+                      >
+                        
+                        <af:column id="dc_c5" 
+                                  headerText="Недопустимый месяц"
+                                  width="92%"
+                        >
+                          <af:outputText
+                              id="dc_ot1"
+                              value="#{row['label']}"
+                          />
+                        </af:column>
+                        
+                        <af:column id="dc_c6" 
+                          headerText=" " 
+                          width="8%"
+                          align="center">
+                            <af:selectBooleanCheckbox id="dc_sbc1"
+                              label="#{null}"
+                              simple="true"
+                              value="#{row['selected']}"
+                            >
+                            </af:selectBooleanCheckbox>
+                        </af:column>
+                        
+                        
+                      </af:table>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </f:facet>
+          </af:switcher>
+      </af:dialog>
+   </af:popup>   
+     
+
+  </af:componentDef>
+</jsp:root>

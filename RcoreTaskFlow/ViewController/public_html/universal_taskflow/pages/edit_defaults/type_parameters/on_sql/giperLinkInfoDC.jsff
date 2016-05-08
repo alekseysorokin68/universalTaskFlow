@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>giperLinkInfoDC</display-name>
+        <attribute>
+          <attribute-name>linkInfo</attribute-name>
+          <attribute-class>java.lang.Object</attribute-class>
+          <required>true</required>
+        </attribute>
+        
+        <attribute>
+          <attribute-name>title</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>Параметры гиперссылки</default-value>
+          <required>false</required>
+        </attribute>
+        
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+    <af:popup id="popup_root" contentDelivery="lazyUncached"
+    >
+      <af:dialog id="dc_pw1" 
+                      title="#{attrs.title}"
+                      closeIconVisible="true" 
+                      modal="true" 
+                      stretchChildren="none"
+                      type="okCancel"
+                      inlineStyle="padding-right:4px"
+                      resize="off">
+        <af:panelGroupLayout  id="pgl12" 
+                              layout="vertical"   
+                              styleClass="AFStretchWidth">
+          <trh:tableLayout width="100%" 
+                           id="tl2"
+                           borderWidth="0"
+                           inlineStyle="border:1px solid gray;padding-left:4px">
+            <trh:rowLayout id="rl16">
+              <trh:cellFormat id="cf30">
+                <af:outputText value="Данные ссылки" id="ot4"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl17">
+              <trh:cellFormat id="cf19" columnSpan="2" wrappingDisabled="true">
+                <af:panelGroupLayout id="pgl24" layout="horizontal">
+                  <af:selectBooleanCheckbox 
+                    label="Открывать в текущем окне"
+                    value="#{attrs.linkInfo['isOpenTargetPageInCurrentWindow']}"
+                    id="it2"/>
+                  <af:spacer width="12px" id="s11"/>
+                  <af:selectOneChoice 
+                      id="soc7" 
+                      label="Тип ссылки"
+                      value="#{attrs.linkInfo['linkType']}">
+                    <f:selectItems id="si9"
+                                   value="#{attrs.linkInfo['linkTypeSelectItems']}"/>
+                  </af:selectOneChoice>
+                </af:panelGroupLayout>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl18">
+              <trh:cellFormat id="cf32" halign="right" width="30%">
+                <af:outputLabel value="Адрес URL" id="ol18"/>
+              </trh:cellFormat>
+              <trh:cellFormat id="cf22" wrappingDisabled="true" width="70%">
+                <af:inputText label="#{null}" 
+                              simple="true"
+                              value="#{attrs.linkInfo['target']}"
+                              shortDesc="Вы можете ввести полный адрес, или относительный адрес по отношению к контексту портала, например '/oracle/webcenter/portalapp/pages/test_page.jspx'"
+                              contentStyle="width:88%"
+                              autoSubmit="true"
+                              immediate="true"
+                              id="it8"/>
+                <af:spacer width="3" id="s2"/>
+                
+                <af:commandImageLink id="cb2" 
+                                     icon="/universal_taskflow/images/check2.gif"
+                                     shortDesc="Проверить адрес">
+                   <af:showPopupBehavior popupId="p2" />                  
+                </af:commandImageLink>                     
+                
+                <af:popup id="p2"
+                          contentDelivery="lazyUncached"
+                          partialTriggers="it8"
+                >
+                  <af:dialog id="d2" type="ok" title="Проверка адреса">
+                    <af:panelGroupLayout  id="pgl10" 
+                                          layout="vertical"
+                                          halign="left" 
+                                          valign="top">
+                      <af:outputText value="Введенный вами адрес :"
+                                     noWrap="true" 
+                                     id="ot7"/>
+                      <af:outputText value="#{attrs.linkInfo['target']}"
+                                     noWrap="true" 
+                                     id="ot8"/>
+                      <af:outputText value="Соответствует следующему полному адресу:"
+                                     noWrap="true" 
+                                     id="ot9"/>
+                      <af:goLink text="#{attrs.linkInfo['fullTarget']}"
+                                 destination="#{attrs.linkInfo['fullTarget']}"
+                                 id="gl1"/>
+                    </af:panelGroupLayout>
+                  </af:dialog>
+                </af:popup>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl20">
+              <trh:cellFormat id="cf34" halign="right" wrappingDisabled="true">
+                <af:outputLabel value="Целевые потоки задач (#{attrs.linkInfo['targetPortletsToRefreshCount']})" 
+                                id="ol12"
+                                shortDesc="Портлеты, которые будут обновляться при переходе по ссылке"
+                                partialTriggers="cb4 cb5"
+                                />
+              </trh:cellFormat>
+              <trh:cellFormat id="cf35" halign="left">
+                <af:commandButton text="..." id="cb4" 
+                                  inlineStyle="margin-top:6px"
+                                  partialSubmit="true"
+                >
+                  <af:showPopupBehavior popupId="targetPortlets"
+                                        triggerType="action"/>
+                </af:commandButton>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl9">
+              <trh:cellFormat id="cf18">
+                <af:outputText value="Параметры ссылки" id="ot10"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl10" valign="top" width="100%">
+              <trh:cellFormat id="cf20" columnSpan="2" width="100%">
+                <af:table id="t3"
+                          value="#{attrs.linkInfo['parameters']}"
+                          summary="Таблица параметров ссылки" 
+                          var="row"
+                          emptyText="Нет параметров"
+                          columnStretching="column:lpFieldName"
+                          inlineStyle="height:128px;"
+                          columnResizing="disabled"
+                          disableColumnReordering="true"
+                          partialTriggers="delLinkParameter ::newParameter"
+                          styleClass="AFStretchWidth">
+                  <af:column id="lpName"
+                             headerText="Имя параметра в целевых портлетах"
+                             headerNoWrap="true"
+                             width="200px">
+                    <af:selectOneChoice id="soc4" 
+                                        label="#{null}" 
+                                        simple="true"
+                                        mode="default" 
+                                        value="#{row['name']}"
+                                        contentStyle="width:100%"
+                                        disabled="#{attrs.linkInfo['targetPortletsToRefreshCount'] == 0}"
+                                        styleClass="AFStretchWidth">
+                      <f:selectItems value="#{attrs.linkInfo['selectItemsParameterNamesInTargetPortlet']}"
+                                     id="si6"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column id="lpFieldName"
+                             headerText="Имя поля в данном портлете">
+                    <af:selectOneChoice id="soc5" 
+                                        label="#{null}" 
+                                        simple="true"
+                                        mode="default" 
+                                        value="#{row['fieldName']}"
+                                        contentStyle="width:100%"
+                                        disabled="#{attrs.linkInfo['targetPortletsToRefreshCount'] == 0}"
+                                        styleClass="AFStretchWidth">
+                      <f:selectItems 
+                        value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.selectItemsSqlAttributes}"
+                        id="si7"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column id="colDelete" align="center" width="18px"
+                             headerText="#{null}">
+                    <af:commandImageLink icon="/universal_taskflow/images/delete.jpg"
+                                         actionListener="#{attrs.linkInfo['deleteLinkParameterActionListener']}"
+                                         partialSubmit="true"
+                                         id="delLinkParameter">
+                      <f:attribute name="row" value="#{row}"/>
+                    </af:commandImageLink>
+                  </af:column>
+                </af:table>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout id="rl11">
+              <trh:cellFormat id="cf21" halign="right" columnSpan="2"
+                              valign="top">
+                <af:commandLink text="Новый параметр"
+                                action="#{attrs.linkInfo['newLinkParameterAction']}"
+                                partialSubmit="true"
+                                inlineStyle="padding-right:4px"
+                                disabled="#{attrs.linkInfo['targetPortletsToRefreshCount'] == 0}"
+                                partialTriggers="cb4 cb5" 
+                                id="newParameter"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+          </trh:tableLayout>
+        </af:panelGroupLayout>
+        
+        <af:popup id="targetPortlets" 
+                  contentDelivery="lazyUncached"
+                  partialTriggers="cb4"
+                  binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecordPopup}"
+                  >
+          <af:dialog id="d3"
+                     title="Выбор целевых портлетов. Отметьте портлеты, которым нужно передать параметры ссылки"
+                     type="cancel" 
+                     closeIconVisible="false" 
+                     contentWidth="1024"
+                     contentHeight="500">
+            <af:table value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecordTableModelForSelectPortletsInHiperLinkInTable}"
+                      var="row" 
+                      rows="8"
+                      emptyText="Нет данных"
+                      fetchSize="1024"
+                      rowBandingInterval="0"
+                      filterModel="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecordFilterModel}"
+                      filterVisible="true" 
+                      varStatus="vs"
+                      rowSelection="single" 
+                      id="t5" 
+                      summary="#{null}"
+                      columnStretching="multiple"
+                      disableColumnReordering="true"
+                      columnResizing="disabled"
+                      inlineStyle="height:#{'100%'}"
+                      binding="#{backingBeanScope.editDefaultsBean.paramsForOnSql.mainRecordTable}"
+                      styleClass="AFStretchWidth">
+              <af:column sortProperty="id" 
+                         filterable="true" 
+                         sortable="true"
+                         headerText="Идентификатор" 
+                         width="24%" 
+                         rowHeader="#{false}"
+                         id="c1">
+                <af:outputText value="#{row['id']}" id="ot1"/>
+              </af:column>
+              
+              <af:column sortProperty="header" 
+                         filterable="true" 
+                         sortable="true"
+                         headerText="Заголовок" 
+                         width="24%" 
+                         rowHeader="#{false}"
+                         id="c2">
+                <af:outputText value="#{row['header']}" id="ot2"/>
+              </af:column>
+              
+              <af:column sortProperty="descriptionTaskFlow" 
+                         filterable="true" 
+                         sortable="true"
+                         headerText="Описание" 
+                         width="24%" 
+                         rowHeader="#{false}"
+                         id="c3">
+                <af:outputText value="#{row['descriptionTaskFlow']}" id="ot3"/>
+              </af:column>
+              
+              <af:column sortProperty="adminComment" 
+                         filterable="true" 
+                         sortable="true"
+                         headerText="Комментарии" 
+                         width="24%" 
+                         rowHeader="#{false}"
+                         id="c4">
+                <af:outputText value="#{row['adminComment']}" id="ot4a"/>
+              </af:column>
+              
+              <af:column sortProperty="selected" 
+                         filterable="false" 
+                         sortable="false"
+                         headerText="#{' '}"
+                         headerNoWrap="true"
+                         align="center"
+                         width="4%" 
+                         id="c5">
+                <af:selectBooleanCheckbox 
+                  label="#{null}"
+                  value="#{row['selected']}"
+                  simple="true"
+                  id="dc_sbc1"/>
+              </af:column>
+              
+            </af:table>
+            <f:facet name="buttonBar">
+              <af:panelGroupLayout id="pgl11" 
+                                   layout="default" 
+                                   halign="right"
+                                   styleClass="AFStretchWidth">
+                <af:commandButton text="OK" 
+                                  partialSubmit="true"
+                                  actionListener="#{backingBeanScope.editDefaultsBean.paramsForOnSql.closeMainRecordPopup}"
+                                  id="cb5"
+                >
+                   <f:attribute name="linkInfo" value="#{attrs.linkInfo}" /> 
+                </af:commandButton>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:dialog>
+        </af:popup>
+        
+      </af:dialog>
+    </af:popup>
+  </af:componentDef>
+</jsp:root>

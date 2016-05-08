@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TCountryView"
+  Version="11.1.1.60.13"
+  SelectList="TCountry.COUNTRY_ID, 
+       TCountry.SNAME"
+  FromList="T_COUNTRY TCountry"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="com.rcore.model.TCountryViewRowImpl"
+  ComponentClass="com.rcore.model.TCountryViewImpl"
+  DefClass="com.rcore.global.bcomponent.base.ViewDefImplRcore"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  Where="TCountry.COUNTRY_ID = nvl(:country,TCountry.COUNTRY_ID)"
+  OrderBy="TCountry.SNAME">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="country"
+    Kind="where"
+    Type="java.lang.String"/>
+  <EntityUsage
+    Name="TCountry"
+    Entity="com.rcore.model.TCountry"/>
+  <ViewAttribute
+    Name="CountryId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CountryId"
+    EntityUsage="TCountry"
+    AliasName="COUNTRY_ID"/>
+  <ViewAttribute
+    Name="Sname"
+    PrecisionRule="true"
+    EntityAttrName="Sname"
+    EntityUsage="TCountry"
+    AliasName="SNAME"/>
+  <ViewLinkAccessor
+    Name="TRegionView"
+    ViewLink="com.rcore.model.TRegionCountryLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

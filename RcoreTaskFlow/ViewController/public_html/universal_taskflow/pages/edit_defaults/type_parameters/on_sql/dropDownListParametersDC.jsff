@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>dropDownListParametersDC</display-name>
+        <attribute>
+          <attribute-name>dropDownInfo</attribute-name>
+          <attribute-class>universal_taskflow.common.data.DropDownInfo</attribute-class>
+          <required>true</required>
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+    
+    <af:group id="root">
+        <af:popup id="popup_root"
+            childCreation="deferred"
+            contentDelivery="lazyUncached">
+            
+            <af:panelWindow id="pt_pw1"
+                        stretchChildren="first"
+                        title="Выпадающий список - параметры"
+                        modal="true"
+                        contentWidth="800"
+                        contentHeight="400"
+                        resize="on"
+                        closeIconVisible="false">
+          <af:panelStretchLayout id="pt_pgl3" bottomHeight="#{'auto'}">
+            <f:facet name="center">
+              <af:panelTabbed id="panelTabbed" contentDelivery="lazyUncached">
+                <af:showDetailItem id="tabControl" text="Элемент управления" stretchChildren="none">
+
+                  <trh:tableLayout id="pt_tl1">
+                    <trh:rowLayout id="pt_rl1">
+                      <trh:cellFormat id="pt_cf1">
+                        <af:outputLabel value="Комбобокс (для ограниченного списка)" id="pt_ol2"/>
+                      </trh:cellFormat>
+
+                      <trh:cellFormat id="pt_cf2">
+                        <af:selectBooleanRadio label="#{null}"
+                                             group="dropDownControl"
+                                             value="#{attrs.dropDownInfo['combobox']}"
+                                             simple="true"
+                                             autoSubmit="true"
+                                             immediate="true"
+                                             id="comboRadio"/>
+                      </trh:cellFormat>
+                    </trh:rowLayout>
+
+                    <trh:rowLayout id="pt_rl2">
+                      <trh:cellFormat id="pt_cf3">
+                        <af:outputLabel value="Таблица (для не ограниченного списка, с поиском и дополнительными полями)"
+                                        id="pt_ol3"/>
+                      </trh:cellFormat>
+                      <trh:cellFormat id="pt_cf4">
+                         <af:selectBooleanRadio label="#{null}"
+                                             group="dropDownControl"
+                                             value="#{attrs.dropDownInfo['table']}"
+                                             simple="true"
+                                             autoSubmit="true"
+                                             immediate="true"
+                                             id="tableRadio"/>
+                      </trh:cellFormat>
+                    </trh:rowLayout>
+                  </trh:tableLayout>
+
+                </af:showDetailItem>
+
+                <af:showDetailItem id="tabSql" text="Запрос к базе" stretchChildren="first">
+                  <af:panelStretchLayout id="pt_psl2"
+                      topHeight="#{'auto'}"
+                      bottomHeight="40px">
+                    <f:facet name="top">
+                      <af:panelFormLayout id="pfl11" labelAlignment="top">
+                        <af:selectOneListbox
+                            id="datasourceList"
+                            label="Источники данных"
+                            value="#{attrs.dropDownInfo['dataSourceInfo']}"
+                            contentStyle="width:782px"
+                            autoSubmit="true"
+                            immediate="true"
+                            size="#{backingBeanScope.editDefaultsBean.paramsForOnSql.sizeListDataSources}">
+                            <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.dataSourceSelectItems}"
+                                           id="dc_si1"/>
+                        </af:selectOneListbox>
+                      </af:panelFormLayout>
+                    </f:facet>
+                    <f:facet name="center">
+                      <af:panelStretchLayout topHeight="#{'auto'}" id="dc_psl13">
+                        <f:facet name="top">
+                          <af:outputLabel value="Запрос к базе данных" id="pt_ol4"/>
+                        </f:facet>
+
+                        <f:facet name="center">
+
+                          <af:inputText label="#{null}"
+                                      value="#{attrs.dropDownInfo['sql']}"
+                                      rows="18"
+                                      autoSubmit="true"
+                                      immediate="true"
+                                      contentStyle="width:782px"
+                                      shortDesc="В запросе допустимы параметры например : select A from T where A = :parameter1"
+                                      simple="true"
+                                      id="input_sql"/>
+                        </f:facet>
+                      </af:panelStretchLayout>
+                    </f:facet>
+                    <f:facet name="bottom">
+                      <af:panelGroupLayout layout="horizontal"
+                                           id="pgl2"
+                                           styleClass="AFStrechWidth"
+                                           valign="middle"
+                                           halign="left">
+                        <f:facet name="separator">
+                          <af:spacer width="4" id="s1"/>
+                        </f:facet>
+                        <af:commandButton text="Тест"
+                                          shortDesc="Тест корректности запроса, переформирование параметров и полей запроса"
+                                          id="testBtn"
+                                          partialSubmit="true"
+                                          action="#{attrs.dropDownInfo['testSqlAction']}"/>
+                        <af:message for="input_sql"
+                                    partialTriggers="testBtn input_sql datasourceList"
+                                    id="m1"
+                                    messageType="#{attrs.dropDownInfo['messageTestType']}"
+                                    message="#{attrs.dropDownInfo['messageTestMessage']}"
+                        />
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:showDetailItem>
+                <af:showDetailItem  id="tabParameters"
+                                    text="Параметры запроса"
+                                    stretchChildren="first"
+                                    disabled="#{attrs.dropDownInfo['tabParametersDisabled']}"
+                                    partialTriggers="testBtn input_sql datasourceList"
+                                    >
+                  <af:switcher
+                        id="pt_s1"
+                        facetName="#{attrs.dropDownInfo['parametersFound'] ? 'yes_parameters' : 'no_parameters'}">
+                    <f:facet name="no_parameters">
+                      <af:outputText value="В запросе нет параметров"
+                         inlineStyle="font-size:large"
+                         id="ot1"
+                         styleClass="AFStretchWidth"
+                      />
+                    </f:facet>
+                    <f:facet name="yes_parameters">
+                      <af:panelStretchLayout id="pt_psl1"
+                      >
+                        <!--f:facet name="top">
+                          <af:panelBox text="Введите (проверьте) значение каждого параметра запроса"
+                                       showDisclosure="false"
+                                       styleClass="AFStrechWidth"
+                                       type="flow"
+                                       id="pt_pb1">
+                            <f:facet name="toolbar">
+                               <af:toolbar flex="1" id="pt_t1">
+                                  <af:commandToolbarButton
+                                           shortDesc="Помощь"
+                                           icon="/images/question.gif"
+                                           id="pt_ctb1">
+                                     <af:showPopupBehavior
+                                        popupId="helpParameterValue"
+                                        alignId="pt_ctb1"
+                                        align="afterStart"
+                                        triggerType="action"
+                                     />
+                                  </af:commandToolbarButton>
+                              </af:toolbar>
+                            </f:facet>
+                          </af:panelBox>
+                        </f:facet-->
+                        <f:facet name="center">
+                          <af:table
+                            id="pt_t2"
+                            value="#{attrs.dropDownInfo['tableModelParameters']}"
+                            var="row"
+                            columnSelection="single"
+                            columnStretching="last"
+                            summary="Table_Parameters"
+                            emptyText="Нет данных"
+                          >
+                            <af:column  id="col_name" 
+                                        headerText="Имя параметра"
+                                        rowHeader="#{false}"
+                            >
+                              <af:outputText value="#{row['name']}" id="pt_ot7"/>
+                            </af:column>
+                            <af:column id="col_type" headerText="Тип параметра">
+                              <af:selectOneChoice label="#{null}"
+                                                  value="#{row['type']}"
+                                                  simple="true"
+                                                  autoSubmit="true"
+                                                  immediate="true"
+                                                  id="soc1">
+                                <f:selectItems value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.parameterTypeSqlSelectItems}" id="si1"/>
+                              </af:selectOneChoice>
+                              
+                            </af:column>
+                            <af:column id="col_value" headerText="Значение параметра">
+                              <af:declarativeComponent
+                                  viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                  partialTriggers="::soc1"
+                                  id="dc1">
+                                <f:attribute name="propertyClassName" 
+                                  value="universal_taskflow.common.data.DropDownInfo.RowParameter" />
+                                <f:attribute name="propertyName" value="value" />
+                                <f:attribute name="objectId" value="#{backingBeanScope.editDefaultsBean.paramsForOnSql.currentSqlParameter.name}" />
+                                <f:attribute name="htmlDisabled" value="#{true}" />
+                                <f:attribute name="elDisabled" value="#{false}" />
+                                <f:facet name="content">
+                                  <af:switcher id="dc_s2a"
+                                      facetName="#{attrs.dropDownInfo['facetNameForParameterValue'][row['type']]}"
+                                   >
+                                   
+                                     <f:facet name="INPUT">
+                                        <af:inputText
+                                            label="#{null}"
+                                            value="#{row['value']}"
+                                            contentStyle="width:300px"
+                                            simple="true"
+                                            autoSubmit="true"
+                                            immediate="true"
+                                            id="pt_it1"
+                                          />
+                                     </f:facet>
+
+                                      <f:facet name="DATE">
+                                        <af:inputDate
+                                          label="#{null}"
+                                          value="#{row['value']}"
+                                          contentStyle="width:300px"
+                                          shortDesc=
+                                                  "Если тип есть DATE, TIME, TIMESTAMP то конкретную дату нужно ввести в формате:
+                                                   dd.MM.yyyy"
+                                          simple="true"
+                                          id="dc_id1"
+                                        >
+                                          <af:convertDateTime type="date" pattern="dd.MM.yyyy" />
+                                        </af:inputDate>
+                                      </f:facet>
+                                      <f:facet name="TIME">
+                                        <af:inputDate
+                                          label="#{null}"
+                                          value="#{row['value']}"
+                                          contentStyle="width:300px"
+                                          shortDesc=
+                                                  "Если тип есть DATE, TIME, TIMESTAMP то конкретную дату нужно ввести в формате:
+                                                   dd.MM.yyyy"
+                                          simple="true"
+                                          id="dc_id2"
+                                        >
+                                          <af:convertDateTime type="time" pattern="kk:mm:ss" />
+                                        </af:inputDate>
+                                      </f:facet>
+                                      <f:facet name="TIMESTAMP">
+                                        <af:inputDate
+                                          label="#{null}"
+                                          value="#{row['value']}"
+                                          contentStyle="width:300px"
+                                          shortDesc=
+                                                  "Если тип есть DATE, TIME, TIMESTAMP то конкретную дату нужно ввести в формате:
+                                                   dd.MM.yyyy"
+                                          simple="true"
+                                          id="dc_id3"
+                                        >
+                                          <af:convertDateTime type="both" pattern="dd.MM.yyyy kk:mm:ss" />
+                                        </af:inputDate>
+                                      </f:facet>
+                                      
+                                  </af:switcher>
+                              </f:facet>
+                            </af:declarativeComponent>  
+                            </af:column>
+                          </af:table>
+                        </f:facet>
+                      </af:panelStretchLayout>
+                    </f:facet>
+                  </af:switcher>
+                </af:showDetailItem>
+                <af:showDetailItem id="tabFields"
+                                   text="Поля запроса"
+                                   disabled="#{attrs.dropDownInfo['tabFieldsDisabled']}"
+                                   partialTriggers="testBtn input_sql datasourceList"
+                                   stretchChildren="first">
+                    <af:panelStretchLayout topHeight="#{'auto'}" id="pt_psl3">
+                      <f:facet name="top">
+                          <af:panelFormLayout id="pt_pfl1"
+                                              labelAlignment="start"
+                          >
+                            <af:selectOneChoice label="Поле - значение"
+                                                value="#{attrs.dropDownInfo['fieldValue']}"
+                                                partialTriggers="testBtn input_sql datasourceList"
+                                                id="pt_soc1">
+                              <f:selectItems value="#{attrs.dropDownInfo['selectItemsFields']}"
+                                             id="pt_si1"/>
+                            </af:selectOneChoice>
+                            
+                            <af:selectOneChoice label="Поле для отображения"
+                                                value="#{attrs.dropDownInfo['fieldCaption']}"
+                                                partialTriggers="testBtn input_sql datasourceList"
+                                                id="pt_soc2">
+                              <f:selectItems value="#{attrs.dropDownInfo['selectItemsFields']}"
+                                             id="pt_si2"/>
+                            </af:selectOneChoice>
+                        </af:panelFormLayout>
+                      </f:facet>
+                      <f:facet name="center">
+                        <af:table
+                            id="pt_t3"
+                            value="#{attrs.dropDownInfo['tableModelFields']}"
+                            var="row"
+                            emptyText="Нет данных"
+                            columnSelection="single"
+                            columnStretching="last"
+                            summary="Table_Fields"
+                            partialTriggers="::comboRadio ::tableRadio"
+                            rendered="#{attrs.dropDownInfo['table']}"
+                          >
+                            <af:column  id="col_field_name" 
+                                        headerText="Имя поля"
+                                        rowHeader="#{false}"
+                            >
+                              <af:outputText value="#{row['name']}" id="pt_ot8"/>
+                            </af:column>
+                            <af:column id="col_field_caption" headerText="Описание поля">
+                              <af:inputText
+                                label="#{null}"
+                                value="#{row['caption']}"
+                                contentStyle="width:100%"
+                                autoSubmit="true"
+                                immediate="true"
+                                simple="true"
+                                id="pt_it2">
+                              </af:inputText>
+                            </af:column>
+                          </af:table>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:showDetailItem>
+
+              </af:panelTabbed>
+            </f:facet>
+            <f:facet name="bottom">
+              <af:panelGroupLayout layout="vertical"
+                                   styleClass="AFStrechWidth"
+                                   halign="right"
+                                   id="pt_pgl5">
+              <af:panelGroupLayout
+                  layout="horizontal"
+                  id="pt_pgl4">
+                  <af:commandButton
+                    text="Закрыть"
+                    id="pt_cb2"/>
+              </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:panelWindow>
+            
+        </af:popup>    
+    </af:group>
+    
+  </af:componentDef>
+</jsp:root>

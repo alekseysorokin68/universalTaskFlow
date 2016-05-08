@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+  <c:set  var="bean" value="#{pageFlowScope.viewAdfTableBean}" scope="page" />
+  <c:set  var="parameters"
+          value="#{bean['taskFlowParametersAsTableAdfParameters']}"
+          scope="page" />
+
+  <af:table id="pt_t1"
+          value="#{bean['tableModeles']['dataModel']}"
+          binding="#{pageFlowScope.viewAdfTableBean.tableCategories}"
+          emptyText="#{parameters['emptyText']}"
+          contentDelivery="#{parameters['contentDelivery']}"
+          var="row"
+          varStatus="rowStatus"
+          autoHeightRows="#{parameters['autoHeightRows']}"
+          fetchSize="#{parameters['fetchSize']}"
+          filterVisible="#{parameters['filterAble']}"
+          columnResizing="#{parameters['possibilityChangeWidthColumns'] ? 'enabled' : 'disabled'}"
+          columnStretching="#{parameters['columnStreching']}"
+          rowBandingInterval="#{parameters['intervalForChangeColourOfLines']}"
+          disableColumnReordering="true"
+          inlineStyle="#{parameters['inlineStyle']}"
+          styleClass="AFStretchWidth"
+          shortDesc="#{parameters['shortDesc']}"
+          displayRow="first"
+          rowSelection="#{parameters['rowSelectAble'] == true ? 'single' : 'none'}"
+          selectionListener="#{pageFlowScope.viewAdfTableBean.myselectionLsnr}"
+          sortListener="#{pageFlowScope.viewAdfTableBean.sortListener}"
+          filterModel="#{bean['tableModeles']['filterModel']}"
+          summary="#{null}">
+            <af:forEach items="#{bean['listCategories']}"
+                              var="info"
+                              varStatus="vsfor1">
+                <c:set var="category" value="#{info['category']}" scope="page"/>
+                <c:set var="columns"  value="#{info['columns']}"  scope="page"/>
+
+                <af:forEach items="#{empty category ? columns : null}"
+                            var="column"
+                            varStatus="vsfor2"
+                >
+                  <af:column width="#{column['columnTableResolvedWidth']}"
+                         align="#{column['resolvedDataAlign']['lowerCase']}"
+                         sortProperty="#{column['notNullSortProperty']}"
+                         sortable="#{column['resolvedSortAble']}"
+                         filterable="#{column['resolvedFilterAble']}"
+                         frozen="#{column['resolvedFrozen']}"
+                         noWrap="#{!column['resolvedWrapEnabledData']}"
+                         id="c1${vsfor1.index}${vsfor2.index}">
+                <f:attribute name="columnName" value="#{column['name']}"/>
+                <af:clientListener method="window.universalTaskFlow._columnPropChange"
+                                   type="propertyChange"/>
+                <af:serverListener type="_myCustomEvent"
+                                   method="#{pageFlowScope.viewAdfTableBean.doCustomEventForColumn}"/>
+                <f:facet name="filter">
+                  <af:panelGroupLayout styleClass="AFStretchWidth"
+                                       layout="vertical"
+                                       inlineStyle="padding-left:4px;padding-right:4px;"
+                                       id="pgl1">
+                    <af:inputText label="#{null}"
+                                  value="#{bean['filterValue'][column['notNullFilterProperty']]}"
+                                  simple="true"
+                                  contentStyle="width:100%;"
+                                  autoSubmit="true"
+                                  immediate="true"
+                                  id="it1"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="header">
+                  <af:panelGroupLayout id="pt_pgl1"
+                                       layout="vertical"
+                                       halign="#{column['resolvedHeaderAlign']['lowerCase']}"
+                                       styleClass="AFStretchWidth"
+                                       rendered="#{parameters['displayHeadersOfColumns']}">
+                    <af:outputText value="#{column['resolvedCaption']}"
+                                   inlineStyle="#{column['resolvedInlineStyleForHeaderInTable']}"
+                                   noWrap="#{column['resolvedWrapEnabled'] == null ? null : (!column['resolvedWrapEnabled'])}"
+                                   id="dc_ol2"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+                
+                <!-- Отобразим данное в таблице -->
+                
+                <af:declarativeComponent 
+                    viewId="/universal_taskflow/pages/view_types/table/adf/columnInTableSwitcher.jsff"
+                    id="dc1">
+                    <f:attribute name="row" value="#{row}" />
+                    <f:attribute name="column" value="#{column}" />
+                  </af:declarativeComponent>
+                
+                
+             
+                  </af:column>
+                </af:forEach>
+                
+                <af:column id="dc_column_cat" align="center" rendered="#{not empty category}">
+                  
+                  <f:facet name="header">
+                    <af:panelGroupLayout  id="dc_tl2${vsfor1.index}" 
+                                          layout="vertical" 
+                                          styleClass="AFStretchWidth"
+                                          rendered="#{parameters['displayHeadersOfColumns']}"
+                    >
+                        <af:outputText value="#{category}"
+                                       inlineStyle="#{parameters['cssHeaderColumnCategory']}"
+                                       noWrap="false"
+                                       styleClass="cb_header"
+                                       id="dc_ol3${vsfor1.index}"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  
+                  <af:forEach items="#{columns}" var="column" varStatus="vsfor2">
+                    <af:column width="#{column['columnTableResolvedWidth']}"
+                           align="#{column['resolvedDataAlign']['lowerCase']}"
+                           sortProperty="#{column['notNullSortProperty']}"
+                           sortable="#{column['resolvedSortAble']}"
+                           filterable="#{column['resolvedFilterAble']}"
+                           frozen="#{column['resolvedFrozen']}"
+                           noWrap="#{!column['resolvedWrapEnabledData']}"
+                           id="c1${vsfor1.index}${vsfor1.index}${vsfor2.index}">
+                  <f:attribute name="columnName" value="#{column['name']}"/>
+                  <af:clientListener method="window.universalTaskFlow._columnPropChange"
+                                     type="propertyChange"/>
+                  <af:serverListener type="_myCustomEvent"
+                                     method="#{pageFlowScope.viewAdfTableBean.doCustomEventForColumn}"/>
+                  <f:facet name="filter">
+                    <af:panelGroupLayout styleClass="AFStretchWidth"
+                                         layout="vertical"
+                                         inlineStyle="padding-left:4px;padding-right:4px;"
+                                         id="pgl1${vsfor1.index}${vsfor2.index}">
+                      <af:inputText label="#{null}"
+                                    value="#{bean['filterValue'][column['notNullFilterProperty']]}"
+                                    simple="true"
+                                    contentStyle="width:100%;"
+                                    autoSubmit="true"
+                                    immediate="true"
+                                    id="it1${vsfor1.index}${vsfor2.index}"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="header">
+                    <af:panelGroupLayout id="pt_pgl1${vsfor1.index}${vsfor2.index}"
+                                         layout="vertical"
+                                         halign="#{column['resolvedHeaderAlign']['lowerCase']}"
+                                         styleClass="AFStretchWidth"
+                                         rendered="#{parameters['displayHeadersOfColumns']}">
+                      <af:outputText value="#{column['resolvedCaption']}"
+                                     inlineStyle="#{column['resolvedInlineStyleForHeaderInTable']}"
+                                     noWrap="#{column['resolvedWrapEnabled'] == null ? null : (!column['resolvedWrapEnabled'])}"
+                                     id="dc_ol2${vsfor1.index}${vsfor2.index}"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  
+                  <!-- Отобразим данное в таблице -->
+                  <af:declarativeComponent 
+                    viewId="/universal_taskflow/pages/view_types/table/adf/columnInTableSwitcher.jsff"
+                    id="dc2">
+                    <f:attribute name="row" value="#{row}" />
+                    <f:attribute name="column" value="#{column}" />
+                  </af:declarativeComponent>
+            
+                </af:column>
+                  
+                  </af:forEach>
+                </af:column>
+            </af:forEach>
+  </af:table>
+</jsp:root>

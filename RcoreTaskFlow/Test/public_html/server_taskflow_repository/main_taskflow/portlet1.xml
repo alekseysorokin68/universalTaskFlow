@@ -1,0 +1,381 @@
+<MainRecord serialVersionUID="1" versionLib="1" versionTaskFlow="1">
+  <id>portlet1</id>
+  <header>header55</header>
+  <headerExists>true</headerExists>
+  <descriptionTaskFlow>Описание потока задач</descriptionTaskFlow>
+  <adminComment>Комментарии администратора</adminComment>
+  <activated>true</activated>
+  <textNotActivated>Эта область в разработке</textNotActivated>
+  <saveAllTaskFlowTypes>true</saveAllTaskFlowTypes>
+  <user>anonymous</user>
+  <date>2016-03-09 18:41:27.748 UTC</date>
+  <taskFlowType>TABLE_ADF</taskFlowType>
+  <taskFlowParametersTable>
+    <entry>
+      <universal__taskflow.common.types.TaskFlowTypeImpl>TABLE_ADF</universal__taskflow.common.types.TaskFlowTypeImpl>
+      <universal__taskflow.common.data.taskflow__type__parameters.on__sql.TableAdfParameters serialVersionUID="1">
+        <containerType>DEFAULT</containerType>
+        <currentSqlAttribute serialVersionUID="1">
+          <name>A</name>
+          <sqlType>2</sqlType>
+          <sqlTypeName>NUMBER</sqlTypeName>
+          <className>java.math.BigDecimal</className>
+          <tableName></tableName>
+          <nullable>true</nullable>
+          <primaryKey>false</primaryKey>
+          <length>39</length>
+          <precision>0</precision>
+          <editableInInsert>true</editableInInsert>
+          <editableInUpdate>true</editableInUpdate>
+          <inInsertSql>false</inInsertSql>
+          <inUpdateSql>false</inUpdateSql>
+          <visibleInTable>true</visibleInTable>
+          <visibleInForm>true</visibleInForm>
+          <caption>Field1</caption>
+          <displayFormat>STRING</displayFormat>
+          <visualControlTypeOnTableInfo serialVersionUID="1">
+            <type serialVersionUID="1">OUTPUT_TEXT</type>
+            <rowsInInput>1</rowsInInput>
+            <linkInfo>
+              <portletsIdToRefresh/>
+              <parameters/>
+              <isOpenTargetPageInCurrentWindow>true</isOpenTargetPageInCurrentWindow>
+              <linkType>LINK_SIMPLE</linkType>
+            </linkInfo>
+            <checkBoxTrueValue class="string">1</checkBoxTrueValue>
+            <checkBoxFalseValue class="string">0</checkBoxFalseValue>
+          </visualControlTypeOnTableInfo>
+          <visualControlTypeOnFormInfo serialVersionUID="1">
+            <type serialVersionUID="1">INPUT</type>
+            <rowsInInput>1</rowsInInput>
+            <dropDownInfo>
+              <combobox>true</combobox>
+              <fieldCaptions serialization="custom">
+                <unserializable-parents/>
+                <map>
+                  <default>
+                    <loadFactor>0.75</loadFactor>
+                    <threshold>0</threshold>
+                  </default>
+                  <int>16</int>
+                  <int>0</int>
+                </map>
+                <com.rcore.global.MapWithOrderKeys>
+                  <default>
+                    <keysList/>
+                  </default>
+                </com.rcore.global.MapWithOrderKeys>
+              </fieldCaptions>
+            </dropDownInfo>
+            <checkBoxTrueValue class="string">1</checkBoxTrueValue>
+            <checkBoxFalseValue class="string">0</checkBoxFalseValue>
+          </visualControlTypeOnFormInfo>
+          <widthInTable>50%</widthInTable>
+          <headerAlign>CENTER</headerAlign>
+          <dataAlign>LEFT</dataAlign>
+          <labelAlign>LEFT</labelAlign>
+          <wrapEnabled>true</wrapEnabled>
+          <wrapEnabledData>true</wrapEnabledData>
+          <filterAble>true</filterAble>
+          <sortAble>true</sortAble>
+          <frozen>false</frozen>
+          <validatorInfo serialVersionUID="1">
+            <type serialVersionUID="1">validateEmpty</type>
+            <mapAttributeValues serialization="custom">
+              <unserializable-parents/>
+              <map>
+                <default>
+                  <loadFactor>0.75</loadFactor>
+                  <threshold>0</threshold>
+                </default>
+                <int>16</int>
+                <int>0</int>
+              </map>
+              <com.rcore.global.MapWithOrderKeys>
+                <default>
+                  <keysList/>
+                </default>
+              </com.rcore.global.MapWithOrderKeys>
+            </mapAttributeValues>
+          </validatorInfo>
+          <convertorInfoForTable serialVersionUID="1">
+            <type serialVersionUID="1">convertDateTime</type>
+            <mapAttributeValues serialization="custom">
+              <unserializable-parents/>
+              <map>
+                <default>
+                  <loadFactor>0.75</loadFactor>
+                  <threshold>12</threshold>
+                </default>
+                <int>16</int>
+                <int>2</int>
+                <string>pattern</string>
+                <string></string>
+                <string>type</string>
+                <string>date</string>
+              </map>
+              <com.rcore.global.MapWithOrderKeys>
+                <default>
+                  <keysList>
+                    <string>type</string>
+                    <string>pattern</string>
+                  </keysList>
+                </default>
+              </com.rcore.global.MapWithOrderKeys>
+            </mapAttributeValues>
+          </convertorInfoForTable>
+          <convertorInfoForForm serialVersionUID="1">
+            <type serialVersionUID="1">convertEmpty</type>
+            <mapAttributeValues serialization="custom">
+              <unserializable-parents/>
+              <map>
+                <default>
+                  <loadFactor>0.75</loadFactor>
+                  <threshold>0</threshold>
+                </default>
+                <int>16</int>
+                <int>0</int>
+              </map>
+              <com.rcore.global.MapWithOrderKeys>
+                <default>
+                  <keysList/>
+                </default>
+              </com.rcore.global.MapWithOrderKeys>
+            </mapAttributeValues>
+          </convertorInfoForForm>
+          <inlineStyleForHeaderInTable>color:#000000;font-weight:bold</inlineStyleForHeaderInTable>
+          <inlineStyleForDataInTable>color:#000000</inlineStyleForDataInTable>
+          <filterType>INPUT_TEXT</filterType>
+          <indexTable>100</indexTable>
+          <indexForm>100</indexForm>
+        </currentSqlAttribute>
+        <eventChangeCurrentRowActive>false</eventChangeCurrentRowActive>
+        <linkByChangeCurrentRow>
+          <portletsIdToRefresh/>
+          <parameters/>
+          <isOpenTargetPageInCurrentWindow>true</isOpenTargetPageInCurrentWindow>
+          <linkType>LINK_SIMPLE</linkType>
+        </linkByChangeCurrentRow>
+        <personalizationOn>false</personalizationOn>
+        <modelType>READ_WRITE</modelType>
+        <autoRefreshPeriod>0</autoRefreshPeriod>
+        <dataChangeTypes>
+          <DataChangeType serialVersionUID="1">INSERT</DataChangeType>
+          <DataChangeType serialVersionUID="1">UPDATE</DataChangeType>
+          <DataChangeType serialVersionUID="1">DELETE</DataChangeType>
+        </dataChangeTypes>
+        <dataSourceCurrent>
+          <title>TRD_OLAP</title>
+          <jndiName>jdbc/tradeEntiretPooledDS</jndiName>
+        </dataSourceCurrent>
+        <sql><![CDATA[select 11  a, 12 b from dual
+union all
+select 21  a, 22 b from dual
+union all
+select 31  a, 32 b from dual
+union all
+select 41  a, 42 b from dual
+union all
+select 51  a, 52 b from dual
+union all
+select 61  a, 62 b from dual
+
+]]></sql>
+        <objectName>dual</objectName>
+        <alternateSqlActivated>false</alternateSqlActivated>
+        <sqlAttributes serialization="custom">
+          <unserializable-parents/>
+          <map>
+            <default>
+              <loadFactor>0.75</loadFactor>
+              <threshold>12</threshold>
+            </default>
+            <int>16</int>
+            <int>2</int>
+            <string>A</string>
+            <SqlAttribute serialVersionUID="1" reference="../../../currentSqlAttribute"/>
+            <string>B</string>
+            <SqlAttribute serialVersionUID="1">
+              <name>B</name>
+              <sqlType>2</sqlType>
+              <sqlTypeName>NUMBER</sqlTypeName>
+              <className>java.math.BigDecimal</className>
+              <tableName></tableName>
+              <nullable>true</nullable>
+              <primaryKey>false</primaryKey>
+              <length>39</length>
+              <precision>0</precision>
+              <editableInInsert>true</editableInInsert>
+              <editableInUpdate>true</editableInUpdate>
+              <inInsertSql>false</inInsertSql>
+              <inUpdateSql>false</inUpdateSql>
+              <visibleInTable>true</visibleInTable>
+              <visibleInForm>true</visibleInForm>
+              <caption>Field2</caption>
+              <displayFormat>STRING</displayFormat>
+              <visualControlTypeOnTableInfo serialVersionUID="1">
+                <type serialVersionUID="1">OUTPUT_TEXT</type>
+                <rowsInInput>1</rowsInInput>
+                <linkInfo>
+                  <portletsIdToRefresh/>
+                  <parameters/>
+                  <isOpenTargetPageInCurrentWindow>true</isOpenTargetPageInCurrentWindow>
+                  <linkType>LINK_SIMPLE</linkType>
+                </linkInfo>
+                <checkBoxTrueValue class="string">1</checkBoxTrueValue>
+                <checkBoxFalseValue class="string">0</checkBoxFalseValue>
+              </visualControlTypeOnTableInfo>
+              <visualControlTypeOnFormInfo serialVersionUID="1">
+                <type serialVersionUID="1">INPUT</type>
+                <rowsInInput>1</rowsInInput>
+                <dropDownInfo>
+                  <combobox>true</combobox>
+                  <fieldCaptions serialization="custom">
+                    <unserializable-parents/>
+                    <map>
+                      <default>
+                        <loadFactor>0.75</loadFactor>
+                        <threshold>0</threshold>
+                      </default>
+                      <int>16</int>
+                      <int>0</int>
+                    </map>
+                    <com.rcore.global.MapWithOrderKeys>
+                      <default>
+                        <keysList/>
+                      </default>
+                    </com.rcore.global.MapWithOrderKeys>
+                  </fieldCaptions>
+                </dropDownInfo>
+                <checkBoxTrueValue class="string">1</checkBoxTrueValue>
+                <checkBoxFalseValue class="string">0</checkBoxFalseValue>
+              </visualControlTypeOnFormInfo>
+              <widthInTable>50%</widthInTable>
+              <headerAlign>CENTER</headerAlign>
+              <dataAlign>LEFT</dataAlign>
+              <labelAlign>LEFT</labelAlign>
+              <wrapEnabled>true</wrapEnabled>
+              <wrapEnabledData>true</wrapEnabledData>
+              <filterAble>true</filterAble>
+              <sortAble>true</sortAble>
+              <frozen>false</frozen>
+              <validatorInfo serialVersionUID="1">
+                <type serialVersionUID="1">validateEmpty</type>
+                <mapAttributeValues serialization="custom">
+                  <unserializable-parents/>
+                  <map>
+                    <default>
+                      <loadFactor>0.75</loadFactor>
+                      <threshold>0</threshold>
+                    </default>
+                    <int>16</int>
+                    <int>0</int>
+                  </map>
+                  <com.rcore.global.MapWithOrderKeys>
+                    <default>
+                      <keysList/>
+                    </default>
+                  </com.rcore.global.MapWithOrderKeys>
+                </mapAttributeValues>
+              </validatorInfo>
+              <convertorInfoForTable serialVersionUID="1">
+                <type serialVersionUID="1">convertDateTime</type>
+                <mapAttributeValues serialization="custom">
+                  <unserializable-parents/>
+                  <map>
+                    <default>
+                      <loadFactor>0.75</loadFactor>
+                      <threshold>12</threshold>
+                    </default>
+                    <int>16</int>
+                    <int>2</int>
+                    <string>pattern</string>
+                    <string></string>
+                    <string>type</string>
+                    <string>date</string>
+                  </map>
+                  <com.rcore.global.MapWithOrderKeys>
+                    <default>
+                      <keysList>
+                        <string>type</string>
+                        <string>pattern</string>
+                      </keysList>
+                    </default>
+                  </com.rcore.global.MapWithOrderKeys>
+                </mapAttributeValues>
+              </convertorInfoForTable>
+              <convertorInfoForForm serialVersionUID="1">
+                <type serialVersionUID="1">convertEmpty</type>
+                <mapAttributeValues serialization="custom">
+                  <unserializable-parents/>
+                  <map>
+                    <default>
+                      <loadFactor>0.75</loadFactor>
+                      <threshold>0</threshold>
+                    </default>
+                    <int>16</int>
+                    <int>0</int>
+                  </map>
+                  <com.rcore.global.MapWithOrderKeys>
+                    <default>
+                      <keysList/>
+                    </default>
+                  </com.rcore.global.MapWithOrderKeys>
+                </mapAttributeValues>
+              </convertorInfoForForm>
+              <inlineStyleForHeaderInTable>color:#000000;;font-weight:bold</inlineStyleForHeaderInTable>
+              <inlineStyleForDataInTable>color:#000000</inlineStyleForDataInTable>
+              <filterType>INPUT_TEXT</filterType>
+              <indexTable>200</indexTable>
+            </SqlAttribute>
+          </map>
+          <com.rcore.global.MapWithOrderKeys>
+            <default>
+              <keysList>
+                <string>A</string>
+                <string>B</string>
+              </keysList>
+            </default>
+          </com.rcore.global.MapWithOrderKeys>
+        </sqlAttributes>
+        <formTypeParameters serialVersionUID="1">
+          <containerType>DEFAULT</containerType>
+          <eventChangeCurrentRowActive>false</eventChangeCurrentRowActive>
+          <personalizationOn>false</personalizationOn>
+          <modelType>READ_ONLY</modelType>
+          <autoRefreshPeriod>0</autoRefreshPeriod>
+          <dataChangeTypes/>
+          <alternateSqlActivated>false</alternateSqlActivated>
+          <labelAlign>LEFT</labelAlign>
+          <isOpenFormInCurrentWindow>true</isOpenFormInCurrentWindow>
+          <parametersDisclosed>true</parametersDisclosed>
+          <rowInFilterForm>2</rowInFilterForm>
+          <buttonsIndent>0</buttonsIndent>
+          <isNavigationPanel>true</isNavigationPanel>
+        </formTypeParameters>
+        <columnStreching>multiple</columnStreching>
+        <intervalForChangeColourOfLines>1</intervalForChangeColourOfLines>
+        <possibilityChangeWidthColumns>false</possibilityChangeWidthColumns>
+        <possibilityShiftColumns>true</possibilityShiftColumns>
+        <inlineStyle></inlineStyle>
+        <containerInlineStyle></containerInlineStyle>
+        <toolBarExists>true</toolBarExists>
+        <sortAble>false</sortAble>
+        <filterAble>true</filterAble>
+        <autoPersonalizableAble>false</autoPersonalizableAble>
+        <rowSelectAble>false</rowSelectAble>
+        <emptyText>Нет данных</emptyText>
+        <displayHeadersOfColumns>true</displayHeadersOfColumns>
+        <fetchSize>50</fetchSize>
+        <readFromDbType>READ_PORTIONS</readFromDbType>
+        <recordCountForReadFromDb>50</recordCountForReadFromDb>
+        <autoHeightRows>-1</autoHeightRows>
+        <parametersDisclosed>true</parametersDisclosed>
+        <rowInFilterForm>2</rowInFilterForm>
+        <buttonsIndent>0</buttonsIndent>
+        <contentDelivery>immediate</contentDelivery>
+      </universal__taskflow.common.data.taskflow__type__parameters.on__sql.TableAdfParameters>
+    </entry>
+  </taskFlowParametersTable>
+  <elHtmlValues/>
+</MainRecord>

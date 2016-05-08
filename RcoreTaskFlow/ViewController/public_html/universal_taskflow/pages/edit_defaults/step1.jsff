@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+xmlns:trh="http://myfaces.apache.org/trinidad/html"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+          
+   <af:pageTemplate viewId="/universal_taskflow/pages/edit_defaults/trainPageTemplate.jsff"
+                    id="pt1"
+                    rendered="#{backingBeanScope.editDefaultsBean.accessibility}"
+    >
+      <f:attribute name="activityId" value="step1"/>
+    <f:facet name="content">
+      <af:panelFormLayout id="pfl1">
+        <c:set var="wf" value="#{'600px'}" scope="page" />
+        <af:panelLabelAndMessage id="plam1" 
+            label="Идентификатор потока задач"
+            for="it12"
+        >
+          <af:inputText
+            label="#{null}"
+            simple="true"
+            value="#{backingBeanScope.editDefaultsBean.mainRecord.id}"
+            readOnly="true"
+            id="it12"/>
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam5" 
+                                 label="Администратор вносивший изменения"
+                                 for="it5"
+                                 >
+          <af:inputText
+            label="#{null}"
+            simple="true"
+            value="#{backingBeanScope.editDefaultsBean.mainRecord.user}"
+            readOnly="true"
+            id="it5"/>
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam6" 
+                label="Дата внесения изменений"
+                for="it6"
+                >
+          <af:inputDate
+            label="#{null}"
+            simple="true"
+            value="#{backingBeanScope.editDefaultsBean.mainRecord.date}"
+            readOnly="true"
+            id="it6">
+            <af:convertDateTime type="both" pattern="dd:MM:yyyy hh:mm:ss"/>
+          </af:inputDate> 
+        </af:panelLabelAndMessage>
+        
+        <!--af:panelLabelAndMessage id="plam7" label="Поток задач активирован">
+          <af:selectBooleanCheckbox
+            id="sbc1"
+            label="#{null}"
+            simple="true"
+            value="#{backingBeanScope.editDefaultsBean.mainRecord.activated}"
+          />
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam0" label="Текст для не активированного потока задач">
+          <af:inputText
+            label="#{null}"
+            simple="true"
+            value="#{backingBeanScope.editDefaultsBean.mainRecord.textNotActivated}"
+            id="it2"/> 
+        </af:panelLabelAndMessage-->
+        
+        <af:panelLabelAndMessage id="plam2" 
+          label="Заголовок потока задач"
+        >
+          <af:declarativeComponent viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                   id="dc1"> 
+             <f:attribute name="propertyClassName" value="universal_taskflow.common.data.MainRecord" />
+             <f:attribute name="propertyName" value="header" />
+             <f:facet name="content">
+                <af:inputText
+                  label="#{null}"
+                  simple="true"
+                  value="#{backingBeanScope.editDefaultsBean.mainRecord.header}"
+                  contentStyle="width:#{wf}"
+                  id="it7"/>    
+             </f:facet>
+          </af:declarativeComponent>
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam7" 
+          label="Наличие заголовок потока задач"
+        >
+          <af:declarativeComponent viewId="/universal_taskflow/pages/edit_defaults/valueEditorWithElHtmlCompDef.jsff"
+                                   id="dc2"> 
+             <f:attribute name="propertyClassName" value="universal_taskflow.common.data.MainRecord" />
+             <f:attribute name="propertyName" value="headerExists" />
+             <f:facet name="content">
+                <af:selectBooleanCheckbox
+                  label="#{null}"
+                  simple="true"
+                  value="#{backingBeanScope.editDefaultsBean.mainRecord.headerExists}"
+                  id="it1"/>    
+             </f:facet>
+          </af:declarativeComponent>
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam3" 
+                                 label="Описание потока задач"
+                                 for="it3"
+                                 >
+                <af:inputText
+                  label="#{null}"
+                  simple="true"
+                  contentStyle="width:#{wf}"
+                  value="#{backingBeanScope.editDefaultsBean.mainRecord.descriptionTaskFlow}"
+                  rows="5"
+                  id="it3"/>    
+        </af:panelLabelAndMessage>
+        
+        <af:panelLabelAndMessage id="plam4" 
+                                 label="Комментарии администратора"
+                                 for="it4"
+                                 >
+                <af:inputText
+                  label="#{null}"
+                  simple="true"
+                  contentStyle="width:#{wf}"
+                  value="#{backingBeanScope.editDefaultsBean.mainRecord.adminComment}"
+                  rows="5"
+                  id="it4"/>    
+        </af:panelLabelAndMessage>
+        
+      </af:panelFormLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

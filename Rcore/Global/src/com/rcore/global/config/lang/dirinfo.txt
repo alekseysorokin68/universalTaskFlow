@@ -1,0 +1,9 @@
+﻿Файлы именуются так:
+<language>_<country>.properties.xml
+<language>.properties.xml
+Где <language> и <country> кодируются как в Locale.java
+В GlobalResourceBundle Locale должно быть параметром
+
+При наличии - используется файл - <language>_<country>.properties.xml
+Иначе, при наличии - файл <language>.properties.xml
+Иначе - default.properties.xml

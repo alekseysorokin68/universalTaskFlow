@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="testTree1">
+      <af:form id="f1">
+        <af:tree  var="node" 
+                  value="#{viewScope.treeBean.treeRoot}" 
+                  id="t1" 
+                  summary="tree1"
+                  expandAllEnabled="true"
+                  initiallyExpanded="true"
+                  
+                  >
+          <f:facet name="nodeStamp">
+            <af:panelGroupLayout id="pgl1">
+              <!--af:image source="#{node.icon}"
+                inlineStyle="margin-right:3px; vertical-align:middle; height:14px; width:16px;"
+                id="i1"/-->
+              <af:outputText value="#{node.attributesMap.caption}" id="ot1"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:tree>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+        <af:panelStretchLayout id="pt_psl1" topHeight="34" bottomHeight="#{'auto'}">
+        <f:facet name="top">
+        <!--   styleClass="AFStretchWidth"   -->
+          <af:panelGroupLayout  layout="vertical" 
+                                id="pt_pgl1"
+                                styleClass="AFStretchWidth"
+                                inlineStyle="border-bottom:1px solid gray"
+          >
+            <trh:script id="pt_s1" source="/universal_taskflow/js/universalTaskFlowUtils.js" />
+            <af:panelGroupLayout layout="horizontal" id="pt_pgl2" 
+                                  valign="middle" 
+                                  styleClass="AFStretchWidth">
+              <af:train value="#{backingBeanScope.editDefaultsBean.trainModel}"
+                        id="t1"
+                        var="node"
+                        varStatus="vs"
+                        layout="horizontal">
+                <f:facet name="nodeStamp">
+                    <af:commandNavigationItem
+                      text="#{backingBeanScope.editDefaultsBean.trainText[node.localActivityId]}"
+                      action="#{node.getOutcome}"
+                      inlineStyle="white-space:nowrap"
+                      disabled="#{backingBeanScope.editDefaultsBean.newInstancePortlet ? node.disabled : false}"
+                      visited="#{backingBeanScope.editDefaultsBean.newInstancePortlet ? node.visited : true}"
+                      id="cni1${vs.index}">
+                    </af:commandNavigationItem>
+                </f:facet>
+              </af:train>
+              
+              
+              <af:panelGroupLayout  styleClass="AFStretchWidth" 
+                                    id="pt_pgl3"
+                                    halign="right"
+                                    valign="middle"
+                                    layout="vertical"
+                                    inlineStyle="padding-right:4px"
+              >
+                <af:panelGroupLayout layout="horizontal" id="pt_pgl4">
+                  <af:panelGroupLayout id="pt_pgl5" 
+                        layout="horizontal"
+                        binding="#{pageFlowScope.adminPageFlowBean.panelTrainHeader}">
+                    <af:outputText 
+                      value="Тип потока задач -" 
+                      noWrap="true"
+                      id="pt_ot1"/>
+                    <af:spacer width="4px" id="pt_s3"/>  
+                    <af:outputText 
+                      value="#{backingBeanScope.editDefaultsBean.mainRecord.taskFlowType.title}" 
+                      inlineStyle="font-weight:bold"
+                      noWrap="true"
+                      id="pt_ot2"/>
+                  </af:panelGroupLayout>  
+                  <af:spacer width="300px" id="pt_s2"/>
+                  <af:commandLink
+                      actionListener="#{backingBeanScope.editDefaultsBean.updateActionListener}"
+                      text="Сохранить"
+                      inlineStyle="font-weight:bold;font-size:14px"
+                      partialSubmit="true"
+                      id="tbb1"/>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+            <af:facetRef facetName="content" />
+        </f:facet>
+        <f:facet name="bottom">
+           <af:message id="pt_m1"
+                       inlineStyle="padding-left:14px"
+                       binding="#{pageFlowScope.adminPageFlowBean.messageInStatusLine}"
+           />
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>Страница в train</display-name>
+        <facet>
+           <description>Facet for development content</description>
+           <facet-name>content</facet-name>
+        </facet>
+        <attribute>
+          <attribute-name>activityId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <required>true</required>
+        </attribute>
+      </component>
+    </af:xmlContent>
+  </af:pageTemplateDef>
+</jsp:root>

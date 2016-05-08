@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<declarativeCompDefs xmlns="http://xmlns.oracle.com/adf/faces/rich/declarativecomp">
+  <declarativecomp-jsp-ui-def>/com/rcore/component/treeNavigator.jspx</declarativecomp-jsp-ui-def>
+  <declarativecomp-jsp-ui-def>/com/rcore/component/exportTable.jspx</declarativecomp-jsp-ui-def>
+  <declarativecomp-jsp-ui-def>/com/rcore/component/inputDateTime.jspx</declarativecomp-jsp-ui-def>
+  <declarativecomp-jsp-ui-def>/com/rcore/component/inputTime.jspx</declarativecomp-jsp-ui-def>
+  <declarativecomp-taglib>
+    <taglib-name>rcoreComponents</taglib-name>
+    <taglib-uri>/rcoreComponentLib</taglib-uri>
+    <taglib-prefix>dc</taglib-prefix>
+  </declarativecomp-taglib>
+</declarativeCompDefs>

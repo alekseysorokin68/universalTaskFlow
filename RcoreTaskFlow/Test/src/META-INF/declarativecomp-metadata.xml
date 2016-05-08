@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<declarativeCompDefs xmlns="http://xmlns.oracle.com/adf/faces/rich/declarativecomp">
+  <declarativecomp-taglib>
+    <taglib-name>compLib1</taglib-name>
+    <taglib-uri>/componentLib1</taglib-uri>
+  </declarativecomp-taglib>
+</declarativeCompDefs>

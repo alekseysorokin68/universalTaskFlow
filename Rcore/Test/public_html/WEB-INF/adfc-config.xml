@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <managed-bean id="__1">
+    <managed-bean-name>testInputTime</managed-bean-name>
+    <managed-bean-class>com.rcore.view.TestInputTimeBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__4">
+    <managed-bean-name id="__5">testDynamicBean</managed-bean-name>
+    <managed-bean-class id="__3">com.rcore.view.TestDynamicBean</managed-bean-class>
+    <managed-bean-scope id="__2">view</managed-bean-scope>
+  </managed-bean>
+  
+  <managed-bean id="__4a">
+    <managed-bean-name id="__5a">testTableModelesBean</managed-bean-name>
+    <managed-bean-class id="__3a">com.rcore.view.TestTableModelesBean</managed-bean-class>
+    <managed-bean-scope id="__2a">view</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

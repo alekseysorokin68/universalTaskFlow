@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="THouse"
+  Version="11.1.1.60.13"
+  DBObjectType="table"
+  DBObjectName="T_HOUSE"
+  AliasName="THouse"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.rcore.global.bcomponent.base.EntityImplRcore"
+  DefClass="com.rcore.global.bcomponent.base.EntityDefImplRcore"
+  CollClass="com.rcore.global.bcomponent.base.EntityCacheRcore">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="HouseId"
+    IsNotNull="true"
+    ColumnName="HOUSE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="T_HOUSE"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StreetId"
+    ColumnName="STREET_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="T_HOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Sname"
+    Precision="64"
+    ColumnName="SNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="T_HOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TStreet"
+    Association="com.rcore.model.THouseStreetAssoc"
+    AssociationEnd="com.rcore.model.THouseStreetAssoc.TStreet"
+    AssociationOtherEnd="com.rcore.model.THouseStreetAssoc.THouse"
+    Type="com.rcore.global.bcomponent.base.EntityImplRcore"
+    IsUpdateable="true"/>
+  <Key
+    Name="THousePr1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="T_HOUSE_PR1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.THouse.HouseId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="THouseStreet">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="T_STEET_PR1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="T_HOUSE_STREET"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rcore.model.THouse.StreetId"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+    
+    <!--af:table binding="#{pageFlowScope.viewAdfTableBean.tableCategories}" 
+              id="pt_t1"
+              var="row" 
+              varStatus="varStatus"
+    /-->
+    <jsp:include page="/universal_taskflow/pages/view_types/table/adf/tableAdfOnlyCategory.jsff"/>
+    
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>noToolbar_category_autoHeightRowsEqMin1</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

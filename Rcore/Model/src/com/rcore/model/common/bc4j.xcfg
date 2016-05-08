@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.rcore.model.AppModule">
+      <AppModuleConfig DeployPlatform="LOCAL" JDBCName="AddressDb" jbo.project="com.rcore.model.Model" name="AppModuleLocal" ApplicationName="com.rcore.model.AppModule">
+         <AM-Pooling jbo.ampool.doampooling="false"/>
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="com.rcore.model.AppModule"/>
+         <Custom jbo.ampool.issupportspassivation="false"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="AppModuleShared" ApplicationName="com.rcore.model.AppModule" DeployPlatform="LOCAL" JDBCName="AddressDb" jbo.project="com.rcore.model.Model">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Security AppModuleJndiName="com.rcore.model.AppModule"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

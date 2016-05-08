@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="component">
+
+   <af:group id="dc_g1">
+   <c:set var="colValue"     value="#{attrs.row[attrs.column['name']]}" scope="page"/>
+   <c:set var="visualInfo"   value="#{attrs.column['visualControlTypeOnTableInfo']}" scope="page"/>
+   <c:set var="inlineStyle"  value="#{attrs.column['resolvedMapInlineStyleForDataInTable'][attrs.row]}" scope="page"/>
+
+   <af:switcher id="pt_s1" facetName="#{visualInfo['type']['name']}"
+                             defaultFacet="OUTPUT_FORMATTED">
+                  <f:facet name="CHECK_BOX">
+                    <af:selectBooleanCheckbox label="#{null}"
+                                              value="#{colValue == visualInfo['checkBoxTrueValue']}"
+                                              id="dc_sbc2"
+                                              inlineStyle="#{inlineStyle}"
+                                              readOnly="true"/>
+                  </f:facet>
+                  <f:facet name="DATE">
+                    <af:outputText value="#{colValue}"
+                                   inlineStyle="#{inlineStyle}"
+                                   id="dc_id2">
+                      <af:convertDateTime pattern="dd.MM.yyyy"/>
+                    </af:outputText>
+                  </f:facet>
+                  <f:facet name="INPUT">
+                    <af:inputText label="#{null}"
+                                  value="#{colValue}"
+                                  rows="#{(attrs.column['rowsInTable'])[colValue]}"
+                                  inlineStyle="#{inlineStyle}"
+                                  readOnly="true"
+                                  id="dc_it3"/>
+                  </f:facet>
+                  <f:facet name="INPUT_NUMBER">
+                    <af:inputText label="#{null}"
+                                  value="#{colValue}"
+                                  rows="#{(attrs.column['rowsInTable'])[colValue]}"
+                                  inlineStyle="#{inlineStyle}"
+                                  readOnly="true"
+                                  id="pt_it1"/>
+                  </f:facet>
+                  <f:facet name="IMAGE">
+                    <af:image source="#{colValue}"
+                              shortDesc="#{colValue}"
+                              inlineStyle="#{inlineStyle}"
+                              id="dc_i1"/>
+                  </f:facet>
+                  <f:facet name="RADIO_BUTTON">
+                    <af:selectBooleanCheckbox label="#{null}" value="#{colValue}"
+                                              id="pt_sbc1"
+                                              inlineStyle="#{inlineStyle}"
+                                              readOnly="true"/>
+                  </f:facet>
+                  <f:facet name="LINK">
+                      <af:commandLink id="dc_cl1"
+                                      inlineStyle="#{inlineStyle}"
+                                      actionListener="#{pageFlowScope.viewAdfTableBean.clickLinkActionListener}">
+                        <f:attribute name="row" value="#{attrs.row}"/>
+                        <f:attribute name="attribute" value="#{attrs.column}"/>
+                        <af:outputText value="#{colValue}" escape="false"
+                                       id="pt_ot1"/>
+                      </af:commandLink>
+                  </f:facet>
+
+
+
+                  <f:facet name="OUTPUT_TEXT">
+                    <af:outputText value="#{colValue}"
+                                   shortDesc="#{colValue}"
+                                   id="dc_ot3"
+                                   noWrap="#{attrs.column['resolvedWrapEnabledData']}"
+                                   inlineStyle="#{inlineStyle}"/>
+                  </f:facet>
+
+                  <f:facet name="OUTPUT_LABEL">
+                    <af:outputLabel value="#{colValue}"
+                                    id="dc_ol4"
+                                    inlineStyle="#{inlineStyle}"
+                                    shortDesc="#{colValue}"/>
+                  </f:facet>
+
+                  <f:facet name="OUTPUT_FORMATTED">
+                    <af:panelGroupLayout id="pt_pgl3"
+                                         inlineStyle="#{inlineStyle}">
+                      <af:outputText  value="#{colValue}"
+                                      id="dc_of2"
+                                      escape="false"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:switcher>
+  </af:group>       
+
+<!--af:switcher id="pt_s1${param.vsfor1}${param.vsfor2}"
+                 facetName="OUTPUT_TEXT"
+                 defaultFacet="OUTPUT_FORMATTED"
+                 >
+      <f:facet name="CHECK_BOX">
+        <af:selectBooleanCheckbox label="#{null}"
+                                  value="#{colValue == param.visualInfo['checkBoxTrueValue']}"
+                                  id="dc_sbc2${param.vsfor1}${param.vsfor2}"
+                                  inlineStyle="#{inlineStyle}"
+                                  readOnly="true"/>
+      </f:facet>
+      <f:facet name="DATE">
+        <af:outputText value="#{colValue}"
+                       inlineStyle="#{inlineStyle}"
+                       id="dc_id2${param.vsfor1}${param.vsfor2}">
+          <af:convertDateTime pattern="dd.MM.yyyy"/>
+        </af:outputText>
+      </f:facet>
+      <f:facet name="INPUT">
+        <af:inputText label="#{null}"
+                      value="#{colValue}"
+                      rows="#{(column['rowsInTable'])[colValue]}"
+                      inlineStyle="#{inlineStyle}"
+                      readOnly="true"
+                      id="dc_it3${param.vsfor1}${param.vsfor2}"/>
+      </f:facet>
+      <f:facet name="INPUT_NUMBER">
+        <af:inputText label="#{null}"
+                      value="#{colValue}"
+                      rows="#{(column['rowsInTable'])[colValue]}"
+                      inlineStyle="#{inlineStyle}"
+                      readOnly="true"
+                      id="pt_it1${param.vsfor1}${param.vsfor2}"/>
+      </f:facet>
+      <f:facet name="IMAGE">
+        <af:image source="#{colValue}"
+                  shortDesc="#{colValue}"
+                  inlineStyle="#{inlineStyle}"
+                  id="dc_i1${param.vsfor1}${param.vsfor2}"/>
+      </f:facet>
+      <f:facet name="RADIO_BUTTON">
+        <af:selectBooleanCheckbox label="#{null}" value="#{colValue}"
+                                  id="pt_sbc1${param.vsfor1}${param.vsfor2}"
+                                  inlineStyle="#{inlineStyle}"
+                                  readOnly="true"/>
+      </f:facet>
+      <f:facet name="LINK">
+          <af:commandLink id="dc_cl1${param.vsfor1}${param.vsfor2}"
+                          inlineStyle="#{inlineStyle}"
+                          actionListener="#{pageFlowScope.viewAdfTableBean.clickLinkActionListener}">
+            <f:attribute name="row" value="#{row}"/>
+            <f:attribute name="attribute" value="#{column}"/>
+            <af:outputText value="#{colValue}" escape="false"
+                           id="pt_ot1${param.vsfor1}${param.vsfor2}"/>
+          </af:commandLink>
+      </f:facet>
+
+      <f:facet name="OUTPUT_TEXT">
+        <af:outputText value="#{attrs.facetName}__#{colValue}"
+                       shortDesc="#{colValue}"
+                       id="dc_ot3${param.vsfor1}${param.vsfor2}"
+                       noWrap="#{column['resolvedWrapEnabledData']}"
+                       inlineStyle="#{inlineStyle}"/>
+      </f:facet>
+
+      <f:facet name="OUTPUT_LABEL">
+        <af:outputLabel value="#{colValue}"
+                        id="dc_ol4${param.vsfor1}${param.vsfor2}"
+                        inlineStyle="#{inlineStyle}"
+                        shortDesc="#{colValue}"/>
+      </f:facet>
+
+      <f:facet name="OUTPUT_FORMATTED">
+        <af:panelGroupLayout id="pt_pgl3${param.vsfor1}${param.vsfor2}"
+                             inlineStyle="#{inlineStyle}">
+          <af:outputText  value="#{colValue}"
+                          id="dc_of2${param.vsfor1}${param.vsfor2}"
+                          escape="false"/>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:switcher-->
+
+
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>columnInTableSwitcher</display-name>
+        <attribute>
+          <attribute-name>row</attribute-name>
+          <attribute-class>java.lang.Object</attribute-class>
+          <required>true</required>
+        </attribute>
+        <attribute>
+          <attribute-name>column</attribute-name>
+          <attribute-class>java.lang.Object</attribute-class>
+          <required>true</required>
+        </attribute>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="view-task-flow-definition">
+    <template-reference>
+      <document id="__2">/WEB-INF/universal_taskflow/universal_task-flow-template.xml</document>
+      <id id="__1">universal_task-flow-template</id>
+    </template-reference>
+    <default-activity id="__19">methodCallStartView</default-activity>
+    <data-control-scope id="__18">
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__3">id</name>
+      <value>#{pageFlowScope.id}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name id="__5">ver</name>
+      <value>#{pageFlowScope.ver}</value>
+      <class>java.lang.Double</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__15">selectionListener</name>
+      <value>#{pageFlowScope.selectionListener}</value>
+      <class>org.apache.myfaces.trinidad.event.SelectionListener</class>
+    </input-parameter-definition>
+    <managed-bean id="__9">
+      <managed-bean-name id="__7">viewApplicationBean</managed-bean-name>
+      <managed-bean-class id="__10">universal_taskflow.view_types.beans.ViewApplicationBean</managed-bean-class>
+      <managed-bean-scope id="__8">application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__12">
+      <managed-bean-name id="__11">viewPageFlowBean</managed-bean-name>
+      <managed-bean-class id="__14">universal_taskflow.view_types.beans.ViewPageFlowBean</managed-bean-class>
+      <managed-bean-scope id="__13">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__60">
+      <managed-bean-name id="__58">viewAdfTableBean</managed-bean-name>
+      <managed-bean-class id="__59">universal_taskflow.view_types.table.beans.ViewAdfTableBean</managed-bean-class>
+      <managed-bean-scope id="__17">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="methodCallStartView">
+      <method>#{pageFlowScope.viewPageFlowBean.methodCallStartView1}</method>
+      <outcome>
+        <to-string/>
+      </outcome>
+    </method-call>
+    <view id="emptyDC">
+      <page>/universal_taskflow/pages/emptyDC.jsff</page>
+    </view>
+    <view id="notActive">
+      <page>/universal_taskflow/pages/view_types/notActive.jsff</page>
+    </view>
+    <view id="diagram_graph_combine">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_graph_combine.jsff</page>
+    </view>
+    <view id="diagram_graph">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_graph.jsff</page>
+    </view>
+    <view id="diagram_horizontal_sum">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_horizontal_sum.jsff</page>
+    </view>
+    <view id="diagram_horizontal">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_horizontal.jsff</page>
+    </view>
+    <view id="diagram_pie">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_pie.jsff</page>
+    </view>
+    <view id="diagram_vertical_sum">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_vertical_sum.jsff</page>
+    </view>
+    <view id="diagram_vertical">
+      <page>/universal_taskflow/pages/view_types/diagram/diagram_vertical.jsff</page>
+    </view>
+    <view id="form">
+      <page>/universal_taskflow/pages/view_types/form/form.jsff</page>
+    </view>
+    <view id="table_adf">
+      <page>/universal_taskflow/pages/view_types/table/table_adf.jsff</page>
+    </view>
+    <view id="table_html">
+      <page>/universal_taskflow/pages/view_types/table/table_html.jsff</page>
+    </view>
+    <view id="tree">
+      <page>/universal_taskflow/pages/view_types/tree/tree.jsff</page>
+    </view>
+    <view id="panel_strech_layout">
+      <page>/universal_taskflow/pages/view_types/_viewRootDC/panel_strech_layout.jsff</page>
+    </view>
+    <view id="table_layout">
+      <page>/universal_taskflow/pages/view_types/_viewRootDC/table_layout.jsff</page>
+    </view>
+    <view id="_title">
+      <page>/universal_taskflow/pages/view_types/_viewRootDC/_title.jsff</page>
+    </view>
+    <view id="filterForm">
+      <page>/universal_taskflow/pages/view_types/table/adf/filterForm.jsff</page>
+    </view>
+    <view id="pollForm">
+      <page>/universal_taskflow/pages/view_types/table/adf/pollForm.jsff</page>
+    </view>
+    <view id="noToolbar_category_autoHeightRowsEqMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/noToolbar_category_autoHeightRowsEqMin1.jsff</page>
+    </view>
+    <view id="noToolbar_category_autoHeightRowsNeMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/noToolbar_category_autoHeightRowsNeMin1.jsff</page>
+    </view>
+    <view id="noToolbar_noCategory_autoHeightRowsEqMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/noToolbar_noCategory_autoHeightRowsEqMin1.jsff</page>
+    </view>
+    <view id="noToolbar_noCategory_autoHeightRowsNeMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/noToolbar_noCategory_autoHeightRowsNeMin1.jsff</page>
+    </view>
+    <view id="toolbar_category_autoHeightRowsEqMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/toolbar_category_autoHeightRowsEqMin1.jsff</page>
+    </view>
+    <view id="toolbar_category_autoHeightRowsNeMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/toolbar_category_autoHeightRowsNeMin1.jsff</page>
+    </view>
+    <view id="toolbar_noCategory_autoHeightRowsEqMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/toolbar_noCategory_autoHeightRowsEqMin1.jsff</page>
+    </view>
+    <view id="toolbar_noCategory_autoHeightRowsNeMin1">
+      <page>/universal_taskflow/pages/view_types/table/adf/switcher/toolbar_noCategory_autoHeightRowsNeMin1.jsff</page>
+    </view>
+    <view id="panel_group_layout_scroll">
+      <page>/universal_taskflow/pages/view_types/_viewRootDC/panel_group_layout_scroll.jsff</page>
+    </view>
+    <view id="panel_group_layout_vertical">
+      <page>/universal_taskflow/pages/view_types/_viewRootDC/panel_group_layout_vertical.jsff</page>
+    </view>
+    <view id="tableAdfOnlyCategory">
+      <page>/universal_taskflow/pages/view_types/table/adf/tableAdfOnlyCategory.jsff</page>
+    </view>
+    <view id="tableAdfOnlyNoCategory">
+      <page>/universal_taskflow/pages/view_types/table/adf/tableAdfOnlyNoCategory.jsff</page>
+    </view>
+    <view id="columnInTableSwitcher">
+      <page>/universal_taskflow/pages/view_types/table/adf/columnInTableSwitcher.jsff</page>
+    </view>
+    <control-flow-rule id="__21">
+      <from-activity-id id="__20">*</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome id="__24">notActive</from-outcome>
+        <to-activity-id id="__22">notActive</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__26">
+        <from-outcome id="__27">diagram_graph_combine</from-outcome>
+        <to-activity-id id="__25">diagram_graph_combine</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__29">
+        <from-outcome id="__30">diagram_graph</from-outcome>
+        <to-activity-id id="__28">diagram_graph</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__31">
+        <from-outcome id="__33">diagram_horizontal_sum</from-outcome>
+        <to-activity-id id="__32">diagram_horizontal_sum</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__35">
+        <from-outcome id="__36">diagram_horizontal</from-outcome>
+        <to-activity-id id="__34">diagram_horizontal</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__38">
+        <from-outcome id="__39">diagram_pie</from-outcome>
+        <to-activity-id id="__37">diagram_pie</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__40">
+        <from-outcome id="__42">diagram_vertical_sum</from-outcome>
+        <to-activity-id id="__41">diagram_vertical_sum</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__44">
+        <from-outcome id="__45">diagram_vertical</from-outcome>
+        <to-activity-id id="__43">diagram_vertical</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__47">
+        <from-outcome id="__48">form</from-outcome>
+        <to-activity-id id="__46">form</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__49">
+        <from-outcome id="__51">table_adf</from-outcome>
+        <to-activity-id id="__50">table_adf</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__53">
+        <from-outcome id="__54">table_html</from-outcome>
+        <to-activity-id id="__52">table_html</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__55">
+        <from-outcome id="__57">tree</from-outcome>
+        <to-activity-id id="__56">tree</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

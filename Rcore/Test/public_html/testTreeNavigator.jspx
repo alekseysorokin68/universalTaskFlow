@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dc="/rcoreComponentLib"
+>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="testTreeNavigator">
+      <af:form id="f1">
+                    
+          <dc:treeNavigator 
+            xmlResource="/com/rcore/view/AddressPropertyTreeModel.xml"
+            id="tn1"
+            type="tree"
+            initiallyExpanded="true"
+            inlineStyle="width:400px;height:260px;border:1px solid blue;background-color:white"
+            inlineStyleTree="width:350px;height:450px;background-color:white"
+            visualNodesAsList="true"
+            splitPosition="166"
+            initLevel="0,0"
+            isViewIdColumn="true"
+          >
+          </dc:treeNavigator>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

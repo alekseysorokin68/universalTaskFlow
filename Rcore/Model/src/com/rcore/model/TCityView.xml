@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TCityView"
+  Version="11.1.1.60.13"
+  SelectList="TCity.CITY_ID, 
+       TCity.REGION_ID, 
+       TCity.SNAME"
+  FromList="T_CITY TCity"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="com.rcore.model.TCityViewRowImpl"
+  ComponentClass="com.rcore.model.TCityViewImpl"
+  DefClass="com.rcore.global.bcomponent.base.ViewDefImplRcore"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TCity"
+    Entity="com.rcore.model.TCity"/>
+  <ViewAttribute
+    Name="CityId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CityId"
+    EntityUsage="TCity"
+    AliasName="CITY_ID"/>
+  <ViewAttribute
+    Name="RegionId"
+    PrecisionRule="true"
+    EntityAttrName="RegionId"
+    EntityUsage="TCity"
+    AliasName="REGION_ID"/>
+  <ViewAttribute
+    Name="Sname"
+    PrecisionRule="true"
+    EntityAttrName="Sname"
+    EntityUsage="TCity"
+    AliasName="SNAME"/>
+  <ViewLinkAccessor
+    Name="TStreetView"
+    ViewLink="com.rcore.model.TStreetCityLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

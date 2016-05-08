@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:componentDef var="attrs" componentVar="comp">
+
+      <af:panelGroupLayout id="dc_pgl2"
+          layout="vertical"
+          inlineStyle="#{pageFlowScope.viewPageFlowBean.mainRecord.resolvedHeaderExists ? null : 'height:0px'}"
+      >
+        <af:clientListener method="_rootContextMenu" type="contextMenu" />
+        
+        <trh:script id="dc_s0_n" source="/universal_taskflow/js/universalTaskFlowUtils.js" ><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script
+          text="#{pageFlowScope.viewPageFlowBean.jsRootContextMenu}"
+          id="dc_s2"
+        ><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+
+        <trh:tableLayout id="dc_tl1"
+            inlineStyle="width:100%;"
+        >
+          <trh:rowLayout id="dc_rl1" inlineStyle="height:0px">
+            <trh:cellFormat id="dc_cf1"
+                inlineStyle="padding-left:4px;font-weight:bold"
+                halign="left"
+            >
+              <af:outputText
+                id="dc_ot1"
+                value="#{pageFlowScope.viewPageFlowBean.mainRecord.resolvedHeader}"
+                escape="false"
+              >
+              </af:outputText>
+            </trh:cellFormat>
+
+            <trh:cellFormat id="dc_cf2"
+                            inlineStyle="padding-right:4px;"
+                            halign="right"
+            >
+
+              <af:panelGroupLayout id="dc_pgl1" layout="horizontal">
+                <f:facet name="separator">
+                  <af:spacer width="4px" id="dc_s1"/>
+                </f:facet>
+
+                <!--  <af:clientListener method="goWindowAdmin" type="click"/>
+                destination="http://127.0.0.1:7101/RcoreTaskFlowImpl-ViewController-context-root/faces/universal_taskflow/pages/edit_defaults/edit_defaults.jspx?id=#{pageFlowScope.id}&amp;ver=#{pageFlowScope.ver}"
+                -->
+                <af:goImageLink   id="adminLink"
+                                  shortDesc="Администрирование"
+                                  icon="/universal_taskflow/images/adminstration.gif"
+                                  rendered="#{pageFlowScope.viewPageFlowBean.adminLinkRendered}"
+                                  destination="#{pageFlowScope.viewPageFlowBean.adminURL}"
+                                  targetFrame="_blank"
+                                  binding="#{pageFlowScope.viewPageFlowBean.adminLink}"
+                >
+                </af:goImageLink>
+
+                <!--
+                actionListener="# {pageFlowScope.viewPageFlowBean.refreshRegion}"
+                -->
+                <af:commandImageLink  id="pt_refresh_act"
+                                      shortDesc="Обновить область"
+                                      icon="/universal_taskflow/images/refresh12.png"
+                                      rendered="#{true}"
+                                      actionListener="#{pageFlowScope.viewPageFlowBean.refreshActionListener}"
+                                      partialSubmit="true"
+                                      >
+                </af:commandImageLink>
+
+                <af:popup id="rootPopup"
+                          binding="#{pageFlowScope.viewPageFlowBean.popup}"
+                          clientComponent="true"
+                          >
+                  <!--af:panelWindow id="dc_d1"
+                                  title="Меню"
+                                  stretchChildren="none"
+                                  resize="off"
+                                  modal="false"
+                  -->
+                    <!--af:panelGroupLayout  id="dc_pgl2"
+                                          layout="vertical"
+                                          styleClass="AFStrechWidth"
+                    -->
+                    <af:menu id="dc_m1">
+                  <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                  <af:goImageLink   
+                              id="dc_cil1"
+                              text="Администрирование"
+                              shortDesc="Администрирование"
+                              icon="/universal_taskflow/images/adminstration.gif"
+                              rendered="#{pageFlowScope.viewPageFlowBean.adminLinkRendered}"
+                              destination="#{pageFlowScope.viewPageFlowBean.adminURL}"
+                              targetFrame="_blank"
+                          >
+                    <?audit suppress oracle.ide.xml.validation-warning?>
+                  </af:goImageLink>
+                          <af:commandImageLink 
+                              icon="/universal_taskflow/images/refresh12.png" 
+                              id="dc_cil2" 
+                              actionListener="#{pageFlowScope.viewPageFlowBean.refreshActionListener}"
+                              partialSubmit="true"
+                              text="Обновить область">
+                          </af:commandImageLink>    
+                          
+                          <!--af:commandImageLink 
+                              icon="/universal_taskflow/images/refresh12.png"
+                              id="dc_cil3" 
+                              text="Обновить страницу"
+                              partialSubmit="false"
+                              actionListener="#{pageFlowScope.viewPageFlowBean.refreshPage}"
+                          >
+                          </af:commandImageLink-->    
+                    </af:menu>
+                </af:popup>
+              </af:panelGroupLayout>
+
+
+            </trh:cellFormat>
+
+          </trh:rowLayout>
+        </trh:tableLayout>
+      </af:panelGroupLayout>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>_title</display-name>
+        <component-extension>
+          <component-tag-namespace>universal_taskflow.declarative_component</component-tag-namespace>
+          <component-taglib-uri>/componentLibTf</component-taglib-uri>
+        </component-extension>
+      </component>
+    </af:xmlContent>
+  </af:componentDef>
+</jsp:root>
